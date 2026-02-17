@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Connect - Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">🎓</div>
+                <span class="logo-text">Alumni Connect</span>
+            </div>
+            <p class="subtitle">Sign in to your account</p>
+        </div>
+
+        <div class="card">
+            <h1 class="card-title">Login</h1>
+
+            <form class="form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@college.edu">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••">
+                </div>
+
+                <div class="form-group">
+                    <label>Login as</label>
+                    <div class="role-selector">
+                        <button type="button" class="role-btn active">Student</button>
+                        <button type="button" class="role-btn">Alumni</button>
+                        <button type="button" class="role-btn">Admin</button>
+                    </div>
+                </div>
+
+                <a href="#" class="forgot-link">Forgot password?</a>
+
+                <button type="submit" class="submit-btn">Sign In</button>
+
+                <p class="footer-text">
+                    Don't have an account? <a href="register.html">Register here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
