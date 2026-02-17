@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Forum - Alumni Connect</title>
+    <link rel="stylesheet" href="discussion-forum.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Alumni Connect</span>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="notification-bell">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </div>
+            <div class="user-profile">
+                <span class="user-name">Sarah Johnson</span>
+                <div class="user-avatar">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="Sarah Johnson">
+                </div>
+                <button class="logout-btn" onclick="showLogoutModal()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <button class="back-btn" onclick="window.location.href='alumni-dashboard.html'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="header-content">
+                <h1>Discussion Forum</h1>
+                <p>Connect, share, and learn from the community</p>
+            </div>
+            <button class="btn-new-topic">+ New Topic</button>
+        </div>
+
+        <!-- Forum Content -->
+        <div class="forum-content">
+            <!-- Sidebar -->
+            <aside class="forum-sidebar">
+                <!-- Categories -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Categories</h3>
+                    <ul class="category-list">
+                        <li class="category-item active">All</li>
+                        <li class="category-item">Career Advice</li>
+                        <li class="category-item">Learning</li>
+                        <li class="category-item">Career Transition</li>
+                        <li class="category-item">Resume</li>
+                        <li class="category-item">Interviews</li>
+                    </ul>
+                </div>
+
+                <!-- Forum Stats -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Forum Stats</h3>
+                    <div class="stat-item">
+                        <div class="stat-number">1,247</div>
+                        <div class="stat-label">Total Topics</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">8,342</div>
+                        <div class="stat-label">Total Posts</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">892</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Discussion Area -->
+            <div class="discussion-main">
+                <!-- Search and Filter -->
+                <div class="search-bar">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search discussions..." class="search-input">
+                    </div>
+                    <button class="filter-btn">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                </div>
+
+                <!-- Discussion Items -->
+                <div class="discussion-list">
+                    <!-- Discussion Item 1 -->
+                    <div class="discussion-item">
+                        <div class="discussion-votes">
+                            <i class="fas fa-arrow-up"></i>
+                            <span class="vote-count">45</span>
+                        </div>
+                        <div class="discussion-content">
+                            <h3 class="discussion-title">How to prepare for technical interviews?</h3>
+                            <div class="discussion-meta">
+                                <div class="author-info">
+                                    <span class="author-name">Alex Kumar</span>
+                                    <span class="author-badge">Student</span>
+                                    <span class="post-time">• 2 hours ago</span>
+                                </div>
+                                <div class="discussion-stats">
+                                    <span class="reply-count">
+                                        <i class="fas fa-comment"></i> 23 replies
+                                    </span>
+                                    <a href="#" class="view-link">View Discussion</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="discussion-category">
+                            <span class="category-tag">Career Advice</span>
+                        </div>
+                    </div>
+
+                    <!-- Discussion Item 2 -->
+                    <div class="discussion-item">
+                        <div class="discussion-votes">
+                            <i class="fas fa-arrow-up"></i>
+                            <span class="vote-count">32</span>
+                        </div>
+                        <div class="discussion-content">
+                            <h3 class="discussion-title">Best resources for learning React in 2026?</h3>
+                            <div class="discussion-meta">
+                                <div class="author-info">
+                                    <span class="author-name">Maria Garcia</span>
+                                    <span class="author-badge">Student</span>
+                                    <span class="post-time">• 5 hours ago</span>
+                                </div>
+                                <div class="discussion-stats">
+                                    <span class="reply-count">
+                                        <i class="fas fa-comment"></i> 18 replies
+                                    </span>
+                                    <a href="#" class="view-link">View Discussion</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="discussion-category">
+                            <span class="category-tag learning">Learning</span>
+                        </div>
+                    </div>
+
+                    <!-- Discussion Item 3 -->
+                    <div class="discussion-item">
+                        <div class="discussion-votes">
+                            <i class="fas fa-arrow-up"></i>
+                            <span class="vote-count">58</span>
+                        </div>
+                        <div class="discussion-content">
+                            <h3 class="discussion-title">Transitioning from engineering to product management</h3>
+                            <div class="discussion-meta">
+                                <div class="author-info">
+                                    <span class="author-name">Michael Chen</span>
+                                    <span class="author-badge alumni">Alumni</span>
+                                    <span class="post-time">• 1 day ago</span>
+                                </div>
+                                <div class="discussion-stats">
+                                    <span class="reply-count">
+                                        <i class="fas fa-comment"></i> 15 replies
+                                    </span>
+                                    <a href="#" class="view-link">View Discussion</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="discussion-category">
+                            <span class="category-tag transition">Career Transition</span>
+                        </div>
+                    </div>
+
+                    <!-- Discussion Item 4 -->
+                    <div class="discussion-item">
+                        <div class="discussion-votes">
+                            <i class="fas fa-arrow-up"></i>
+                            <span class="vote-count">28</span>
+                        </div>
+                        <div class="discussion-content">
+                            <h3 class="discussion-title">Resume review: Getting feedback before applying</h3>
+                            <div class="discussion-meta">
+                                <div class="author-info">
+                                    <span class="author-name">John Smith</span>
+                                    <span class="author-badge">Student</span>
+                                    <span class="post-time">• 2 days ago</span>
+                                </div>
+                                <div class="discussion-stats">
+                                    <span class="reply-count">
+                                        <i class="fas fa-comment"></i> 12 replies
+                                    </span>
+                                    <a href="#" class="view-link">View Discussion</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="discussion-category">
+                            <span class="category-tag resume">Resume</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="page-btn" disabled>Previous</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-sign-out-alt"></i>
+                <h3>Confirm Logout</h3>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to logout?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeLogoutModal()">Cancel</button>
+                <button class="btn-confirm" onclick="confirmLogout()">Yes, Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Logout Modal Functions
+        function showLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'flex';
+        }
+
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'none';
+        }
+
+        function confirmLogout() {
+            window.location.href = 'index.html';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('logoutModal');
+            if (event.target === modal) {
+                closeLogoutModal();
+            }
+        }
+    </script>
+</body>
+</html>
