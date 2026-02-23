@@ -2,76 +2,173 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tech University | Alumni Network</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="../css/common.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Connect - Connecting Students with Alumni</title>
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-<!-- NAVBAR -->
-<header class="navbar">
-    <div class="brand">
-        🎓
-        <div>
-            <div class="brand-title">Tech University</div>
-            <div class="brand-subtitle">Alumni Network</div>
+    <!-- Top Navigation -->
+    <nav class="top-navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Alumni Connect</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+                <button class="btn-register" onclick="window.location.href='login.html'">Register</button>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <a href="login.html" class="btn primary">Login</a>
-</header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Connecting Students with Alumni<br>for Career Growth</h1>
+            <p class="hero-subtitle">Get mentorship, career guidance, and access to exclusive job opportunities from<br>experienced alumni</p>
+            <div class="hero-buttons">
+               <button class="btn-start" onclick="window.location.href='login.html'">Get Started</button>
+<button class="btn-register-alt" onclick="window.location.href='alumni-register.html'">Register Now</button>
+            </div>
+        </div>
+    </section>
 
-<!-- HERO -->
-<section class="hero">
-    <h1>Connecting Students with Alumni</h1>
-    <p>For Growth and Opportunities</p>
+    <!-- Why Choose Section -->
+    <section class="why-choose-section">
+        <div class="section-container">
+            <h2 class="section-title">Why Choose Alumni Connect?</h2>
+            <p class="section-subtitle">Everything you need to connect with alumni and accelerate your career journey</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon blue">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3 class="feature-title">Mentorship</h3>
+                    <p class="feature-text">Connect with experienced<br>alumni who can guide you<br>through your career path</p>
+                </div>
 
-    <div class="actions">
-        <a href="login.html" class="btn primary large">Login to Platform</a>
-        <a href="alumni-register.html" class="btn outline large">Alumni Registration</a>
-    </div>
+                <div class="feature-card">
+                    <div class="feature-icon green">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="feature-title">Job Opportunities</h3>
+                    <p class="feature-text">Access exclusive job postings and<br>internship opportunities shared<br>by our alumni network</p>
+                </div>
 
-    <span class="note">
-        Students and Alumni receive login credentials from the college
-    </span>
-</section>
+                <div class="feature-card">
+                    <div class="feature-icon purple">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="feature-title">Verified Alumni</h3>
+                    <p class="feature-text">All alumni are verified by the college<br>ensuring authentic connections and<br>reliable guidance</p>
+                </div>
 
-<!-- FEATURES -->
-<section class="features">
-    <div class="card">
-        <div class="icon">🎯</div>
-        <h3>Mentorship</h3>
-        <p>Career guidance from experienced alumni</p>
-    </div>
+                <div class="feature-card">
+                    <div class="feature-icon orange">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="feature-title">Discussion Forum</h3>
+                    <p class="feature-text">Share and discuss topics of interest<br>with students and alumni to expand<br>your network</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-        <div class="icon">💼</div>
-        <h3>Job Opportunities</h3>
-        <p>Jobs & internships shared by alumni</p>
-    </div>
+    <!-- How It Works Section -->
+    <section class="how-it-works-section">
+        <div class="section-container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Get started in three simple steps</p>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon blue">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3 class="step-title">Create Your Profile</h3>
+                    <p class="step-text">Sign up with your college email and<br>complete your profile with interests and goals</p>
+                </div>
 
-    <div class="card">
-        <div class="icon">📅</div>
-        <h3>Events</h3>
-        <p>Workshops and alumni–student meets</p>
-    </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon blue">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="step-title">Find Your Mentor</h3>
+                    <p class="step-text">Browse through verified alumni and find<br>mentors in your field of interest</p>
+                </div>
 
-    <div class="card">
-        <div class="icon">💬</div>
-        <h3>Student Forum</h3>
-        <p>Ask questions and discuss with peers</p>
-    </div>
-</section>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon blue">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="step-title">Start Connecting</h3>
+                    <p class="step-text">Send mentorship requests and start<br>building relationships to advance your<br>career success</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Testimonials Section -->
+   
 
-<!-- FOOTER -->
-<div id="footer-placeholder"></div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Start Your Journey?</h2>
+            <p class="cta-subtitle">Join hundreds of students and alumni already benefiting from our platform</p>
+            <button class="btn-cta" onclick="window.location.href='login.html'">Join Now</button>
+        </div>
+    </section>
 
-<script src="../js/includeFooter.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Connecting students with verified alumni<br>to provide mentorship, guidance and<br>opportunities.</p>
+            </div>
 
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#opportunities">Job Opportunities</a></li>
+                    <li><a href="#contact">Contact & Support</a></li>
+                </ul>
+            </div>
 
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><i class="fas fa-envelope"></i> contact@alumniconnect.edu</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> College Campus, Building A</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 Alumni Connect. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

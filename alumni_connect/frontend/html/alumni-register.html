@@ -2,21 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Alumni Registration</title>
-
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/alumni-register.css">
-    <link rel="stylesheet" href="../css/footer.css">
+    <title>Alumni Registration | Alumni Connect</title>
+    <link rel="stylesheet" href="../css/auth.css">
 </head>
 <body>
 
-<div class="auth-wrapper">
-
+<div class="auth-page">
     <div class="auth-card">
-        <h3>Alumni Registration</h3>
-        <p class="subtitle">
-            Register if you haven't received login credentials
-        </p>
+
+        <div class="auth-header">
+            <i class="fas fa-user-plus"></i>
+            <h2>Alumni Registration</h2>
+            <p>Register if you haven't received credentials</p>
+        </div>
 
         <label>Full Name</label>
         <input type="text" placeholder="Enter your full name">
@@ -27,9 +25,9 @@
         <label>Graduation Year</label>
         <select>
             <option>Select year</option>
-            <option>2020</option>
             <option>2021</option>
             <option>2022</option>
+            <option>2023</option>
         </select>
 
         <label>Branch</label>
@@ -41,27 +39,23 @@
         </select>
 
         <label>Current Company</label>
-        <input type="text" placeholder="Enter your current company">
+        <input type="text" placeholder="Enter your company name">
 
-        <div class="info-box">
-            Your account will be activated after admin verification.
+        <div class="auth-info">
+            Your account will be activated after admin verification.<br>
             Login credentials will be sent via email.
         </div>
 
-        <button class="btn primary full">Submit Registration</button>
+        <button class="auth-btn">Submit Registration</button>
 
-        <p class="switch">
+        <p class="auth-switch">
             Already have credentials?
             <a href="login.html">Login here</a>
         </p>
+
+        <a href="index.html" class="back-home">← Back to Home</a>
     </div>
-
-     <a href="index.html" class="back">← Back to home</a>
 </div>
-
-<!-- Footer -->
-<div id="footer-placeholder"></div>
-<script src="../js/includeFooter.js"></script>
 
 </body>
 </html>
