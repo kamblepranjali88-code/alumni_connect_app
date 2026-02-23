@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+body {
+    background: #f4f7ff;
+    color: #0f172a;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #ffffff;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.brand-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.brand-subtitle {
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* BUTTONS */
+.btn {
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.primary {
+    background: #0f172a;
+    color: white;
+}
+
+.outline {
+    background: white;
+    border: 1px solid #cbd5f5;
+    color: #0f172a;
+}
+
+.large {
+    padding: 14px 28px;
+    font-size: 16px;
+}

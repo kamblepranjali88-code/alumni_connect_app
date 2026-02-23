@@ -1,0 +1,75 @@
+.hero {
+    text-align: center;
+    padding: 110px 20px 70px;
+}
+
+.hero h1 {
+    font-size: 52px;          /* BIG like Figma */
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    font-size: 22px;
+    color: #475569;
+}
+
+.actions {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.note {
+    display: block;
+    margin-top: 18px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* FEATURES */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 30px;
+    padding: 60px 50px 90px;
+}
+
+.card {
+    background: white;
+    padding: 36px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+}
+
+.card .icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+}
+
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.card p {
+    font-size: 15px;
+    color: #64748b;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+}
