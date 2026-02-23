@@ -2,52 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alumni Connect - Login</title>
+    <title>Login | Alumni Network</title>
+
+    <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/footer.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">
-                <div class="logo-icon">🎓</div>
-                <span class="logo-text">Alumni Connect</span>
-            </div>
-            <p class="subtitle">Sign in to your account</p>
-        </div>
 
-        <div class="card">
-            <h1 class="card-title">Login</h1>
+<div class="auth-wrapper">
 
-            <form class="form">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="you@college.edu">
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="••••••••">
-                </div>
-
-                <div class="form-group">
-                    <label>Login as</label>
-                    <div class="role-selector">
-                        <button type="button" class="role-btn active">Student</button>
-                        <button type="button" class="role-btn">Alumni</button>
-                        <button type="button" class="role-btn">Admin</button>
-                    </div>
-                </div>
-
-                <a href="#" class="forgot-link">Forgot password?</a>
-
-                <button type="submit" class="submit-btn">Sign In</button>
-
-                <p class="footer-text">
-                    Don't have an account? <a href="register.html">Register here</a>
-                </p>
-            </form>
+    <!-- Branding -->
+    <div class="auth-brand">
+        🎓
+        <div>
+            <h2>Tech University</h2>
+            <span>Alumni Network</span>
         </div>
     </div>
+
+    <!-- Login Card -->
+    <div class="auth-card">
+        <h3>Login</h3>
+        <p class="subtitle">Enter your credentials to access your account</p>
+
+        <label>Email ID</label>
+        <input type="email" placeholder="your.email@college.edu">
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password">
+
+        <div class="info-box">
+            Initial credentials are provided by the college administration.
+            Role is detected automatically.
+        </div>
+
+        <button class="btn primary full">Login</button>
+
+        <a href="#" class="link">Forgot password?</a>
+
+        <p class="switch">
+            Alumni not invited?
+            <a href="alumni-register.html">Register here</a>
+        </p>
+    </div>
+
+    <a href="index.html" class="back">← Back to home</a>
+</div>
+
+<!-- Footer -->
+<div id="footer-placeholder"></div>
+<script src="../js/includeFooter.js"></script>
+
 </body>
 </html>

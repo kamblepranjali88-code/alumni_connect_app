@@ -1,290 +1,104 @@
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    line-height: 1.6;
+.auth-wrapper {
     min-height: 100vh;
+    background: #eef3ff;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 60px 20px 0;
 }
 
-/* Container */
-.container {
-    width: 100%;
-    max-width: 600px;
-}
-
-/* Header */
-.header {
-    text-align: center;
+.auth-brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
     margin-bottom: 30px;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 10px;
+.auth-brand h2 {
+    font-size: 22px;
 }
 
-.logo-icon {
-    background-color: #1a73e8;
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.auth-brand span {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.auth-card {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.auth-card h3 {
     font-size: 24px;
-}
-
-.logo-text {
-    font-size: 40px;
-    font-weight: 600;
-    color: #1f1f1f;
+    margin-bottom: 6px;
 }
 
 .subtitle {
-    color: #5f6368;
-    font-size: 20px;
-}
-
-/* Card */
-.card {
-    background: white;
-    border-radius: 12px;
-    padding: 80px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-}
-
-.card-title {
-    font-size: 30px;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 8px;
-    color: #1f1f1f;
-}
-
-.card-subtitle {
-    text-align: center;
-    color: #5f6368;
-    font-size: 14px;
-    margin-bottom: 30px;
-}
-
-/* Form */
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    font-size: 15px;
+    color: #64748b;
+    margin-bottom: 25px;
 }
 
 label {
-    font-size: 14px;
-    font-weight: 500;
-    color: #1f1f1f;
-}
-
-input[type="email"],
-input[type="password"],
-input[type="text"] {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #dadce0;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: all 0.2s;
-    outline: none;
-}
-
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="text"]:focus {
-    border-color: #1a73e8;
-    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
-}
-
-input::placeholder {
-    color: #9aa0a6;
-}
-
-/* Role Selector */
-.role-selector {
-    display: flex;
-    gap: 12px;
-}
-
-.role-btn {
-    flex: 1;
-    padding: 12px 16px;
-    border: 1px solid #dadce0;
-    background: white;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    color: #5f6368;
-    transition: all 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    position: relative;
-}
-
-.role-btn:hover {
-    background-color: #f8f9fa;
-    border-color: #1a73e8;
-}
-
-.role-btn.active {
-    background-color: #e8f0fe;
-    border-color: #1a73e8;
-    color: #1a73e8;
-}
-
-.role-title {
     font-weight: 600;
     font-size: 14px;
+    margin-top: 15px;
+    display: block;
 }
 
-.role-desc {
-    font-size: 12px;
-    color: #5f6368;
-    font-weight: 400;
-}
-
-.role-btn.active .role-desc {
-    color: #1967d2;
-}
-
-/* Verification Badge */
-.verification-required {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-.verification-badge {
-    font-size: 11px;
-    color: #1a73e8;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin-top: 4px;
-}
-
-/* Checkbox Group */
-.checkbox-group {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.checkbox-group input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    cursor: pointer;
-    accent-color: #1a73e8;
-}
-
-.checkbox-group label {
-    font-weight: 400;
-    font-size: 13px;
-    color: #5f6368;
-    cursor: pointer;
-}
-
-/* Links */
-.forgot-link {
-    text-align: right;
-    font-size: 13px;
-    color: #1a73e8;
-    text-decoration: none;
-    font-weight: 500;
-    margin-top: -8px;
-}
-
-.forgot-link:hover {
-    text-decoration: underline;
-}
-
-/* Submit Button */
-.submit-btn {
+input {
     width: 100%;
     padding: 14px;
-    background-color: #1a73e8;
-    color: white;
+    margin-top: 6px;
+    border-radius: 10px;
     border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin-top: 8px;
+    background: #f4f4f5;
+    font-size: 14px;
 }
 
-.submit-btn:hover {
-    background-color: #1765cc;
-}
-
-.submit-btn:active {
-    background-color: #1557b0;
-}
-
-/* Footer Text */
-.footer-text {
-    text-align: center;
+.info-box {
+    margin: 18px 0;
+    padding: 14px;
+    border-radius: 10px;
+    background: #f8fafc;
     font-size: 13px;
-    color: #5f6368;
-    margin-top: 8px;
+    color: #475569;
 }
 
-.footer-text a {
-    color: #1a73e8;
+.full {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    font-size: 16px;
+}
+
+.link {
+    display: block;
+    text-align: center;
+    margin-top: 14px;
+    color: #2563eb;
+    font-size: 14px;
     text-decoration: none;
-    font-weight: 500;
 }
 
-.footer-text a:hover {
-    text-decoration: underline;
+.switch {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    .card {
-        padding: 30px 24px;
-    }
+.switch a {
+    color: #2563eb;
+    font-weight: 600;
+}
 
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    .role-selector {
-        flex-direction: column;
-    }
+.back {
+    margin: 25px 0;
+    font-size: 14px;
+    color: #334155;
+    text-decoration: none;
 }

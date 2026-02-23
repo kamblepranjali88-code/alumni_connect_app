@@ -1,0 +1,12 @@
+@import url("./login.css");
+
+/* Minor adjustments for registration */
+select {
+    width: 100%;
+    padding: 14px;
+    margin-top: 6px;
+    border-radius: 10px;
+    border: none;
+    background: #f4f4f5;
+    font-size: 14px;
+}
