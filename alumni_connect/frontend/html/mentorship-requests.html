@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mentorship Requests | Alumni Connect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/mentorship-requests.css">
+    <link rel="stylesheet" href="../css/footer.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="brand">
+        <i class="fas fa-user-tie"></i>
+        <div>
+            <div class="brand-title">Tech University</div>
+            <div class="brand-subtitle">Alumni Mentorship</div>
+        </div>
+    </div>
+
+    <nav class="nav-links">
+        <a href="alumni-dashboard.html" class="active">Dashboard</a>
+        <a href="alumni-profile.html">My Profile</a>
+        <a href="mentorship-requests.html">Mentorship</a>
+        <a href="alumni-post-job.html">Post Job</a>
+        <a href="events.html">Events</a>
+        <a href="login.html" class="logout">Logout</a>
+    </nav>
+</header>
+
+<!-- MAIN -->
+<main class="mentorship-container">
+
+    <section class="page-header">
+        <h1>Mentorship Requests</h1>
+        <p>Review and respond to student mentorship requests</p>
+    </section>
+
+    <section class="requests-list" id="requestsList">
+        <!-- Requests loaded by JS -->
+    </section>
+
+</main>
+
+<!-- REJECT MODAL -->
+<div class="modal-overlay" id="rejectModal">
+    <div class="modal">
+        <h3>Reject Request</h3>
+        <p>Please provide a reason for rejection</p>
+
+        <textarea id="rejectReason" placeholder="Enter reason..." rows="4"></textarea>
+
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+            <button class="btn-reject" onclick="confirmReject()">Reject</button>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div id="footer-placeholder"></div>
+<script src="../js/includeFooter.js"></script>
+<script src="../js/mentorship-requests.js"></script>
+
+</body>
+</html>
