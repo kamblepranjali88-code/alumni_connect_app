@@ -1,0 +1,115 @@
+.admin-events-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 120px 24px 40px;
+    background: #f5f7fa;
+}
+
+/* Header */
+.page-header {
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.page-header p {
+    color: #6b7280;
+}
+
+/* Layout */
+.events-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 28px;
+}
+
+/* Cards */
+.add-event-card,
+.events-list-card {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    border: 1px solid #e5e7eb;
+}
+
+.add-event-card h2,
+.events-list-card h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: #1f2937;
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #111827;
+}
+
+/* Event List */
+.admin-event {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.admin-event h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.admin-event .meta {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+.admin-event .mode {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .events-layout {
+        grid-template-columns: 1fr;
+    }
+}

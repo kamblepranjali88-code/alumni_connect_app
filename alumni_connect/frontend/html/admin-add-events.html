@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | Manage Events</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Common styles -->
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin-add-events.css">
+    <link rel="stylesheet" href="../css/footer.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar admin-navbar">
+    <div class="brand">
+        <i class="fas fa-user-shield"></i>
+        <div>
+            <div class="brand-title">Tech University</div>
+            <div class="brand-subtitle">Admin Panel</div>
+        </div>
+    </div>
+
+    <nav class="nav-links">
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-add-events.html" class="active">Events</a>
+        <a href="admin-users.html">Users</a>
+        <a href="login.html" class="logout">Logout</a>
+    </nav>
+</header>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="admin-events-container">
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Manage Events</h1>
+        <p>Create and manage alumni–student events</p>
+    </section>
+
+    <!-- Layout -->
+    <section class="events-layout">
+
+        <!-- ===== ADD EVENT FORM ===== -->
+        <div class="add-event-card">
+            <h2>Add New Event</h2>
+
+            <form id="eventForm">
+                <div class="form-group">
+                    <label>Event Title</label>
+                    <input type="text" id="eventTitle" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="eventDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mode</label>
+                        <select id="eventMode" required>
+                            <option value="">Select</option>
+                            <option>Online</option>
+                            <option>Offline</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Venue / Meeting Link</label>
+                    <input type="text" id="eventVenue" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="eventDescription" rows="4" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-plus-circle"></i> Add Event
+                </button>
+            </form>
+        </div>
+
+        <!-- ===== EVENT LIST ===== -->
+        <div class="events-list-card">
+            <h2>Events Created</h2>
+
+            <div id="adminEventsList"></div>
+        </div>
+
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<div id="footer-placeholder"></div>
+<script src="../js/includeFooter.js"></script>
+<script src="../js/admin-add-events.js"></script>
+
+</body>
+</html>
