@@ -2,18 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumni Dashboard | Alumni Connect</title>
 
+    <!-- Styles -->
     <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/alumni-dashboard.css">
+    <link rel="stylesheet" href="../css/student-dashboard.css">
     <link rel="stylesheet" href="../css/footer.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
 <!-- ===== NAVBAR ===== -->
 <header class="navbar">
     <div class="brand">
-        🎓
+        <i class="fas fa-user-graduate"></i>
         <div>
             <div class="brand-title">Tech University</div>
             <div class="brand-subtitle">Alumni Dashboard</div>
@@ -35,72 +40,73 @@
 
     <!-- Welcome -->
     <section class="welcome">
-        <h1>Welcome, Alumni 👋</h1>
+        <h1 id="alumni-name">Welcome, Alumni</h1>
         <p>Support students, share opportunities, and stay connected</p>
     </section>
 
-    <!-- Stats -->
+    <!-- ===== STATS (BACKEND DATA) ===== -->
     <section class="stats">
         <div class="stat-card">
-            <h2>8</h2>
+            <h2 id="requestCount">0</h2>
             <p>Mentorship Requests</p>
         </div>
 
         <div class="stat-card">
-            <h2>3</h2>
+            <h2 id="activeMentorships">0</h2>
             <p>Active Mentorships</p>
         </div>
 
         <div class="stat-card">
-            <h2>5</h2>
+            <h2 id="jobsPosted">0</h2>
             <p>Jobs Posted</p>
         </div>
 
         <div class="stat-card">
-            <h2>2</h2>
+            <h2 id="eventCount">0</h2>
             <p>Upcoming Events</p>
         </div>
     </section>
 
-    <!-- Quick Actions -->
+    <!-- ===== QUICK ACTIONS ===== -->
     <section class="actions">
         <h2>Quick Actions</h2>
 
         <div class="action-grid">
             <a href="mentorship-requests.html" class="action-card">
-                🧑‍🏫
+                <i class="fas fa-handshake action-icon"></i>
                 <h3>Mentorship Requests</h3>
                 <p>Accept or reject student mentorship requests</p>
             </a>
 
             <a href="post-job.html" class="action-card">
-                💼
-                <h3>Post Job Opportunity</h3>
-                <p>Share jobs or internships with students</p>
+                <i class="fas fa-briefcase action-icon"></i>
+                <h3>Post Job</h3>
+                <p>Share job and internship opportunities</p>
             </a>
 
             <a href="alumni-profile.html" class="action-card">
-                👤
+                <i class="fas fa-user action-icon"></i>
                 <h3>Update Profile</h3>
-                <p>Manage your skills and mentorship availability</p>
+                <p>Manage your skills and availability</p>
             </a>
 
             <a href="events.html" class="action-card">
-                📅
+                <i class="fas fa-calendar-check action-icon"></i>
                 <h3>View Events</h3>
-                <p>Register for alumni–student meets</p>
+                <p>Register for alumni–student events</p>
             </a>
         </div>
     </section>
 
-    <!-- Notifications -->
+    <!-- ===== RECENT UPDATES (BACKEND DATA) ===== -->
     <section class="notifications">
         <h2>Recent Updates</h2>
 
-        <ul>
-            <li>📩 New mentorship request from Ananya Patil</li>
-            <li>📅 Alumni–Student Meet scheduled on 25 March</li>
-            <li>💬 Mentorship chat session active with Rahul Sharma</li>
+        <ul id="alumniUpdates">
+            <li>
+                <i class="fas fa-info-circle"></i>
+                Loading updates...
+            </li>
         </ul>
     </section>
 
@@ -109,6 +115,9 @@
 <!-- ===== FOOTER ===== -->
 <div id="footer-placeholder"></div>
 <script src="../js/includeFooter.js"></script>
+
+<!-- ===== DASHBOARD DATA SCRIPT ===== -->
+<script src="../js/alumni-dashboard.js"></script>
 
 </body>
 </html>

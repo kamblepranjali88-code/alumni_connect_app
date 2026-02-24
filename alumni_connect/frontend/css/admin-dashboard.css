@@ -1,0 +1,268 @@
+/* =========================
+   ADMIN DASHBOARD – MODERN
+   ========================= */
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #e5e7eb;
+    line-height: 1.6;
+}
+
+/* =========================
+   HEADER / NAVBAR
+   (MATCHES FOOTER COLOR)
+   ========================= */
+.navbar {
+    background-color: #1f2937; /* SAME AS FOOTER */
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand i {
+    font-size: 30px;
+    color: #60a5fa;
+}
+
+.brand-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.brand-subtitle {
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: #d1d5db;
+    transition: color 0.2s ease;
+}
+
+/* Hover */
+.nav-links a:hover {
+    color: #60a5fa;
+}
+
+/* Active link */
+.nav-links a.active {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Logout */
+.nav-links .logout {
+    color: #f87171;
+    font-weight: 600;
+}
+
+.nav-links .logout:hover {
+    color: #ef4444;
+}
+
+
+
+.nav-links a.active {
+    color: #ffffff;
+}
+
+.nav-links .logout {
+    color: #f87171;
+    font-weight: 600;
+}
+
+/* =========================
+   MAIN CONTAINER
+   ========================= */
+.dashboard {
+    max-width: 1400px;
+    margin: auto;
+    padding: 42px 40px;
+    color: #1f2937;
+}
+
+/* =========================
+   WELCOME
+   ========================= */
+.welcome {
+    margin-bottom: 36px;
+}
+
+.welcome h1 {
+    font-size: 34px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.welcome p {
+    font-size: 16px;
+    color: #6b7280;
+    margin-top: 6px;
+}
+
+/* =========================
+   STATS CARDS
+   ========================= */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 52px;
+}
+
+.stat-card {
+    background: linear-gradient(145deg, #ffffff, #f9fafb);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 32px rgba(0,0,0,0.1);
+}
+
+.stat-card h2 {
+    font-size: 42px;
+    font-weight: 800;
+    
+    margin-bottom: 8px;
+}
+
+.stat-card p {
+    font-size: 15px;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+/* =========================
+   SYSTEM OVERVIEW (CHARTS)
+   ========================= */
+.actions {
+    margin-bottom: 52px;
+}
+
+.actions h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 24px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 36px;
+}
+
+.action-card {
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 26px;
+    height: 380px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Bigger charts */
+.action-card canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* =========================
+   SYSTEM ALERTS
+   ========================= */
+.notifications {
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+}
+
+.notifications h2 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 22px;
+}
+
+.notifications ul {
+    list-style: none;
+}
+
+.notifications li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 15px;
+    color: #374151;
+}
+
+.notifications li:last-child {
+    border-bottom: none;
+}
+
+.notifications i {
+    font-size: 20px;
+    color: #1a73e8;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 1024px) {
+    .dashboard {
+        padding: 32px 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .welcome h1 {
+        font-size: 28px;
+    }
+
+    .action-card {
+        height: 340px;
+    }
+}

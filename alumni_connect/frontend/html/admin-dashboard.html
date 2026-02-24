@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Alumni Connect</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <link rel="stylesheet" href="../css/footer.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+    <div class="brand">
+        <i class="fas fa-user-shield"></i>
+        <div>
+            <div class="brand-title">Tech University</div>
+            <div class="brand-subtitle">Admin Dashboard</div>
+        </div>
+    </div>
+
+    <nav class="nav-links">
+        <a href="admin-dashboard.html" class="active">Dashboard</a>
+        <a href="verify-alumni.html">Verify Alumni</a>
+        <a href="manage-events.html">Events</a>
+        <a href="system-users.html">Users</a>
+        <a href="login.html" class="logout">Logout</a>
+    </nav>
+</header>
+
+<!-- ===== MAIN DASHBOARD ===== -->
+<main class="dashboard">
+
+    <!-- Welcome -->
+    <section class="welcome">
+        <h1 id="admin-name">Welcome, Admin</h1>
+        <p>System overview, analytics, and platform monitoring</p>
+    </section>
+
+    <!-- ===== SYSTEM STATS ===== -->
+    <section class="stats">
+        <div class="stat-card">
+            <h2 id="studentCount">0</h2>
+            <p>Total Students</p>
+        </div>
+        <div class="stat-card">
+            <h2 id="alumniCount">0</h2>
+            <p>Total Alumni</p>
+        </div>
+        <div class="stat-card">
+            <h2 id="pendingVerifications">0</h2>
+            <p>Pending Verifications</p>
+        </div>
+        <div class="stat-card">
+            <h2 id="eventCount">0</h2>
+            <p>Upcoming Events</p>
+        </div>
+    </section>
+
+    <!-- ===== SYSTEM OVERVIEW ===== -->
+    <section class="actions">
+        <h2>System Overview</h2>
+
+        <div class="action-grid">
+            <div class="action-card">
+                <canvas id="userChart"></canvas>
+            </div>
+
+            <div class="action-card">
+                <canvas id="mentorshipChart"></canvas>
+            </div>
+
+            <div class="action-card">
+                <canvas id="jobChart"></canvas>
+            </div>
+
+            <div class="action-card">
+                <canvas id="eventChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SYSTEM ALERTS ===== -->
+    <section class="notifications">
+        <h2>System Alerts</h2>
+
+        <ul id="adminUpdates">
+            <li><i class="fas fa-info-circle"></i> Loading system alerts...</li>
+        </ul>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<div id="footer-placeholder"></div>
+<script src="../js/includeFooter.js"></script>
+
+<!-- ===== DASHBOARD DATA SCRIPT ===== -->
+<script src="../js/admin-dashboard.js"></script>
+
+</body>
+</html>

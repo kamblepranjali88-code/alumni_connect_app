@@ -58,3 +58,79 @@ body {
     padding: 14px 28px;
     font-size: 16px;
 }
+
+
+/* ===== NAVBAR FIX ===== */
+.navbar {
+    background-color: #1f2937;
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+}
+
+.brand i {
+    font-size: 22px;
+    color: #3b82f6;
+}
+
+.brand-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.brand-subtitle {
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+/* ===== NAV LINKS ===== */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.nav-links a {
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 6px 2px;
+    transition: color 0.2s ease, border-bottom 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover {
+    color: #3b82f6;
+}
+
+.nav-links a.active {
+    color: #3b82f6;
+    border-bottom: 2px solid #3b82f6;
+}
+
+/* Logout emphasis */
+.nav-links a.logout {
+    color: #fca5a5;
+}
+
+.nav-links a.logout:hover {
+    color: #fecaca;
+}
+
+/* ===== FIX CONTENT OFFSET (VERY IMPORTANT) ===== */
+.dashboard {
+    margin-top: 80px;   /* pushes content below fixed navbar */
+}

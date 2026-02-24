@@ -1,5 +1,5 @@
-fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById("footer-placeholder").innerHTML = data;
+fetch("../html/footer.html")
+    .then(res => res.text())
+    .then(html => {
+        document.getElementById("footer-placeholder").innerHTML = html;
     });
