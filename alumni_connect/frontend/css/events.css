@@ -1,0 +1,92 @@
+.events-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 120px 24px 40px;
+    background: #f5f7fa;
+}
+
+.page-header {
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.page-header p {
+    color: #6b7280;
+}
+
+/* Grid */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+/* Event Card */
+.event-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.event-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.event-meta {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 10px;
+}
+
+.event-description {
+    font-size: 15px;
+    color: #1f2937;
+    margin-bottom: 16px;
+}
+
+/* Footer of card */
+.event-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-type {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+/* Buttons */
+.register-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.register-btn.registered {
+    background: #d1fae5;
+    color: #065f46;
+    cursor: default;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .events-container {
+        padding: 110px 16px 32px;
+    }
+}
