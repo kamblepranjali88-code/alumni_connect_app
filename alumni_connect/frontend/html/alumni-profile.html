@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile | Alumni Connect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/alumni-profile.css">
+    <link rel="stylesheet" href="../css/footer.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="brand">
+        <i class="fas fa-id-card"></i>
+        <div>
+            <div class="brand-title">Tech University</div>
+            <div class="brand-subtitle">My Profile</div>
+        </div>
+    </div>
+
+    <nav class="nav-links">
+       <a href="alumni-dashboard.html" class="active">Dashboard</a>
+        <a href="alumni-profile.html">My Profile</a>
+        <a href="mentorship-requests.html">Mentorship</a>
+        <a href="alumni-post-job.html">Post Job</a>
+        <a href="events.html">Events</a>
+        <a href="login.html" class="logout">Logout</a>
+    </nav>
+</header>
+
+<!-- MAIN -->
+<main class="profile-container">
+
+    <section class="page-header">
+        <h1>Complete Your Profile</h1>
+        <p>This information helps others connect with you</p>
+    </section>
+
+    <form id="profileForm">
+
+        <!-- BASIC INFO -->
+        <section class="profile-card">
+            <h2><i class="fas fa-user"></i> Basic Information</h2>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" disabled>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Role</label>
+                    <select id="role" required>
+                        <option value="">Select</option>
+                        <option value="student">Student</option>
+                        <option value="alumni">Alumni</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Branch</label>
+                    <select id="branch" required>
+                        <option value="">Select</option>
+                        <option>CSE</option>
+                        <option>IT</option>
+                        <option>ENTC</option>
+                        <option>Mechanical</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDENT SECTION -->
+        <section class="profile-card" id="studentSection">
+            <h2><i class="fas fa-graduation-cap"></i> Student Details</h2>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Current Year</label>
+                    <select id="year">
+                        <option>First Year</option>
+                        <option>Second Year</option>
+                        <option>Third Year</option>
+                        <option>Final Year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Areas of Interest</label>
+                    <input type="text" id="interests" placeholder="e.g. Web Dev, AI, Cloud">
+                </div>
+            </div>
+        </section>
+
+        <!-- ALUMNI SECTION -->
+        <section class="profile-card" id="alumniSection">
+            <h2><i class="fas fa-briefcase"></i> Professional Details</h2>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Passout Year</label>
+                    <input type="number" id="passoutYear">
+                </div>
+
+                <div class="form-group">
+                    <label>Current Company</label>
+                    <input type="text" id="company">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Job Role</label>
+                    <input type="text" id="jobRole">
+                </div>
+
+                <div class="form-group">
+                    <label>Experience (Years)</label>
+                    <input type="number" id="experience">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="availableForMentorship">
+                    Available for Mentorship
+                </label>
+            </div>
+        </section>
+
+        <!-- BIO -->
+        <section class="profile-card">
+            <h2><i class="fas fa-info-circle"></i> About You</h2>
+            <textarea id="bio" rows="4"
+                placeholder="Brief introduction about yourself"></textarea>
+        </section>
+
+        <button type="submit" class="save-btn">
+            <i class="fas fa-save"></i> Save Profile
+        </button>
+
+    </form>
+
+</main>
+
+<!-- FOOTER -->
+<div id="footer-placeholder"></div>
+<script src="../js/includeFooter.js"></script>
+<script src="../js/alumni-profile.js"></script>
+
+</body>
+</html>
