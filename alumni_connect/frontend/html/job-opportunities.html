@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Opportunities | Alumni Connect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Common styles -->
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/job-opportunities.css">
+    <link rel="stylesheet" href="../css/footer.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+    <div class="brand">
+        <i class="fas fa-briefcase"></i>
+        <div>
+            <div class="brand-title">Tech University</div>
+            <div class="brand-subtitle">Job Opportunities</div>
+        </div>
+    </div>
+
+    <nav class="nav-links">
+        <a href="student-dashboard.html">Dashboard</a>
+        <a href="search-alumni.html">Alumni</a>
+        <a href="student-forum.html">Forum</a>
+        <a href="job-opportunities.html" class="active">Jobs</a>
+        <a href="events.html">Events</a>
+        <a href="login.html" class="logout">Logout</a>
+    </nav>
+</header>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="jobs-container">
+
+    <!-- Header -->
+    <section class="jobs-header">
+        <div>
+            <h1>Job & Internship Opportunities</h1>
+            <p>Explore opportunities shared by alumni</p>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="job-filters">
+    <select id="filterType">
+        <option value="All">All Types</option>
+        <option value="Internship">Internship</option>
+        <option value="Full-Time">Full-Time</option>
+    </select>
+
+    <input
+        type="text"
+        id="searchJob"
+        placeholder="Search by role or skill (e.g. React, Java)">
+</section>
+
+    <!-- Job Cards -->
+    <section class="jobs-list" id="jobsList"></section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<div id="footer-placeholder"></div>
+<script src="../js/includeFooter.js"></script>
+<script src="../js/job-opportunities.js"></script>
+
+</body>
+</html>
