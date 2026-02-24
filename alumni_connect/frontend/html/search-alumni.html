@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Alumni | Alumni Connect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/search-alumni.css">
+    <link rel="stylesheet" href="../css/footer.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="brand">
+        <i class="fas fa-user-graduate"></i>
+        <div>
+            <div class="brand-title">Tech University</div>
+            <div class="brand-subtitle">Search Alumni</div>
+        </div>
+    </div>
+
+    <nav class="nav-links">
+        <a href="student-dashboard.html">Dashboard</a>
+        <a href="search-alumni.html" class="active">Alumni</a>
+        <a href="student-forum.html">Forum</a>
+        <a href="job-opportunities.html">Jobs</a>
+        <a href="events.html">Events</a>
+        <a href="login.html" class="logout">Logout</a>
+    </nav>
+</header>
+
+<!-- MAIN -->
+<main class="alumni-search-container">
+
+    <!-- FILTER SIDEBAR -->
+    <aside class="filters-panel">
+        <h3>Filters</h3>
+
+        <label>Branch</label>
+        <select id="filterBranch">
+            <option value="All">All</option>
+            <option>CSE</option>
+            <option>IT</option>
+            <option>ENTC</option>
+            <option>Mechanical</option>
+        </select>
+
+        <label>Passout Year</label>
+        <select id="filterYear">
+            <option value="All">All</option>
+            <option>2020</option>
+            <option>2021</option>
+            <option>2022</option>
+            <option>2023</option>
+        </select>
+
+        <label>Mentorship</label>
+        <select id="filterAvailability">
+            <option value="All">All</option>
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+        </select>
+
+        <button id="clearFilters">Clear Filters</button>
+    </aside>
+
+    <!-- RESULTS -->
+    <section class="results-panel">
+
+        <!-- SEARCH -->
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by name, company, or role">
+        </div>
+
+        <!-- ALUMNI LIST -->
+        <div id="alumniList" class="alumni-list"></div>
+
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<div id="footer-placeholder"></div>
+<script src="../js/includeFooter.js"></script>
+<script src="../js/search-alumni.js"></script>
+
+</body>
+</html>
