@@ -5,7 +5,7 @@ function loadStudentDashboard() {
 
     // Example API response (replace later with fetch)
     const dashboardData = {
-        studentName: "John",
+        studentName: "Pranjali",
         alumniCount: 120,
         mentorshipLimit: "2 / Month",
         jobCount: 35,
