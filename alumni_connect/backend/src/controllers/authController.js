@@ -328,4 +328,4 @@ module.exports = {
     changePassword,
     getStudentProfile, // ← ADD THIS
     updateStudentProfile
-};
+};"// Updated on $(date)" 
