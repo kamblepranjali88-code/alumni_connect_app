@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Request | Alumni Connect</title>
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-header">
+            <i class="fas fa-user-graduate"></i>
+            <h2>Student Registration Request</h2>
+            <p>College will verify and send credentials</p>
+        </div>
+
+        <label>Full Name</label>
+        <input type="text" id="fullName" placeholder="Enter your full name" required>
+
+        <label>Roll Number</label>
+        <input type="text" id="rollNumber" placeholder="Enter your roll number" required>
+
+        <label>College Email</label>
+        <input type="email" id="email" placeholder="your.name@college.edu.in" required>
+
+        <label>Branch</label>
+        <select id="branch" required>
+            <option value="">Select branch</option>
+            <option value="CS">Computer Engineering</option>
+            <option value="IT">Information Technology</option>
+            <option value="ENTC">Electronics & Telecommunication</option>
+        </select>
+
+        <label>Current Year</label>
+        <select id="year" required>
+            <option value="">Select year</option>
+            <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+            <option value="4">4th Year</option>
+        </select>
+
+        <label>Interests (comma separated)</label>
+        <input type="text" id="interests" placeholder="e.g. Web Development, AI, Placements">
+
+        <div class="auth-info">
+            ⚠️ Your request will be sent to college admin.<br>
+            You will receive login credentials via email within 24-48 hours.
+        </div>
+
+        <button class="auth-btn" id="submitBtn">Submit Request</button>
+
+        <p class="auth-switch">
+            Already have credentials?
+            <a href="login.html">Login here</a>
+        </p>
+
+        <a href="role-select.html" class="back-home">← Back to Role Selection</a>
+    </div>
+</div>
+
+<script src="../js/student-request.js"></script>
+</body>
+</html>

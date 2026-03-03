@@ -28,7 +28,7 @@
     <nav class="nav-links">
         <a href="student-dashboard.html" class="active">Dashboard</a>
         <a href="search-alumni.html">Search Alumni</a>
-         <a href="alumni-profile.html">My Profile</a>
+         <a href="student-profile.html">My Profile</a>
         <a href="student-forum.html">Forum</a>
         <a href="job-opportunities.html">Jobs</a>
         <a href="events.html">Events</a>
@@ -39,12 +39,14 @@
 <!-- ===== MAIN DASHBOARD ===== -->
 <main class="dashboard">
 
-    <!-- Welcome -->
-    <section class="welcome">
-        <h1 id="student-name">Welcome, Student</h1>
-        <p>Connect with alumni, explore opportunities, and grow your career</p>
-    </section>
+  <!-- Welcome -->
+<section class="welcome">
+    <h1 id="student-name">Welcome, <span id="displayName">Student</span></h1>
+    <p>Connect with alumni, explore opportunities, and grow your career</p>
+</section>
 
+<!-- Add this script at bottom of page -->
+<script src="../js/student-dashboard.js"></script>
     <!-- ===== STATS (BACKEND DATA) ===== -->
     <section class="stats">
         <div class="stat-card">
@@ -75,7 +77,7 @@
         <div class="action-grid">
             <a href="search-alumni.html" class="action-card">
                 <i class="fas fa-user-graduate action-icon"></i>
-                <h3>Find a Mentor</h3>
+                <h3>Search Alumni</h3>
                 <p>Search alumni by branch, year, or company</p>
             </a>
 
@@ -120,6 +122,7 @@
 
 <!-- ===== DASHBOARD DATA SCRIPT ===== -->
 <script src="../js/student-dashboard.js"></script>
+   
 
 </body>
 </html>

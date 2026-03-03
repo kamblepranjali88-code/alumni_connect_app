@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose Role | Alumni Connect</title>
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-header">
+            <i class="fas fa-users"></i>
+            <h2>Welcome to Alumni Connect</h2>
+            <p>Select your role to continue</p>
+        </div>
+
+        <div class="role-cards">
+            <div class="role-card" onclick="location.href='student-request.html'">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Student</h3>
+                <p>Current college students</p>
+                <small>Request credentials from college</small>
+            </div>
+
+            <div class="role-card" onclick="location.href='alumni-request.html'">
+                <i class="fas fa-user-tie"></i>
+                <h3>Alumni</h3>
+                <p>Graduates & professionals</p>
+                <small>Request invitation from college</small>
+            </div>
+        </div>
+
+        <p class="auth-switch">
+            Already have credentials?
+            <a href="login.html">Login here</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>
