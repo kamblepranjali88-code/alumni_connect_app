@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alumni Request | Alumni Connect</title>
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-header">
+            <i class="fas fa-user-tie"></i>
+            <h2>Alumni Registration Request</h2>
+            <p>College will verify and send invitation</p>
+        </div>
+
+        <label>Full Name</label>
+        <input type="text" id="fullName" placeholder="Enter your full name" required>
+
+        <label>Email ID</label>
+        <input type="email" id="email" placeholder="your.email@gmail.com" required>
+
+        <label>Graduation Year</label>
+        <select id="graduationYear" required>
+            <option value="">Select year</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+        </select>
+
+        <label>Branch</label>
+        <select id="branch" required>
+            <option value="">Select branch</option>
+            <option value="CS">Computer Engineering</option>
+            <option value="IT">Information Technology</option>
+            <option value="ENTC">Electronics & Telecommunication</option>
+        </select>
+
+        <label>Current Company</label>
+        <input type="text" id="company" placeholder="Enter your company name" required>
+
+        <label>Designation</label>
+        <input type="text" id="designation" placeholder="e.g. Software Engineer" required>
+
+        <label>Years of Experience</label>
+        <input type="number" id="experience" placeholder="Years" required>
+
+        <label>Expertise Areas (comma separated)</label>
+        <input type="text" id="expertise" placeholder="e.g. Web Dev, Leadership, Placements">
+
+        <div class="auth-info">
+            ⚠️ College will verify your alumni status.<br>
+            You will receive login credentials via email within 2-3 days.
+        </div>
+
+        <button class="auth-btn" id="submitBtn">Submit Request</button>
+
+        <p class="auth-switch">
+            Already have credentials?
+            <a href="login.html">Login here</a>
+        </p>
+
+        <a href="role-select.html" class="back-home">← Back to Role Selection</a>
+    </div>
+</div>
+
+<script src="../js/alumni-request.js"></script>
+</body>
+</html>
