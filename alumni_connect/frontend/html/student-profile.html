@@ -9,61 +9,32 @@
 </head>
 <body>
     <div class="profile-container">
-
-        <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">
                 <i class="fas fa-graduation-cap"></i>
                 <span>Alumni Connect</span>
             </div>
             <nav class="nav-menu">
-                <a href="student-dashboard.html" class="nav-item">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="student-profile.html" class="nav-item active">
-                    <i class="fas fa-user"></i>
-                    <span>My Profile</span>
-                </a>
-                <a href="search-alumni.html" class="nav-item">
-                    <i class="fas fa-users"></i>
-                    <span>Search Alumni</span>
-                </a>
-                <a href="job-opportunities.html" class="nav-item">
-                    <i class="fas fa-clock"></i>
-                    <span>Jobs</span>
-                </a>
-                <a href="events.html" class="nav-item">
-                    <i class="fas fa-calendar"></i>
-                    <span>Events</span>
-                </a>
-                <a href="forum.html" class="nav-item">
-                    <i class="fas fa-comments"></i>
-                    <span>Forum</span>
-                </a>
+                <a href="student-dashboard.html" class="nav-item"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+                <a href="student-profile.html" class="nav-item active"><i class="fas fa-user"></i><span>My Profile</span></a>
+                <a href="search-alumni.html" class="nav-item"><i class="fas fa-users"></i><span>Search Alumni</span></a>
+                <a href="job-opportunities.html" class="nav-item"><i class="fas fa-clock"></i><span>Jobs</span></a>
+                <a href="events.html" class="nav-item"><i class="fas fa-calendar"></i><span>Events</span></a>
+                <a href="forum.html" class="nav-item"><i class="fas fa-comments"></i><span>Forum</span></a>
             </nav>
             <div class="sidebar-footer">
-                <a href="login.html" class="nav-item" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Logout</span>
-                </a>
+                <a href="login.html" class="nav-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
-
             <div class="content-header">
                 <h1>My Profile</h1>
-                <button class="edit-btn" id="editProfileBtn">
-                    <i class="fas fa-edit"></i> Edit Profile
-                </button>
+                <button class="edit-btn" id="editProfileBtn"><i class="fas fa-edit"></i> Edit Profile</button>
             </div>
 
-            <!-- ===== VIEW MODE ===== -->
+            <!-- VIEW MODE -->
             <div class="profile-view" id="profileView">
-
-                <!-- Hero Card -->
                 <div class="profile-hero">
                     <div class="profile-cover">
                         <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt="Cover">
@@ -75,118 +46,90 @@
                         <div class="profile-hero-info">
                             <h2 id="displayFullName">Loading...</h2>
                             <p>
-                                <i class="fas fa-id-card"></i>
-                                <span id="displayRollNumber">-</span>
+                                <i class="fas fa-id-card"></i><span id="displayRollNumber">-</span>
                                 &nbsp;·&nbsp;
-                                <i class="fas fa-code-branch"></i>
-                                <span id="displayBranch">-</span>
+                                <i class="fas fa-code-branch"></i><span id="displayBranch">-</span>
                                 &nbsp;·&nbsp;
-                                <i class="fas fa-layer-group"></i>
-                                <span id="displayYear">-</span>
+                                <i class="fas fa-layer-group"></i><span id="displayYear">-</span>
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Stats -->
                 <div class="info-card">
-                    <div class="card-title">
-                        <i class="fas fa-chart-line"></i> Activity Summary
-                    </div>
+                    <div class="card-title"><i class="fas fa-chart-line"></i> Activity Summary</div>
                     <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value" id="statRequests">0</div>
-                            <div class="stat-label">Mentorship Requests</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="statMentors">0</div>
-                            <div class="stat-label">Active Mentors</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="statEvents">0</div>
-                            <div class="stat-label">Events Attended</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="statPosts">0</div>
-                            <div class="stat-label">Forum Posts</div>
-                        </div>
+                        <div class="stat-card"><div class="stat-value" id="statRequests">0</div><div class="stat-label">Mentorship Requests</div></div>
+                        <div class="stat-card"><div class="stat-value" id="statMentors">0</div><div class="stat-label">Active Mentors</div></div>
+                        <div class="stat-card"><div class="stat-value" id="statEvents">0</div><div class="stat-label">Events Attended</div></div>
+                        <div class="stat-card"><div class="stat-value" id="statPosts">0</div><div class="stat-label">Forum Posts</div></div>
                     </div>
                 </div>
 
-                <!-- Basic Info + Skills Row -->
                 <div class="cards-row">
                     <div class="info-card">
-                        <div class="card-title">
-                            <i class="fas fa-user-circle"></i> Basic Information
-                        </div>
+                        <div class="card-title"><i class="fas fa-user-circle"></i> Basic Information</div>
                         <div class="info-grid">
-                            <div class="info-item">
-                                <div class="label">Full Name</div>
-                                <div class="value" id="displayFullName2">Loading...</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="label">Email</div>
-                                <div class="value" id="displayEmail">-</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="label">Branch</div>
-                                <div class="value" id="displayBranch2">-</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="label">Year</div>
-                                <div class="value" id="displayYear2">-</div>
-                            </div>
+                            <div class="info-item"><div class="label">Full Name</div><div class="value" id="displayFullName2">Loading...</div></div>
+                            <div class="info-item"><div class="label">Email</div><div class="value" id="displayEmail">-</div></div>
+                            <div class="info-item"><div class="label">Branch</div><div class="value" id="displayBranch2">-</div></div>
+                            <div class="info-item"><div class="label">Year</div><div class="value" id="displayYear2">-</div></div>
                         </div>
                     </div>
-
                     <div class="info-card">
-                        <div class="card-title">
-                            <i class="fas fa-code"></i> Skills & Interests
-                        </div>
-                        <div class="tags-container" id="displayInterests">
-                            <span class="tag">No skills added</span>
-                        </div>
+                        <div class="card-title"><i class="fas fa-code"></i> Skills & Interests</div>
+                        <div class="tags-container" id="displayInterests"><span class="tag">No skills added</span></div>
                     </div>
                 </div>
 
-                <!-- Goals + Social Row -->
                 <div class="cards-row">
                     <div class="info-card">
-                        <div class="card-title">
-                            <i class="fas fa-bullseye"></i> Career Goals
-                        </div>
-                        <p class="goals-text" id="displayGoals">
-                            No goals added yet.
-                        </p>
+                        <div class="card-title"><i class="fas fa-bullseye"></i> Career Goals</div>
+                        <p class="goals-text" id="displayGoals">No goals added yet.</p>
                     </div>
-
                     <div class="info-card">
-                        <div class="card-title">
-                            <i class="fas fa-link"></i> Social Links
-                        </div>
+                        <div class="card-title"><i class="fas fa-link"></i> Social Links</div>
                         <div class="social-links">
-                            <a href="#" class="social-link" id="linkedinLink" target="_blank">
-                                <i class="fab fa-linkedin"></i> <span id="linkedinText">Not added</span>
-                            </a>
-                            <a href="#" class="social-link" id="githubLink" target="_blank">
-                                <i class="fab fa-github"></i> <span id="githubText">Not added</span>
-                            </a>
+                            <a href="#" class="social-link" id="linkedinLink" target="_blank"><i class="fab fa-linkedin"></i><span id="linkedinText">Not added</span></a>
+                            <a href="#" class="social-link" id="githubLink" target="_blank"><i class="fab fa-github"></i><span id="githubText">Not added</span></a>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <!-- ===== EDIT MODE ===== -->
+            <!-- EDIT MODE -->
             <div class="profile-edit" id="profileEdit" style="display: none;">
                 <form id="profileForm">
 
+                    <!-- Photo Upload -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-camera"></i> Profile Photo</h3>
+                        <div class="photo-upload-area">
+                            <div class="photo-preview-wrapper">
+                                <img src="https://ui-avatars.com/api/?name=User&size=150&background=2563eb&color=fff"
+                                     alt="Profile" id="editAvatarImg" class="photo-preview">
+                                <label for="photoInput" class="camera-btn" title="Upload photo">
+                                    <i class="fas fa-camera"></i>
+                                </label>
+                                <input type="file" id="photoInput" accept="image/*" style="display:none;">
+                            </div>
+                            <div class="photo-upload-info">
+                                <p class="photo-upload-title">Upload Profile Photo</p>
+                                <p class="photo-upload-hint">Supported formats: JPG, PNG, GIF · Max size: 5MB</p>
+                                <label for="photoInput" class="upload-btn">
+                                    <i class="fas fa-upload"></i> Choose from Device
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Basic Info -->
                     <div class="form-section">
                         <h3><i class="fas fa-user-circle"></i> Basic Information</h3>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label>Full Name *</label>
-                                <input type="text" id="editFullName" required>
+                                <input type="text" id="editFullName" required placeholder="Your full name">
                             </div>
                             <div class="form-group">
                                 <label>Roll Number</label>
@@ -195,7 +138,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Email *</label>
-                                <input type="email" id="editEmail" required>
+                                <input type="email" id="editEmail" required placeholder="your@email.com">
                             </div>
                             <div class="form-group">
                                 <label>Branch *</label>
@@ -219,6 +162,7 @@
                         </div>
                     </div>
 
+                    <!-- Skills -->
                     <div class="form-section">
                         <h3><i class="fas fa-code"></i> Skills & Interests</h3>
                         <div class="form-group">
@@ -227,6 +171,7 @@
                         </div>
                     </div>
 
+                    <!-- Goals -->
                     <div class="form-section">
                         <h3><i class="fas fa-bullseye"></i> Career Goals</h3>
                         <div class="form-group">
@@ -235,6 +180,7 @@
                         </div>
                     </div>
 
+                    <!-- Social Links -->
                     <div class="form-section">
                         <h3><i class="fas fa-link"></i> Social Links</h3>
                         <div class="form-grid">
@@ -251,17 +197,12 @@
 
                     <div class="form-actions">
                         <button type="button" class="cancel-btn" id="cancelEditBtn">Cancel</button>
-                        <button type="submit" class="save-btn">
-                            <i class="fas fa-save"></i> Save Changes
-                        </button>
+                        <button type="submit" class="save-btn"><i class="fas fa-save"></i> Save Changes</button>
                     </div>
-
                 </form>
             </div>
-
         </div>
     </div>
-
     <script src="../js/student-profile.js"></script>
 </body>
 </html>

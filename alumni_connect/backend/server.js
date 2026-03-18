@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -14,17 +15,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static frontend files
-app.use(express.static('../frontend'));
+const frontendPath = path.resolve(__dirname, '..', 'frontend');
+console.log('Serving frontend from:', frontendPath);
+app.use(express.static(frontendPath));
 
 // Redirect root to role-select page
 app.get('/', (req, res) => {
-    res.redirect('/html/role-select.html');
+    res.redirect('/html/role_select.html');
 });
 
-// ✅ IMPORTANT: MOUNT ROUTES
+// MOUNT ROUTES
 app.use('/api', authRoutes);
 
-// Test route (direct on server)
+// Test route
 app.get('/test', (req, res) => {
     res.json({ message: 'Server is running!' });
 });
@@ -33,5 +36,5 @@ app.get('/test', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
     console.log(`Routes mounted at /api`);
-    console.log(`Frontend available at http://localhost:${PORT}/html/role-select.html`);
+    console.log(`Frontend available at http://localhost:${PORT}/html/role_select.html`);
 });

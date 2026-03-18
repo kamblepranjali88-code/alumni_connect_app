@@ -1,12 +1,17 @@
-// Supabase configuration 
-
+// Supabase configuration
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 
-const supabaseUrl = process.env.SUPABASE_URL;
-//const supabaseKey = process.env.SUPABASE_ANON_KEY;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY; // ← this line
+// Alumni Connect DB (main project DB)
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+// College DB (for student/alumni verification only)
+const collegeDB = createClient(
+    process.env.COLLEGE_SUPABASE_URL,
+    process.env.COLLEGE_SERVICE_ROLE_KEY
+);
 
-module.exports = supabase;
+module.exports = { supabase, collegeDB };
