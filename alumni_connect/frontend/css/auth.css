@@ -19,10 +19,10 @@
 .auth-card {
     background: white;
     width: 100%;
-    max-width: 420px;
+    max-width: 460px;
     padding: 36px;
-    border-radius: 14px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    border-radius: 16px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.25);
 }
 
 .auth-header {
@@ -31,65 +31,155 @@
 }
 
 .auth-header i {
-    font-size: 36px;
-    color: #3b82f6;
+    font-size: 38px;
+    color: #2563eb;
     margin-bottom: 10px;
+    display: block;
 }
 
 .auth-header h2 {
     font-size: 22px;
-    color: #1f2937;
+    font-weight: 700;
+    color: #1e293b;
 }
 
 .auth-header p {
-    font-size: 14px;
+    font-size: 13px;
     color: #6b7280;
-    margin-top: 4px;
+    margin-top: 5px;
+}
+
+/* Form group wrapper */
+.form-group {
+    margin-bottom: 16px;
 }
 
 label {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    margin-top: 14px;
+    color: #374151;
+    margin-bottom: 6px;
     display: block;
 }
 
-input, select {
+input, select, textarea {
     width: 100%;
-    padding: 12px 14px;
-    margin-top: 6px;
+    padding: 11px 14px;
     border-radius: 8px;
-    border: 1px solid #e5e7eb;
+    border: 1.5px solid #e5e7eb;
     background: #f9fafb;
     font-size: 14px;
+    color: #1e293b;
+    font-family: inherit;
+    transition: all 0.2s;
 }
 
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Date of Birth */
+input[type="date"] {
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+/* PRN Number */
+#prnNumber {
+    font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#prnNumber::placeholder {
+    font-family: inherit;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #9ca3af;
+}
+/* Graduation Year input styling */
+#graduationYear {
+    width: 100%;
+    padding: 12px 16px;
+    margin: 8px 0 16px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#graduationYear:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background-color: #fff;
+}
+
+/* Remove spinner arrows for number input (optional) */
+#graduationYear::-webkit-inner-spin-button, 
+#graduationYear::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
+#graduationYear {
+    -moz-appearance: textfield;
+}
+
+/* Info box */
 .auth-info {
-    margin: 18px 0;
-    padding: 12px;
+    margin: 16px 0;
+    padding: 12px 14px;
     background: #eff6ff;
-    border-left: 4px solid #3b82f6;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 8px 8px 0;
     font-size: 13px;
     color: #374151;
+    line-height: 1.6;
 }
 
+/* Submit button */
 .auth-btn {
     width: 100%;
-    padding: 14px;
-    background: #3b82f6;
+    padding: 13px;
+    background: #2563eb;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 8px;
+    transition: background 0.2s;
+    letter-spacing: 0.3px;
 }
 
 .auth-btn:hover {
-    background: #2563eb;
+    background: #1d4ed8;
 }
 
+.auth-btn:disabled {
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+
+/* Links */
 .auth-link {
     display: block;
     text-align: center;
@@ -97,24 +187,62 @@ input, select {
     font-size: 14px;
     color: #2563eb;
     text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
 }
 
 .auth-switch {
     text-align: center;
     margin-top: 16px;
     font-size: 14px;
+    color: #6b7280;
 }
 
 .auth-switch a {
     color: #2563eb;
     font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
 }
 
 .back-home {
     display: block;
     text-align: center;
-    margin-top: 18px;
+    margin-top: 16px;
     font-size: 13px;
-    color: #4b5563;
+    color: #6b7280;
     text-decoration: none;
+    transition: color 0.2s;
 }
+
+.back-home:hover {
+    color: #2563eb;
+}
+
+/* Divider */
+.auth-divider {
+    text-align: center;
+    margin: 20px 0;
+    color: #9ca3af;
+    font-size: 13px;
+    position: relative;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.auth-divider::before { left: 0; }
+.auth-divider::after  { right: 0; }

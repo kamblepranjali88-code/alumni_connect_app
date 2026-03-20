@@ -1,5 +1,5 @@
-// Authentication controller
-const { supabase, collegeDB } = require('../config/supabase'); // ← updated import
+// Student Authentication Controller
+const { supabase, collegeDB } = require('../config/supabase');
 const bcrypt = require('bcryptjs');
 const { sendCredentials } = require('../utils/emailService');
 
@@ -18,7 +18,7 @@ const generateUserId = (rollNumber) => {
     return 'STU_' + rollNumber;
 };
 
-// Student Registration Request
+// ===== STUDENT REGISTRATION =====
 const studentRegistration = async (req, res) => {
     try {
         console.log('=== REGISTRATION ATTEMPT ===');
@@ -26,15 +26,17 @@ const studentRegistration = async (req, res) => {
 
         const { fullName, rollNumber, email, branch, year, interests } = req.body;
 
+        // Validate required fields
+        if (!fullName || !rollNumber || !email || !branch || !year) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+
         const normalizedRoll  = rollNumber?.trim();
         const normalizedEmail = email?.trim().toLowerCase();
 
         console.log('2. Normalized values:');
         console.log('   - rollNumber:', normalizedRoll);
         console.log('   - email:', normalizedEmail);
-        console.log('   - fullName:', fullName);
-        console.log('   - branch:', branch);
-        console.log('   - year:', year);
 
         // 1. Verify student from COLLEGE DB
         console.log('3. Querying college_students in College DB...');
@@ -49,7 +51,6 @@ const studentRegistration = async (req, res) => {
         console.log('5. Full collegeError:', JSON.stringify(collegeError, null, 2));
 
         if (collegeError) {
-            console.log('❌ Full error:', JSON.stringify(collegeError, null, 2));
             return res.status(500).json({
                 message: 'Database error while verifying student records',
                 detail: collegeError.message
@@ -57,15 +58,14 @@ const studentRegistration = async (req, res) => {
         }
 
         if (!collegeStudent) {
-            console.log('6. ❌ No match found for rollNumber:', normalizedRoll, 'email:', normalizedEmail);
             return res.status(404).json({
                 message: 'Roll number or email not found in college records'
             });
         }
 
-        console.log('7. ✅ Match found in College DB:', collegeStudent);
+        console.log('7. ✅ Match found in College DB');
 
-        // 2. Check if already registered in APP DB
+        // 2. Check if already registered
         const { data: existingUser } = await supabase
             .from('users')
             .select('*')
@@ -98,7 +98,7 @@ const studentRegistration = async (req, res) => {
             return res.status(500).json({ message: 'Error creating user account' });
         }
 
-        // 5. Create student profile in APP DB
+        // 5. Create student profile
         const { error: studentError } = await supabase
             .from('students')
             .insert([{
@@ -108,7 +108,7 @@ const studentRegistration = async (req, res) => {
                 email:       normalizedEmail,
                 branch:      branch?.trim(),
                 year:        parseInt(year),
-                interests:   interests
+                interests:   interests || []
             }]);
 
         if (studentError) {
@@ -116,7 +116,7 @@ const studentRegistration = async (req, res) => {
             return res.status(500).json({ message: 'Error creating student profile' });
         }
 
-        // 6. Send email with credentials
+        // 6. Send email
         await sendCredentials(normalizedEmail, userId, tempPassword, fullName?.trim());
 
         console.log('8. ✅ Registration successful for:', normalizedEmail);
@@ -130,21 +130,25 @@ const studentRegistration = async (req, res) => {
     }
 };
 
-// Login
+// ===== LOGIN =====
 const login = async (req, res) => {
     try {
         const { userId, password } = req.body;
 
-        const rollNumber = userId?.replace('STU_', '').trim();
-
         console.log('=== LOGIN ATTEMPT ===');
-        console.log('rollNumber extracted:', rollNumber);
+        console.log('Received userId:', userId);
+        console.log('Received password:', password);
+
+        const rollNumber = userId?.replace('STU_', '').trim();
+        console.log('Extracted rollNumber:', rollNumber);
 
         const { data: user, error } = await supabase
             .from('users')
             .select('*')
             .eq('roll_number', rollNumber)
             .maybeSingle();
+
+        console.log('User found:', user ? 'YES' : 'NO');
 
         if (error) {
             console.error('❌ DB error during login:', error.message);
@@ -155,7 +159,10 @@ const login = async (req, res) => {
             return res.status(401).json({ message: 'Invalid User ID or password' });
         }
 
+        console.log('Stored password_hash:', user.password_hash);
         const isValid = await bcrypt.compare(password, user.password_hash);
+        console.log('Password valid:', isValid);
+
         if (!isValid) {
             return res.status(401).json({ message: 'Invalid User ID or password' });
         }
@@ -174,7 +181,7 @@ const login = async (req, res) => {
     }
 };
 
-// Change password
+// ===== CHANGE PASSWORD =====
 const changePassword = async (req, res) => {
     try {
         const { user_id, new_password } = req.body;
@@ -207,7 +214,7 @@ const changePassword = async (req, res) => {
     }
 };
 
-// Get student profile
+// ===== GET STUDENT PROFILE =====
 const getStudentProfile = async (req, res) => {
     try {
         const { userId } = req.params;
@@ -229,11 +236,15 @@ const getStudentProfile = async (req, res) => {
     }
 };
 
-// Update student profile
+// ===== UPDATE STUDENT PROFILE =====
 const updateStudentProfile = async (req, res) => {
     try {
         const { userId } = req.params;
-        const { full_name, email, branch, year, interests, goals, linkedin, github } = req.body;
+        const {
+            full_name, email, branch, year,
+            interests, goals, linkedin, github,
+            profile_photo
+        } = req.body;
 
         console.log('📝 Updating profile for user_id:', userId);
 
@@ -247,10 +258,18 @@ const updateStudentProfile = async (req, res) => {
             return res.status(404).json({ message: 'Student not found' });
         }
 
-        const updateData = { full_name, email, branch, year, interests: interests || [] };
-        if (goals    !== undefined) updateData.goals    = goals;
-        if (linkedin !== undefined) updateData.linkedin = linkedin;
-        if (github   !== undefined) updateData.github   = github;
+        const updateData = {
+            full_name,
+            email,
+            branch,
+            year,
+            interests: interests || []
+        };
+
+        if (goals         !== undefined) updateData.goals         = goals;
+        if (linkedin      !== undefined) updateData.linkedin      = linkedin;
+        if (github        !== undefined) updateData.github        = github;
+        if (profile_photo !== undefined) updateData.profile_photo = profile_photo;
 
         const { data, error } = await supabase
             .from('students')
@@ -261,11 +280,17 @@ const updateStudentProfile = async (req, res) => {
 
         if (error) {
             console.error('❌ Error updating student:', error);
-            return res.status(500).json({ message: 'Error updating profile', error: error.message });
+            return res.status(500).json({
+                message: 'Error updating profile',
+                error: error.message
+            });
         }
 
-        console.log('✅ Profile updated successfully:', data);
-        res.json({ message: 'Profile updated successfully', student: data });
+        console.log('✅ Profile updated successfully');
+        res.json({
+            message: 'Profile updated successfully',
+            student: data
+        });
 
     } catch (error) {
         console.error('❌ Update error:', error);

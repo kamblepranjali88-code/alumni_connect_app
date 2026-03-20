@@ -2,67 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Alumni Request | Alumni Connect</title>
+    <title>Alumni Registration | Alumni Connect</title>
     <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 <div class="auth-page">
     <div class="auth-card">
         <div class="auth-header">
             <i class="fas fa-user-tie"></i>
-            <h2>Alumni Registration Request</h2>
-            <p>College will verify and send invitation</p>
+            <h2>Alumni Registration</h2>
+            <p>College will verify and send credentials to your email</p>
         </div>
 
-        <label>Full Name</label>
-        <input type="text" id="fullName" placeholder="Enter your full name" required>
+        <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="fullName" placeholder="Enter your full name" required>
+        </div>
 
-        <label>Email ID</label>
-        <input type="email" id="email" placeholder="your.email@gmail.com" required>
+        <div class="form-group">
+            <label>PRN Number *</label>
+            <input type="text" id="prnNumber" placeholder="e.g. S18CE031" required>
+        </div>
 
-        <label>Graduation Year</label>
-        <select id="graduationYear" required>
-            <option value="">Select year</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-        </select>
+        <div class="form-group">
+            <label>Date of Birth *</label>
+            <input type="date" id="dob" required>
+        </div>
 
-        <label>Branch</label>
-        <select id="branch" required>
-            <option value="">Select branch</option>
-            <option value="CS">Computer Engineering</option>
-            <option value="IT">Information Technology</option>
-            <option value="ENTC">Electronics & Telecommunication</option>
-        </select>
+        <div class="form-group">
+            <label>Email ID *</label>
+            <input type="email" id="email" placeholder="your.email@gmail.com" required>
+        </div>
 
-        <label>Current Company</label>
-        <input type="text" id="company" placeholder="Enter your company name" required>
+        <div class="form-group">
+           <label>Graduation Year</label>
+<input type="number" id="graduationYear" placeholder="e.g. 2024" min="1950" max="2100" required>
 
-        <label>Designation</label>
-        <input type="text" id="designation" placeholder="e.g. Software Engineer" required>
+<label>Branch</label>
+<select id="branch" required>
+    <option value="">Select branch</option>
+    <option value="CS">Computer Engineering</option>
+    <option value="IT">Information Technology</option>
+    <option value="ENTC">Electronics & Telecommunication</option>
+</select>
+        </div>
 
-        <label>Years of Experience</label>
-        <input type="number" id="experience" placeholder="Years" required>
-
-        <label>Expertise Areas (comma separated)</label>
-        <input type="text" id="expertise" placeholder="e.g. Web Dev, Leadership, Placements">
+        
 
         <div class="auth-info">
-            ⚠️ College will verify your alumni status.<br>
-            You will receive login credentials via email within 2-3 days.
+            ⚠️ Make sure your PRN, Date of Birth and Graduation Year match college records.<br>
+            You will receive login credentials via email after verification.
         </div>
 
-        <button class="auth-btn" id="submitBtn">Submit Request</button>
+        <button class="auth-btn" id="submitBtn">Submit Registration</button>
 
         <p class="auth-switch">
             Already have credentials?
             <a href="login.html">Login here</a>
         </p>
 
-        <a href="role-select.html" class="back-home">← Back to Role Selection</a>
+        <a href="role_select.html" class="back-home">← Back to Role Selection</a>
     </div>
 </div>
 

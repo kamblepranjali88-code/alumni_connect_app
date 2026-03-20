@@ -27,7 +27,7 @@
     <nav class="nav-links">
         <a href="student-dashboard.html">Dashboard</a>
         <a href="search-alumni.html" class="active">Alumni</a>
-         <a href="student-profile.html">My Profile</a>
+        <a href="student-profile.html">My Profile</a>
         <a href="student-forum.html">Forum</a>
         <a href="job-opportunities.html">Jobs</a>
         <a href="events.html">Events</a>
@@ -44,27 +44,31 @@
 
         <label>Branch</label>
         <select id="filterBranch">
-            <option value="All">All</option>
-            <option>CSE</option>
-            <option>IT</option>
-            <option>ENTC</option>
-            <option>Mechanical</option>
+            <option value="">All</option>
+            <option value="Computer Engineering">Computer Engineering</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="ENTC">ENTC</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Civil">Civil</option>
         </select>
 
         <label>Passout Year</label>
         <select id="filterYear">
-            <option value="All">All</option>
-            <option>2020</option>
-            <option>2021</option>
-            <option>2022</option>
-            <option>2023</option>
+            <option value="">All</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
         </select>
 
         <label>Mentorship</label>
         <select id="filterAvailability">
-            <option value="All">All</option>
-            <option value="Available">Available</option>
-            <option value="Unavailable">Unavailable</option>
+            <option value="">All</option>
+            <option value="true">Available</option>
+            <option value="false">Not Available</option>
         </select>
 
         <button id="clearFilters">Clear Filters</button>
@@ -83,7 +87,9 @@
         </div>
 
         <!-- ALUMNI LIST -->
-        <div id="alumniList" class="alumni-list"></div>
+        <div id="alumniList" class="alumni-list">
+            <p class="loading-text">Loading alumni...</p>
+        </div>
 
     </section>
 

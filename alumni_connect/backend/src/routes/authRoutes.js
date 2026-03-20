@@ -1,11 +1,15 @@
-const express = require('express');
+const express = require('express');  // ← add this line
 const router = express.Router();
+
+const authController = require('../controllers/authController');  // ← line 1
+console.log('Auth controller exports:', Object.keys(authController));  // ← line 2
+
 const {
     studentRegistration,
     login,
     changePassword,
     getStudentProfile,
-    updateStudentProfile  // ← Make sure this is imported
+    updateStudentProfile
 } = require('../controllers/authController');
 
 // Auth routes
@@ -15,7 +19,9 @@ router.post('/auth/change-password', changePassword);
 
 // Profile routes
 router.get('/auth/student/profile/:userId', getStudentProfile);
-router.put('/auth/student/profile/:userId', updateStudentProfile);  // ← ADD THIS LINE
+router.put('/auth/student/profile/:userId', updateStudentProfile);
+
+
 
 // Test route
 router.get('/test', (req, res) => {
