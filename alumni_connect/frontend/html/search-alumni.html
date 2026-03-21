@@ -12,6 +12,8 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
+
 <body>
 
 <!-- NAVBAR -->
@@ -94,6 +96,55 @@
     </section>
 
 </main>
+
+
+
+<!-- REQUEST MODAL -->
+<div class="modal-overlay" id="requestModal" style="display:none;">
+    <div class="modal">
+        <div class="modal-header">
+            <h3><i class="fas fa-paper-plane"></i> Send Request to <span id="modalAlumniName"></span></h3>
+            <button class="modal-close" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-rules">
+    <div class="rule-item">
+        <i class="fas fa-info-circle"></i>
+        <span>You can have maximum <strong>2 active mentors</strong> at a time</span>
+    </div>
+    <div class="rule-item">
+        <i class="fas fa-clock"></i>
+        <span>Each mentorship connection lasts <strong>15 days</strong></span>
+    </div>
+    <div class="rule-item">
+        <i class="fas fa-lock"></i>
+        <span>You <strong>cannot change</strong> your mentor during active connection</span>
+    </div>
+    <div class="rule-item">
+        <i class="fas fa-redo"></i>
+        <span>New slot opens when connection ends or request is rejected</span>
+    </div>
+</div>
+<p class="modal-info">Write a message explaining why you want mentorship:</p>
+            <textarea
+                id="requestMessage"
+                placeholder="e.g. Hi, I am a 2nd year IT student interested in web development. I would love guidance on placements and improving my technical skills..."
+                rows="5">
+            </textarea>
+            <p class="char-hint">Minimum 10 characters required</p>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-cancel" onclick="document.getElementById('requestModal').style.display='none'">
+                Cancel
+            </button>
+            <button class="modal-submit" id="submitRequest">
+                <i class="fas fa-paper-plane"></i> Send Request
+            </button>
+        </div>
+    </div>
+</div>
 
 <!-- FOOTER -->
 <div id="footer-placeholder"></div>

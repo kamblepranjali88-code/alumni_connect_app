@@ -33,7 +33,7 @@
     <!-- MAIN CONTENT -->
     <div class="page-wrapper">
 
-        <!-- LEFT COLUMN — Profile Card -->
+        <!-- LEFT COLUMN -->
         <div class="left-col">
 
             <!-- Profile Card -->
@@ -58,7 +58,6 @@
                         Batch of <span id="displayGradYear">-</span>
                     </p>
 
-                    <!-- Mentorship Badge -->
                     <div id="mentorshipBadge" class="mentorship-badge" style="display:none;">
                         <i class="fas fa-check-circle"></i> Available for Mentorship
                     </div>
@@ -66,14 +65,13 @@
                         <i class="fas fa-times-circle"></i> Not Available for Mentorship
                     </div>
 
-                    <!-- Send Request Button -->
                     <button class="request-btn" id="sendRequestBtn" style="display:none;">
                         <i class="fas fa-paper-plane"></i> Send Mentorship Request
                     </button>
                 </div>
             </div>
 
-            <!-- Social Links Card -->
+            <!-- Social Links -->
             <div class="side-card">
                 <div class="side-card-title">
                     <i class="fas fa-link"></i> Social Links
@@ -94,7 +92,7 @@
                 </div>
             </div>
 
-            <!-- Contact Preference Card -->
+            <!-- Contact Preference -->
             <div class="side-card">
                 <div class="side-card-title">
                     <i class="fas fa-envelope"></i> Contact Preference
@@ -104,10 +102,9 @@
 
         </div>
 
-        <!-- RIGHT COLUMN — Details -->
+        <!-- RIGHT COLUMN -->
         <div class="right-col">
 
-            <!-- About -->
             <div class="detail-card">
                 <div class="detail-card-title">
                     <i class="fas fa-user"></i> About Me
@@ -115,7 +112,6 @@
                 <p class="bio-text" id="displayBio">No bio added yet.</p>
             </div>
 
-            <!-- Professional Info -->
             <div class="detail-card">
                 <div class="detail-card-title">
                     <i class="fas fa-briefcase"></i> Professional Information
@@ -144,7 +140,6 @@
                 </div>
             </div>
 
-            <!-- Skills -->
             <div class="detail-card">
                 <div class="detail-card-title">
                     <i class="fas fa-code"></i> Skills & Expertise
@@ -154,7 +149,6 @@
                 </div>
             </div>
 
-            <!-- Mentorship Info -->
             <div class="detail-card">
                 <div class="detail-card-title">
                     <i class="fas fa-hands-helping"></i> Mentorship Information
@@ -175,6 +169,53 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <!-- ===== REQUEST MODAL ===== -->
+    <div class="modal-overlay" id="requestModal" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-paper-plane"></i> Send Mentorship Request</h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-rules">
+    <div class="rule-item">
+        <i class="fas fa-info-circle"></i>
+        <span>You can have maximum <strong>2 active mentors</strong> at a time</span>
+    </div>
+    <div class="rule-item">
+        <i class="fas fa-clock"></i>
+        <span>Each mentorship connection lasts <strong>15 days</strong></span>
+    </div>
+    <div class="rule-item">
+        <i class="fas fa-lock"></i>
+        <span>You <strong>cannot change</strong> your mentor during active connection</span>
+    </div>
+    <div class="rule-item">
+        <i class="fas fa-redo"></i>
+        <span>New slot opens when connection ends or request is rejected</span>
+    </div>
+</div>
+<p class="modal-info">Write a message explaining why you want mentorship:</p>
+                <textarea
+                    id="requestMessage"
+                    placeholder="e.g. Hi, I am a 2nd year IT student interested in web development. I would love to get guidance on placements and improving my technical skills..."
+                    rows="5">
+                </textarea>
+                <p class="char-hint">Minimum 10 characters required</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-cancel" id="closeModal2" onclick="document.getElementById('requestModal').style.display='none'">
+                    Cancel
+                </button>
+                <button class="modal-submit" id="submitRequest">
+                    <i class="fas fa-paper-plane"></i> Send Request
+                </button>
+            </div>
         </div>
     </div>
 

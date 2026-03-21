@@ -1,82 +1,182 @@
 .mentorship-container {
-    max-width: 1100px;
+    max-width: 900px;
     margin: auto;
-    padding: 120px 24px 40px;
-    background: #f5f7fa;
+    padding: 120px 24px 60px;
 }
 
 .page-header {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 }
 
 .page-header h1 {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
+    color: #1e293b;
 }
 
 .page-header p {
     color: #6b7280;
+    margin-top: 4px;
+    font-size: 14px;
 }
 
-/* Request Card */
+/* ===== STATS ROW ===== */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.stat-box {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.stat-box i {
+    font-size: 22px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.pending-box i  { color: #d97706; }
+.active-box i   { color: #16a34a; }
+.rejected-box i { color: #dc2626; }
+
+.stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1e293b;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===== REQUEST CARD ===== */
 .request-card {
     background: white;
     border-radius: 16px;
-    padding: 24px;
     border: 1px solid #e5e7eb;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 18px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
 }
 
-.request-info {
+.request-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.request-card.card-pending  { border-left: 4px solid #d97706; }
+.request-card.card-accepted { border-left: 4px solid #16a34a; }
+.request-card.card-rejected { border-left: 4px solid #dc2626; }
+
+/* Student Info */
+.request-student-info {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.request-student-info img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5e7eb;
+    flex-shrink: 0;
 }
 
 .student-name {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 3px;
 }
 
 .student-meta {
-    font-size: 14px;
+    font-size: 13px;
     color: #6b7280;
 }
 
-.request-message {
-    font-size: 14px;
-    color: #374151;
+.status-badge {
+    margin-left: auto;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
 }
 
-/* Status */
-.status {
-    font-size: 13px;
-    font-weight: 600;
+.status-pending  { background: #fef3c7; color: #92400e; }
+.status-accepted { background: #d1fae5; color: #065f46; }
+.status-rejected { background: #fee2e2; color: #991b1b; }
+
+/* Message */
+.request-message {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    border-left: 3px solid #2563eb;
+}
+
+.request-message i {
+    color: #2563eb;
+    margin-right: 6px;
+    font-size: 12px;
+}
+
+/* Expiry Info */
+.expiry-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
     padding: 6px 12px;
-    border-radius: 12px;
+    border-radius: 8px;
+    margin-bottom: 14px;
     width: fit-content;
 }
 
-.pending {
-    background: #fef3c7;
-    color: #92400e;
+.expiry-info.active  { background: #d1fae5; color: #065f46; }
+.expiry-info.expired { background: #f1f5f9; color: #6b7280; }
+
+/* Footer */
+.request-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.accepted {
-    background: #d1fae5;
-    color: #065f46;
+.request-date {
+    font-size: 12px;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.rejected {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-/* Actions */
-.actions {
+/* Action Buttons */
+.action-btns {
     display: flex;
     gap: 10px;
 }
@@ -85,74 +185,67 @@
     background: #16a34a;
     color: white;
     border: none;
-    padding: 10px 14px;
-    border-radius: 10px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
 }
+
+.accept-btn:hover { background: #15803d; }
 
 .reject-btn {
-    background: #dc2626;
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 10px;
+    background: white;
+    color: #dc2626;
+    border: 1.5px solid #fca5a5;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-}
-
-.accept-btn:disabled,
-.reject-btn:disabled {
-    background: #d1d5db;
-    cursor: not-allowed;
-}
-
-/* Modal */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-.modal {
-    background: white;
-    border-radius: 14px;
-    padding: 24px;
-    width: 400px;
-}
-
-.modal textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-}
-
-.modal-actions {
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 14px;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
 }
 
-.btn-cancel {
-    background: #e5e7eb;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-reject {
+.reject-btn:hover {
     background: #dc2626;
     color: white;
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
+    border-color: #dc2626;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #9ca3af;
+}
+
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.empty-state p {
+    font-size: 16px;
+}
+
+/* Loading */
+.loading-text {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+.error-text {
+    text-align: center;
+    padding: 40px;
+    color: #dc2626;
 }

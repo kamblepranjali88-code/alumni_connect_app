@@ -3,17 +3,14 @@
 document.getElementById('loginBtn').addEventListener('click', async function(e) {
     e.preventDefault();
 
-    // Get form values
     const userId   = document.getElementById('userId').value.trim();
     const password = document.getElementById('password').value;
 
-    // Validate
     if (!userId || !password) {
         alert('Please enter both User ID and password');
         return;
     }
 
-    // Show loading state
     const btn = document.getElementById('loginBtn');
     const originalText = btn.textContent;
     btn.textContent = 'Logging in...';
@@ -21,8 +18,6 @@ document.getElementById('loginBtn').addEventListener('click', async function(e) 
 
     try {
         // Auto detect route based on User ID prefix
-        // STU_ → student route
-        // ALM_ → alumni route
         const loginUrl = userId.startsWith('ALM_')
             ? 'http://localhost:5000/api/alumni/login'
             : 'http://localhost:5000/api/auth/login';
@@ -47,11 +42,20 @@ document.getElementById('loginBtn').addEventListener('click', async function(e) 
                 // First time login → change password
                 window.location.href = 'change-password.html?userId=' + result.user_id;
             } else {
-                // Redirect based on user type
-                if (result.user_type === 'alumni') {
-                    window.location.href = 'alumni-dashboard.html';
+                // ===== CHECK FOR REDIRECT URL =====
+                const urlParams   = new URLSearchParams(window.location.search);
+                const redirectPage = urlParams.get('redirect');
+
+                if (redirectPage) {
+                    // Redirect to the page from email link
+                    window.location.href = redirectPage;
                 } else {
-                    window.location.href = 'student-dashboard.html';
+                    // Normal redirect based on user type
+                    if (result.user_type === 'alumni') {
+                        window.location.href = 'alumni-dashboard.html';
+                    } else {
+                        window.location.href = 'student-dashboard.html';
+                    }
                 }
             }
         } else {
