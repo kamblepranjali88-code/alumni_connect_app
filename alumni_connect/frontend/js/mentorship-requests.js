@@ -6,7 +6,6 @@ if (!alumniId) {
     window.location.href = 'login.html';
 }
 
-// ===== LOAD REQUESTS =====
 async function loadRequests() {
     try {
         const response = await fetch(`${BASE_URL}/requests/alumni/${alumniId}`);
@@ -17,31 +16,16 @@ async function loadRequests() {
     } catch (error) {
         console.error('Error:', error);
         document.getElementById('requestsList').innerHTML =
-            '<p class="error-text">❌ Error loading requests. Please try again.</p>';
+            '<p class="error-text">❌ Error loading requests.</p>';
     }
 }
 
-// ===== UPDATE STATS — correctly count active vs pending =====
 function updateStats(requests) {
-    const now = new Date();
-
-    const pending  = requests.filter(r => r.status === 'pending').length;
-
-    // Active = accepted AND not expired
-    const active   = requests.filter(r =>
-        r.status === 'accepted' &&
-        r.expires_at &&
-        new Date(r.expires_at) > now
-    ).length;
-
-    const rejected = requests.filter(r => r.status === 'rejected').length;
-
-    document.getElementById('pendingCount').textContent  = pending;
-    document.getElementById('activeCount').textContent   = active;
-    document.getElementById('rejectedCount').textContent = rejected;
+    document.getElementById('pendingCount').textContent  = requests.filter(r => r.status === 'pending').length;
+    document.getElementById('activeCount').textContent   = requests.filter(r => r.status === 'accepted').length;
+    document.getElementById('rejectedCount').textContent = requests.filter(r => r.status === 'rejected').length;
 }
 
-// ===== RENDER REQUESTS =====
 function renderRequests(requests) {
     const container = document.getElementById('requestsList');
     container.innerHTML = '';
@@ -55,7 +39,6 @@ function renderRequests(requests) {
         return;
     }
 
-    // Sort: pending first, then accepted, then rejected
     const sorted = [...requests].sort((a, b) => {
         const order = { pending: 0, accepted: 1, rejected: 2 };
         return order[a.status] - order[b.status];
@@ -66,17 +49,11 @@ function renderRequests(requests) {
         const avatarSrc = student.profile_photo ||
             `https://ui-avatars.com/api/?name=${encodeURIComponent(student.full_name || 'S')}&size=52&background=2563eb&color=fff`;
 
-        const now       = new Date();
-        const isExpired = req.expires_at && new Date(req.expires_at) < now;
+        const statusClass = `status-${req.status}`;
+        const statusLabel = req.status === 'pending'  ? '⏳ Pending'  :
+                           req.status === 'accepted' ? '✅ Active'   : '❌ Rejected';
 
-        // Status label — show completed if accepted but expired
-        const statusClass = req.status === 'accepted' && isExpired ? 'status-completed' :
-                           `status-${req.status}`;
-        const statusLabel = req.status === 'pending'                    ? '⏳ Pending'   :
-                           req.status === 'accepted' && !isExpired      ? '✅ Active'    :
-                           req.status === 'accepted' && isExpired       ? '✔️ Completed' :
-                           '❌ Rejected';
-
+        // Action buttons — only for pending
         const actionBtns = req.status === 'pending' ? `
             <div class="action-btns">
                 <button class="accept-btn" onclick="handleRequest(${req.request_id}, 'accept')">
@@ -87,6 +64,8 @@ function renderRequests(requests) {
                 </button>
             </div>` : '';
 
+        const now       = new Date();
+        const isExpired = req.expires_at && new Date(req.expires_at) < now;
         const expiryInfo = req.expires_at && req.status === 'accepted' ? `
             <div class="expiry-info ${isExpired ? 'expired' : 'active'}">
                 <i class="fas fa-clock"></i>
@@ -97,7 +76,7 @@ function renderRequests(requests) {
 
         const div = document.createElement('div');
         div.className = `request-card card-${req.status}`;
-        div.id = `req-${req.request_id}`;
+        div.id        = `req-${req.request_id}`;
         div.innerHTML = `
             <div class="request-student-info">
                 <img src="${avatarSrc}" alt="${student.full_name}"
@@ -118,14 +97,22 @@ function renderRequests(requests) {
                 <span class="request-date">
                     <i class="fas fa-calendar"></i> ${formatDate(req.created_at)}
                 </span>
-                ${actionBtns}
+                <div class="action-btns">
+                    <button class="view-profile-btn" onclick="viewStudentProfile(${student.student_id})">
+                        <i class="fas fa-user"></i> View Profile
+                    </button>
+                    ${actionBtns}
+                </div>
             </div>
         `;
         container.appendChild(div);
     });
 }
 
-// ===== ACCEPT / REJECT =====
+function viewStudentProfile(studentId) {
+    window.location.href = `view-student-profile.html?id=${studentId}`;
+}
+
 async function handleRequest(requestId, action) {
     const confirmMsg = action === 'accept'
         ? '✅ Accept this request? Connection will be active for 15 days and student will be notified via email.'
@@ -143,13 +130,13 @@ async function handleRequest(requestId, action) {
 
         if (response.ok) {
             alert('✅ ' + result.message);
-            loadRequests(); // refresh
+            loadRequests();
         } else {
             alert('❌ ' + result.message);
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('❌ Network error. Please try again.');
+        alert('❌ Network error.');
     }
 }
 
@@ -160,7 +147,6 @@ function formatDate(dateStr) {
     });
 }
 
-// ===== LOGOUT =====
 document.querySelector('.logout')?.addEventListener('click', (e) => {
     e.preventDefault();
     sessionStorage.clear();

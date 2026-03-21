@@ -13,13 +13,38 @@ if (!studentId) {
     window.location.href = 'login.html';
 }
 
-let selectedAlumni = null; // stores alumni for current request
+let selectedAlumni   = null;
+let studentRequests  = []; // stores student's existing requests
+
+// ===== LOAD STUDENT REQUESTS FIRST =====
+async function loadStudentRequests() {
+    try {
+        const response = await fetch(`${BASE_URL}/requests/student/${studentId}`);
+        if (response.ok) {
+            studentRequests = await response.json();
+        }
+    } catch (error) {
+        console.error('Error loading student requests:', error);
+    }
+}
+
+// ===== GET CONNECTION STATUS FOR ALUMNI =====
+function getConnectionStatus(alumniId) {
+    const now = new Date();
+    const req = studentRequests.find(r => r.alumni?.alumni_id === alumniId);
+    if (!req) return null;
+
+    if (req.status === 'accepted' && new Date(req.expires_at) > now) return 'connected';
+    if (req.status === 'accepted' && new Date(req.expires_at) <= now) return 'expired';
+    if (req.status === 'pending') return 'pending';
+    if (req.status === 'rejected') return 'rejected';
+    return null;
+}
 
 // ===== FETCH ALUMNI FROM DB =====
 async function fetchAlumni() {
     try {
         const params = new URLSearchParams();
-
         const search       = searchInput.value.trim();
         const branch       = filterBranch.value;
         const year         = filterYear.value;
@@ -39,8 +64,8 @@ async function fetchAlumni() {
         renderAlumni(alumniData);
 
     } catch (error) {
-        console.error('Error fetching alumni:', error);
-        list.innerHTML = '<p class="error-text">❌ Error loading alumni. Please try again.</p>';
+        console.error('Error:', error);
+        list.innerHTML = '<p class="error-text">❌ Error loading alumni.</p>';
     }
 }
 
@@ -54,9 +79,31 @@ function renderAlumni(data) {
     }
 
     data.forEach(alumni => {
-        const avatarSrc   = alumni.profile_photo ||
+        const avatarSrc      = alumni.profile_photo ||
             `https://ui-avatars.com/api/?name=${encodeURIComponent(alumni.full_name || 'A')}&size=60&background=2563eb&color=fff`;
-        const isAvailable = alumni.available_for_mentorship;
+        const isAvailable    = alumni.available_for_mentorship;
+        const connStatus     = getConnectionStatus(alumni.alumni_id);
+
+        // Connection status badge
+        let connBadge = '';
+        let requestBtnHtml = '';
+
+        if (connStatus === 'connected') {
+            connBadge      = '<span class="conn-badge connected"><i class="fas fa-link"></i> Connected</span>';
+            requestBtnHtml = '<button class="request-btn" disabled>Connected</button>';
+        } else if (connStatus === 'pending') {
+            connBadge      = '<span class="conn-badge pending-conn"><i class="fas fa-clock"></i> Request Sent</span>';
+            requestBtnHtml = '<button class="request-btn" disabled>Pending</button>';
+        } else if (connStatus === 'expired') {
+            connBadge      = '<span class="conn-badge expired-conn"><i class="fas fa-history"></i> Previously Connected</span>';
+            requestBtnHtml = isAvailable
+                ? `<button class="request-btn" onclick="openRequestModal(${alumni.alumni_id}, '${alumni.full_name?.replace(/'/g, "\\'")}')">Request Again</button>`
+                : '<button class="request-btn" disabled>Not Available</button>';
+        } else {
+            requestBtnHtml = isAvailable
+                ? `<button class="request-btn" onclick="openRequestModal(${alumni.alumni_id}, '${alumni.full_name?.replace(/'/g, "\\'")}')">Request</button>`
+                : '<button class="request-btn" disabled>Not Available</button>';
+        }
 
         list.innerHTML += `
             <div class="alumni-item">
@@ -68,22 +115,20 @@ function renderAlumni(data) {
                     <span class="alumni-name">${alumni.full_name || 'Unknown'}</span>
                     <span class="alumni-meta">
                         ${alumni.designation ? alumni.designation + ' at ' + (alumni.company || '') : (alumni.company || 'Not specified')}
-                        <br>
-                        ${alumni.branch || ''} • Passout ${alumni.graduation_year || ''}
+                        <br>${alumni.branch || ''} • Passout ${alumni.graduation_year || ''}
                     </span>
-                    <span class="badge ${isAvailable ? 'available' : 'unavailable'}">
-                        ${isAvailable ? '✅ Available for Mentorship' : '❌ Not Available'}
-                    </span>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <span class="badge ${isAvailable ? 'available' : 'unavailable'}">
+                            ${isAvailable ? '✅ Available for Mentorship' : '❌ Not Available'}
+                        </span>
+                        ${connBadge}
+                    </div>
                 </div>
                 <div class="actions">
                     <button class="view-btn" onclick="viewProfile(${alumni.user_id})">
                         View Profile
                     </button>
-                    <button class="request-btn"
-                        ${isAvailable ? '' : 'disabled'}
-                        onclick="openRequestModal(${alumni.alumni_id}, '${alumni.full_name?.replace(/'/g, "\\'")}')">
-                        Request
-                    </button>
+                    ${requestBtnHtml}
                 </div>
             </div>
         `;
@@ -97,28 +142,21 @@ function viewProfile(alumniUserId) {
 
 // ===== OPEN REQUEST MODAL =====
 async function openRequestModal(alumniId, alumniName) {
-    // Check slots first
     try {
         const response = await fetch(`${BASE_URL}/requests/slots/${studentId}`);
-        const slots = await response.json();
+        const slots    = await response.json();
 
         if (!slots.canSend) {
             alert(`❌ You cannot send more requests.\n\nYou have ${slots.activeCount} active mentor(s) and ${slots.pendingCount} pending request(s).\nMaximum allowed is 2.`);
             return;
         }
 
-        // Store selected alumni
         selectedAlumni = { alumniId, alumniName };
-
-        // Update modal title
         document.getElementById('modalAlumniName').textContent = alumniName;
         document.getElementById('requestMessage').value = '';
-
-        // Show modal
         document.getElementById('requestModal').style.display = 'flex';
 
     } catch (error) {
-        console.error('Error checking slots:', error);
         alert('❌ Network error. Please try again.');
     }
 }
@@ -142,7 +180,7 @@ document.getElementById('submitRequest').addEventListener('click', async () => {
 
     const submitBtn = document.getElementById('submitRequest');
     submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
+    submitBtn.disabled    = true;
 
     try {
         const response = await fetch(`${BASE_URL}/requests/send`, {
@@ -161,21 +199,22 @@ document.getElementById('submitRequest').addEventListener('click', async () => {
             document.getElementById('requestModal').style.display = 'none';
             selectedAlumni = null;
             alert('✅ ' + result.message);
-            fetchAlumni(); // refresh list
+            // Reload requests and alumni
+            await loadStudentRequests();
+            fetchAlumni();
         } else {
             alert('❌ ' + result.message);
         }
 
     } catch (error) {
-        console.error('Error:', error);
-        alert('❌ Network error. Please try again.');
+        alert('❌ Network error.');
     } finally {
         submitBtn.textContent = 'Send Request';
-        submitBtn.disabled = false;
+        submitBtn.disabled    = false;
     }
 });
 
-// ===== FILTER LISTENERS =====
+// ===== FILTERS =====
 let searchTimeout;
 searchInput.addEventListener('input', () => {
     clearTimeout(searchTimeout);
@@ -201,4 +240,10 @@ document.querySelector('.logout')?.addEventListener('click', (e) => {
     window.location.href = 'login.html';
 });
 
-fetchAlumni();
+// ===== INIT =====
+async function init() {
+    await loadStudentRequests(); // load requests first
+    await fetchAlumni();          // then load alumni with connection status
+}
+
+init();

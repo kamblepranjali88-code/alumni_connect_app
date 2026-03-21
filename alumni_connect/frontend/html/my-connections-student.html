@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Connections | Alumni Connect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-connections.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="brand">
+        <i class="fas fa-user-graduate"></i>
+        <div>
+            <div class="brand-title">Tech University</div>
+            <div class="brand-subtitle">My Connections</div>
+        </div>
+    </div>
+   <nav class="nav-links">
+    <a href="student-dashboard.html">Dashboard</a>
+    <a href="student-profile.html">My Profile</a>
+    <a href="search-alumni.html">Search Alumni</a>
+    <a href="my-connections-student.html">My Connections</a>
+    <a href="job-opportunities.html">Jobs</a>
+    <a href="events.html">Events</a>
+    <a href="student-forum.html">Forum</a>
+    <a href="login.html" class="logout">Logout</a>
+</header>
+
+<main class="connections-container">
+
+    <div class="page-header">
+        <h1>My Connections</h1>
+        <p>Track your mentorship requests and active connections</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+        <div class="stat-box active-box">
+            <i class="fas fa-handshake"></i>
+            <div class="stat-num" id="activeCount">0</div>
+            <div class="stat-label">Active Mentors</div>
+        </div>
+        <div class="stat-box pending-box">
+            <i class="fas fa-clock"></i>
+            <div class="stat-num" id="pendingCount">0</div>
+            <div class="stat-label">Pending Requests</div>
+        </div>
+        <div class="stat-box slot-box">
+            <i class="fas fa-unlock"></i>
+            <div class="stat-num" id="slotsAvailable">0</div>
+            <div class="stat-label">Slots Available</div>
+        </div>
+        <div class="stat-box completed-box">
+            <i class="fas fa-check-circle"></i>
+            <div class="stat-num" id="completedCount">0</div>
+            <div class="stat-label">Completed</div>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('active')">
+            <i class="fas fa-handshake"></i> Active
+        </button>
+        <button class="tab-btn" onclick="switchTab('pending')">
+            <i class="fas fa-clock"></i> Pending
+        </button>
+        <button class="tab-btn" onclick="switchTab('completed')">
+            <i class="fas fa-check-circle"></i> Completed
+        </button>
+        <button class="tab-btn" onclick="switchTab('rejected')">
+            <i class="fas fa-times-circle"></i> Rejected
+        </button>
+    </div>
+
+    <!-- Content -->
+    <div id="connectionsContent">
+        <p class="loading-text"><i class="fas fa-spinner fa-spin"></i> Loading...</p>
+    </div>
+
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="../js/includeFooter.js"></script>
+<script src="../js/my-connections-student.js"></script>
+
+</body>
+</html>

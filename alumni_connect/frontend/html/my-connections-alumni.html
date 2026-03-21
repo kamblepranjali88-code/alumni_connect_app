@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Connections | Alumni Connect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/my-connections.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="brand">
+        <i class="fas fa-user-tie"></i>
+        <div>
+            <div class="brand-title">Tech University</div>
+            <div class="brand-subtitle">My Connections</div>
+        </div>
+    </div>
+   <nav class="nav-links">
+    <a href="alumni-dashboard.html">Dashboard</a>
+    <a href="alumni-profile.html">My Profile</a>
+    <a href="mentorship-requests.html">Requests</a>
+    <a href="my-connections-alumni.html">My Connections</a>
+    <a href="alumni-post-job.html">Post Job</a>
+    <a href="events.html">Events</a>
+    <a href="forum.html">Forum</a>
+    <a href="login.html" class="logout">Logout</a>
+</nav>
+</header>
+
+<main class="connections-container">
+
+    <div class="page-header">
+        <h1>My Connections</h1>
+        <p>Students you are currently mentoring</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+        <div class="stat-box active-box">
+            <i class="fas fa-users"></i>
+            <div class="stat-num" id="activeCount">0</div>
+            <div class="stat-label">Active Mentees</div>
+        </div>
+        <div class="stat-box completed-box">
+            <i class="fas fa-check-circle"></i>
+            <div class="stat-num" id="completedCount">0</div>
+            <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-box pending-box">
+            <i class="fas fa-clock"></i>
+            <div class="stat-num" id="pendingCount">0</div>
+            <div class="stat-label">Pending Requests</div>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('active')">
+            <i class="fas fa-users"></i> Active Mentees
+        </button>
+        <button class="tab-btn" onclick="switchTab('completed')">
+            <i class="fas fa-check-circle"></i> Completed
+        </button>
+    </div>
+
+    <!-- Content -->
+    <div id="connectionsContent">
+        <p class="loading-text"><i class="fas fa-spinner fa-spin"></i> Loading...</p>
+    </div>
+
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="../js/includeFooter.js"></script>
+<script src="../js/my-connections-alumni.js"></script>
+
+</body>
+</html>

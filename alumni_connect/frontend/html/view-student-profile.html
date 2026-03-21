@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Profile | Alumni Connect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/view-alumni-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- TOP NAVBAR -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+        <div class="nav-brand">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Alumni Connect</span>
+        </div>
+        <div class="nav-right">
+            <a href="alumni-dashboard.html" class="nav-link">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="login.html" class="nav-link logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <div class="page-wrapper">
+
+        <!-- LEFT COLUMN -->
+        <div class="left-col">
+
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="profile-cover"></div>
+                <div class="profile-card-body">
+                    <div class="profile-avatar-wrap">
+                        <img src="https://ui-avatars.com/api/?name=User&size=150&background=2563eb&color=fff"
+                             alt="Avatar" id="avatarImg">
+                    </div>
+                    <h2 id="displayFullName">Loading...</h2>
+                    <p class="profile-role">
+                        <span id="displayBranch">-</span>
+                        <span class="dot">·</span>
+                        Year <span id="displayYear">-</span>
+                    </p>
+                    <p class="profile-branch">
+                        <i class="fas fa-id-card"></i>
+                        <span id="displayRollNumber">-</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="side-card">
+                <div class="side-card-title">
+                    <i class="fas fa-envelope"></i> Contact
+                </div>
+                <p class="contact-text" id="displayEmail">-</p>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-col">
+
+            <div class="detail-card">
+                <div class="detail-card-title">
+                    <i class="fas fa-user-circle"></i> Basic Information
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value" id="displayFullName2">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Branch</div>
+                        <div class="info-value" id="displayBranch2">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Year</div>
+                        <div class="info-value" id="displayYear2">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value" id="displayEmail2">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-card-title">
+                    <i class="fas fa-code"></i> Skills & Interests
+                </div>
+                <div class="tags-container" id="displayInterests">
+                    <span class="tag">No skills added</span>
+                </div>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-card-title">
+                    <i class="fas fa-bullseye"></i> Career Goals
+                </div>
+                <p class="bio-text" id="displayGoals">No goals added yet.</p>
+            </div>
+
+            <!-- Social Links -->
+            <div class="detail-card">
+                <div class="detail-card-title">
+                    <i class="fas fa-link"></i> Social Links
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link" id="linkedinLink" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        <span id="linkedinText">Not added</span>
+                    </a>
+                    <a href="#" class="social-link" id="githubLink" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <span id="githubText">Not added</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../js/view-student-profile.js"></script>
+</body>
+</html>
