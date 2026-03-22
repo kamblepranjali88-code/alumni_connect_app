@@ -68,18 +68,15 @@ const sendRequest = async (req, res) => {
             return res.status(400).json({ message: 'Please write a message of at least 10 characters' });
         }
 
-        // Get actual student_id from students table using user_id
         const actualStudentId = await getStudentId(student_id);
         if (!actualStudentId) return res.status(404).json({ message: 'Student not found' });
 
-        // Get student details
         const { data: student } = await supabase
             .from('students')
             .select('student_id, full_name, branch, year, email')
             .eq('student_id', actualStudentId)
             .single();
 
-        // Get alumni details
         const { data: alumni } = await supabase
             .from('alumni')
             .select('alumni_id, full_name, email, available_for_mentorship')
@@ -92,7 +89,6 @@ const sendRequest = async (req, res) => {
             return res.status(400).json({ message: 'This alumni is not available for mentorship' });
         }
 
-        // Check slots using actual student_id
         const slots = await checkAvailableSlots(actualStudentId);
         if (!slots.canSend) {
             return res.status(400).json({
@@ -100,7 +96,6 @@ const sendRequest = async (req, res) => {
             });
         }
 
-        // Check duplicate
         const { data: existing } = await supabase
             .from('mentorship_requests')
             .select('request_id, status')
@@ -117,7 +112,6 @@ const sendRequest = async (req, res) => {
             });
         }
 
-        // Save request using actual student_id
         const { data: newRequest, error } = await supabase
             .from('mentorship_requests')
             .insert([{
@@ -134,7 +128,6 @@ const sendRequest = async (req, res) => {
             return res.status(500).json({ message: 'Error sending request' });
         }
 
-        // Send email to alumni
         try {
             await sendRequestNotification(
                 alumni.email, alumni.full_name,
@@ -158,11 +151,11 @@ const sendRequest = async (req, res) => {
 };
 
 // ===== GET STUDENT REQUESTS =====
+// Returns each request enriched with alumni info + room_id if chat room exists
 const getStudentRequests = async (req, res) => {
     try {
         const { studentId } = req.params; // user_id
 
-        // Convert user_id to student_id
         const actualStudentId = await getStudentId(studentId);
         if (!actualStudentId) return res.status(404).json({ message: 'Student not found' });
 
@@ -176,12 +169,31 @@ const getStudentRequests = async (req, res) => {
 
         const now      = new Date();
         const enriched = await Promise.all(requests.map(async (r) => {
+
+            // Get alumni details
             const { data: alumni } = await supabase
                 .from('alumni')
                 .select('alumni_id, full_name, company, designation, branch, profile_photo')
                 .eq('alumni_id', r.alumni_id)
                 .single();
-            return { ...r, alumni, is_expired: r.expires_at && new Date(r.expires_at) < now };
+
+            // ── NEW: fetch room_id from chat_rooms for active connections ──
+            let room_id = null;
+            if (r.status === 'accepted') {
+                const { data: chatRoom } = await supabase
+                    .from('chat_rooms')
+                    .select('room_id')
+                    .eq('request_id', r.request_id)
+                    .maybeSingle();
+                room_id = chatRoom?.room_id || null;
+            }
+
+            return {
+                ...r,
+                alumni,
+                room_id,
+                is_expired: r.expires_at && new Date(r.expires_at) < now
+            };
         }));
 
         res.json(enriched);
@@ -189,12 +201,13 @@ const getStudentRequests = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
 // ===== GET ALUMNI REQUESTS =====
+// Returns each request enriched with student info + room_id if chat room exists
 const getAlumniRequests = async (req, res) => {
     try {
-        const { alumniId } = req.params; // this is user_id from session
+        const { alumniId } = req.params; // user_id from session
 
-        // Convert user_id to alumni_id
         const actualAlumniId = await getAlumniId(alumniId);
         if (!actualAlumniId) return res.status(404).json({ message: 'Alumni not found' });
 
@@ -208,14 +221,27 @@ const getAlumniRequests = async (req, res) => {
 
         if (error) return res.status(500).json({ message: error.message });
 
-        // Enrich with student details
-        const enriched = await Promise.all(requests.map(async (req) => {
+        const enriched = await Promise.all(requests.map(async (r) => {
+
+            // Get student details
             const { data: student } = await supabase
                 .from('students')
                 .select('student_id, full_name, email, branch, year, profile_photo')
-                .eq('student_id', req.student_id)
+                .eq('student_id', r.student_id)
                 .single();
-            return { ...req, student };
+
+            // ── NEW: fetch room_id from chat_rooms for accepted connections ──
+            let room_id = null;
+            if (r.status === 'accepted') {
+                const { data: chatRoom } = await supabase
+                    .from('chat_rooms')
+                    .select('room_id')
+                    .eq('request_id', r.request_id)
+                    .maybeSingle();
+                room_id = chatRoom?.room_id || null;
+            }
+
+            return { ...r, student, room_id };
         }));
 
         res.json(enriched);
@@ -232,15 +258,11 @@ const acceptRequest = async (req, res) => {
         const { requestId } = req.params;
         console.log('Accepting request:', requestId);
 
-        // First get request WITHOUT joins
         const { data: request, error: fetchError } = await supabase
             .from('mentorship_requests')
             .select('*')
             .eq('request_id', requestId)
             .single();
-
-        console.log('Request found:', request);
-        console.log('Fetch error:', fetchError);
 
         if (fetchError || !request) {
             return res.status(404).json({ message: 'Request not found' });
@@ -250,27 +272,23 @@ const acceptRequest = async (req, res) => {
             return res.status(400).json({ message: 'Request is no longer pending' });
         }
 
-        // Get student separately
         const { data: student } = await supabase
             .from('students')
             .select('full_name, email, branch, year')
             .eq('student_id', request.student_id)
             .single();
 
-        // Get alumni separately
         const { data: alumni } = await supabase
             .from('alumni')
             .select('full_name, company, designation')
             .eq('alumni_id', request.alumni_id)
             .single();
 
-        console.log('Student:', student);
-        console.log('Alumni:', alumni);
-
         const acceptedAt = new Date();
         const expiresAt  = new Date();
         expiresAt.setDate(expiresAt.getDate() + 15);
 
+        // Update the mentorship request status
         const { data, error } = await supabase
             .from('mentorship_requests')
             .update({
@@ -288,7 +306,42 @@ const acceptRequest = async (req, res) => {
             return res.status(500).json({ message: 'Error accepting request' });
         }
 
-        // Send email
+        // ── NEW: Create chat room for this accepted mentorship ──────────────
+        try {
+            // Check if a room already exists (safety check to avoid duplicates)
+            const { data: existingRoom } = await supabase
+                .from('chat_rooms')
+                .select('room_id')
+                .eq('request_id', requestId)
+                .maybeSingle();
+
+            if (!existingRoom) {
+                const { data: newRoom, error: roomError } = await supabase
+                    .from('chat_rooms')
+                    .insert({
+                        request_id: parseInt(requestId),
+                        student_id: request.student_id,
+                        alumni_id:  request.alumni_id,
+                        expires_at: expiresAt.toISOString(),
+                        is_active:  true
+                    })
+                    .select()
+                    .single();
+
+                if (roomError) {
+                    console.error('⚠️ Chat room creation failed:', roomError.message);
+                    // Don't block the accept response — just log the error
+                } else {
+                    console.log(`✅ Chat room ${newRoom.room_id} created for request ${requestId}`);
+                }
+            } else {
+                console.log(`ℹ️ Chat room already exists for request ${requestId}`);
+            }
+        } catch (roomErr) {
+            console.error('⚠️ Chat room error:', roomErr.message);
+        }
+        // ───────────────────────────────────────────────────────────────────
+
         try {
             await sendAcceptNotification(
                 student.email, student.full_name,
@@ -316,14 +369,11 @@ const rejectRequest = async (req, res) => {
         const { requestId } = req.params;
         console.log('Rejecting request:', requestId);
 
-        // Get request without joins
         const { data: request, error: fetchError } = await supabase
             .from('mentorship_requests')
             .select('*')
             .eq('request_id', requestId)
             .single();
-
-        console.log('Request found:', request);
 
         if (fetchError || !request) {
             return res.status(404).json({ message: 'Request not found' });
@@ -333,24 +383,18 @@ const rejectRequest = async (req, res) => {
             return res.status(400).json({ message: 'Request is no longer pending' });
         }
 
-        // Get student separately
         const { data: student } = await supabase
             .from('students')
             .select('full_name, email')
             .eq('student_id', request.student_id)
             .single();
 
-        // Get alumni separately
         const { data: alumni } = await supabase
             .from('alumni')
             .select('full_name')
             .eq('alumni_id', request.alumni_id)
             .single();
 
-        console.log('Student:', student);
-        console.log('Alumni:', alumni);
-
-        // Update status
         const { data, error } = await supabase
             .from('mentorship_requests')
             .update({
@@ -366,7 +410,6 @@ const rejectRequest = async (req, res) => {
             return res.status(500).json({ message: 'Error rejecting request' });
         }
 
-        // Send email to student
         try {
             await sendRejectNotification(
                 student.email,
@@ -388,10 +431,11 @@ const rejectRequest = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
 // ===== GET SLOT INFO =====
 const getSlotInfo = async (req, res) => {
     try {
-        const { studentId } = req.params; // user_id
+        const { studentId } = req.params;
         const actualStudentId = await getStudentId(studentId);
         if (!actualStudentId) return res.status(404).json({ message: 'Student not found' });
         const slots = await checkAvailableSlots(actualStudentId);

@@ -106,6 +106,27 @@ function renderCards(requests, tab) {
                 </div>`;
         }
 
+        // ── Chat button: enabled with room_id if active, history if completed ──
+        let chatBtn = '';
+        if (tab === 'active') {
+            if (req.room_id) {
+                chatBtn = `
+                    <button class="btn-chat" onclick="openChat(${req.room_id})">
+                        <i class="fas fa-comments"></i> Chat
+                    </button>`;
+            } else {
+                chatBtn = `
+                    <button class="btn-chat" disabled title="Chat room is being set up...">
+                        <i class="fas fa-comments"></i> Chat
+                    </button>`;
+            }
+        } else if (tab === 'completed' && req.room_id) {
+            chatBtn = `
+                <button class="btn-chat btn-chat-history" onclick="openChat(${req.room_id})">
+                    <i class="fas fa-history"></i> View History
+                </button>`;
+        }
+
         const div = document.createElement('div');
         div.className = `connection-card ${cardClass}`;
         div.innerHTML = `
@@ -133,15 +154,17 @@ function renderCards(requests, tab) {
                     <button class="btn-view" onclick="viewStudentProfile(${student.student_id})">
                         <i class="fas fa-user"></i> View Profile
                     </button>
-                    ${tab === 'active' ? `
-                    <button class="btn-chat" disabled title="Coming soon">
-                        <i class="fas fa-comments"></i> Chat (Coming Soon)
-                    </button>` : ''}
+                    ${chatBtn}
                 </div>
             </div>
         `;
         container.appendChild(div);
     });
+}
+
+// ── Navigate to chat page with room_id ──────────────────────────────────────
+function openChat(roomId) {
+    window.location.href = `chat.html?room_id=${roomId}`;
 }
 
 function viewStudentProfile(studentId) {

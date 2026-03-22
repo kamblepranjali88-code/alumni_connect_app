@@ -80,10 +80,10 @@ function renderCards(requests, tab) {
 
     if (requests.length === 0) {
         const messages = {
-            active:    { icon: 'fa-handshake', text: 'No active mentors yet.', link: true },
-            pending:   { icon: 'fa-clock',     text: 'No pending requests.', link: true },
-            completed: { icon: 'fa-check-circle', text: 'No completed connections yet.', link: false },
-            rejected:  { icon: 'fa-times-circle', text: 'No rejected requests.', link: false }
+            active:    { icon: 'fa-handshake',    text: 'No active mentors yet.',          link: true  },
+            pending:   { icon: 'fa-clock',         text: 'No pending requests.',            link: true  },
+            completed: { icon: 'fa-check-circle',  text: 'No completed connections yet.',   link: false },
+            rejected:  { icon: 'fa-times-circle',  text: 'No rejected requests.',           link: false }
         };
         const m = messages[tab];
         container.innerHTML = `
@@ -139,10 +139,29 @@ function renderCards(requests, tab) {
                 <i class="fas fa-user"></i> View Profile
             </button>`;
 
-        const chatBtn = tab === 'active' ? `
-            <button class="btn-chat" disabled title="Coming soon">
-                <i class="fas fa-comments"></i> Chat (Coming Soon)
-            </button>` : '';
+        // ── Chat button: enabled with room_id if active, disabled if expired ──
+        let chatBtn = '';
+        if (tab === 'active') {
+            if (req.room_id) {
+                // Room exists → link directly to chat page with room_id
+                chatBtn = `
+                    <button class="btn-chat" onclick="openChat(${req.room_id})">
+                        <i class="fas fa-comments"></i> Chat
+                    </button>`;
+            } else {
+                // Accepted but room not created yet (edge case)
+                chatBtn = `
+                    <button class="btn-chat" disabled title="Chat room is being set up...">
+                        <i class="fas fa-comments"></i> Chat
+                    </button>`;
+            }
+        } else if (tab === 'completed' && req.room_id) {
+            // Completed — allow viewing old chat history (read-only)
+            chatBtn = `
+                <button class="btn-chat btn-chat-history" onclick="openChat(${req.room_id})">
+                    <i class="fas fa-history"></i> View History
+                </button>`;
+        }
 
         const div = document.createElement('div');
         div.className = `connection-card ${cardClass}`;
@@ -176,6 +195,11 @@ function renderCards(requests, tab) {
         `;
         container.appendChild(div);
     });
+}
+
+// ── Navigate to chat page with room_id ──────────────────────────────────────
+function openChat(roomId) {
+    window.location.href = `chat.html?room_id=${roomId}`;
 }
 
 function viewAlumniProfile(alumniUserId) {

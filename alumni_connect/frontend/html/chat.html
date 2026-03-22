@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentorship Chat — Alumni Connect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/chat.css">
+</head>
+<body>
+
+<!-- ── TOP NAVBAR ──────────────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <i class="fas fa-graduation-cap"></i>
+    <span>Alumni<strong>Connect</strong></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="student-dashboard.html" class="nav-link">
+      <i class="fas fa-home"></i> Dashboard
+    </a>
+    <a href="student-profile.html" class="nav-link">
+      <i class="fas fa-user"></i> Profile
+    </a>
+    <a href="mentorship.html" class="nav-link">
+      <i class="fas fa-handshake"></i> Mentorship
+    </a>
+    <a href="chat.html" class="nav-link active">
+      <i class="fas fa-comments"></i> Chat
+      <span class="nav-badge" id="navUnreadBadge" style="display:none">0</span>
+    </a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-avatar" id="navAvatar">
+      <img src="https://ui-avatars.com/api/?name=User&background=0a66c2&color=fff" alt="avatar" id="navAvatarImg">
+    </div>
+    <button class="nav-logout" onclick="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- ── CHAT LAYOUT ─────────────────────────────────────────────────────────── -->
+<div class="chat-page">
+
+  <!-- ── SIDEBAR ──────────────────────────────────────────────────────────── -->
+  <aside class="chat-sidebar" id="chatSidebar">
+
+    <div class="sidebar-header">
+      <h2 class="sidebar-title">Messages</h2>
+      <span class="sidebar-subtitle" id="sidebarSubtitle">Loading...</span>
+    </div>
+
+    <div class="sidebar-search">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search conversations..." id="searchInput" oninput="filterContacts()">
+    </div>
+
+    <div class="contact-list" id="contactList">
+      <!-- Populated by JS -->
+      <div class="loading-shimmer">
+        <div class="shimmer-item"></div>
+        <div class="shimmer-item"></div>
+        <div class="shimmer-item"></div>
+      </div>
+    </div>
+
+    <!-- Mobile close -->
+    <button class="sidebar-close-btn" onclick="closeSidebar()">
+      <i class="fas fa-times"></i>
+    </button>
+  </aside>
+
+  <!-- ── MAIN CHAT AREA ────────────────────────────────────────────────────── -->
+  <main class="chat-main" id="chatMain">
+
+    <!-- Empty state (no chat selected) -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-illustration">
+        <div class="empty-circle outer"></div>
+        <div class="empty-circle middle"></div>
+        <div class="empty-circle inner"></div>
+        <i class="fas fa-comments empty-icon"></i>
+      </div>
+      <h3>Select a conversation</h3>
+      <p>Choose a mentor or mentee from the sidebar to start chatting.</p>
+    </div>
+
+    <!-- Chat window (hidden until a chat is selected) -->
+    <div class="chat-window" id="chatWindow" style="display:none">
+
+      <!-- Chat Header -->
+      <div class="chat-header" id="chatHeader">
+        <button class="back-btn" onclick="showSidebar()">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="chat-avatar-wrap">
+          <img src="" id="chatAvatar" alt="avatar" class="chat-avatar">
+          <span class="online-dot" id="onlineDot"></span>
+        </div>
+        <div class="chat-header-info">
+          <h4 id="chatName">Name</h4>
+          <span id="chatSubInfo" class="chat-sub">Loading...</span>
+        </div>
+        <div class="chat-header-right">
+          <div class="expiry-badge" id="expiryBadge">
+            <i class="fas fa-clock"></i>
+            <span id="expiryText">15 days left</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages Area -->
+      <div class="messages-area" id="messagesArea">
+        <div class="messages-loading" id="messagesLoading">
+          <div class="loading-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div id="messagesList"></div>
+      </div>
+
+      <!-- Typing indicator -->
+      <div class="typing-indicator" id="typingIndicator" style="display:none">
+        <span class="typing-name" id="typingName">Someone</span> is typing
+        <span class="dots"><span></span><span></span><span></span></span>
+      </div>
+
+      <!-- Input Area -->
+      <div class="chat-input-wrap">
+        <div class="chat-input-box">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Type a message..."
+            onkeydown="handleKeyDown(event)"
+            oninput="handleTyping()"
+            maxlength="2000"
+            autocomplete="off"
+          >
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <div class="input-footer">
+          <span id="charCount" class="char-count">0 / 2000</span>
+          <span class="chat-expiry-note" id="chatExpiryNote"></span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<!-- ── EXPIRED OVERLAY ──────────────────────────────────────────────────────── -->
+<div class="expired-overlay" id="expiredOverlay" style="display:none">
+  <div class="expired-card">
+    <i class="fas fa-lock"></i>
+    <h3>Mentorship Ended</h3>
+    <p>This 15-day mentorship session has ended. Chat history is saved above for your reference.</p>
+    <button onclick="closeExpiredOverlay()">View History</button>
+  </div>
+</div>
+
+<!-- ── TOAST NOTIFICATION ──────────────────────────────────────────────────── -->
+<div class="toast" id="toast"></div>
+
+<!-- ── SCRIPTS ──────────────────────────────────────────────────────────────── -->
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="../js/chat.js"></script>
+
+</body>
+</html>
