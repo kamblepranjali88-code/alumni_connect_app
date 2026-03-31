@@ -1,3 +1,7 @@
+/* ============================================================
+   alumni-profile.css — updated for top navbar layout
+   ============================================================ */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,74 +14,14 @@ body {
     color: #1e293b;
 }
 
-/* ===== LAYOUT ===== */
-.profile-container { display: flex; min-height: 100vh; }
-
-/* ===== SIDEBAR ===== */
-.sidebar {
-    width: 260px;
-    background: #1e293b;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0; left: 0;
-    height: 100vh;
-    z-index: 100;
-    padding: 24px 0;
+/* ===== LAYOUT — no sidebar, just top navbar offset ===== */
+.profile-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 90px 24px 48px;   /* 90px top = navbar height + breathing room */
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0 24px 24px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    font-size: 18px;
-    font-weight: 700;
-    color: white;
-}
-
-.logo i { color: #2563eb; font-size: 22px; }
-
-.nav-menu {
-    flex: 1;
-    padding: 16px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.nav-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 11px 14px;
-    border-radius: 10px;
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s;
-}
-
-.nav-item:hover { background: rgba(37,99,235,0.12); color: white; }
-.nav-item.active { background: #2563eb; color: white; }
-.nav-item i { width: 18px; font-size: 15px; }
-
-.sidebar-footer {
-    padding: 12px 12px 0;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    margin-top: auto;
-}
-
-/* ===== MAIN CONTENT ===== */
-.main-content {
-    margin-left: 260px;
-    flex: 1;
-    padding: 32px 36px;
-    min-height: 100vh;
-}
-
+/* ===== CONTENT HEADER ===== */
 .content-header {
     display: flex;
     align-items: center;
@@ -85,7 +29,11 @@ body {
     margin-bottom: 28px;
 }
 
-.content-header h1 { font-size: 26px; font-weight: 700; color: #1e293b; }
+.content-header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1e293b;
+}
 
 .edit-btn {
     display: inline-flex;
@@ -104,7 +52,11 @@ body {
 .edit-btn:hover { background: #1d4ed8; }
 
 /* ===== PROFILE VIEW ===== */
-.profile-view { display: flex; flex-direction: column; gap: 20px; }
+.profile-view {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
 /* ===== HERO ===== */
 .profile-hero {
@@ -118,9 +70,9 @@ body {
 .profile-cover {
     height: 160px;
     background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%);
-    position: relative;
     border-radius: 16px 16px 0 0;
     overflow: hidden;
+    position: relative;
 }
 
 .profile-cover img {
@@ -187,7 +139,6 @@ body {
     border: 1px solid #bbf7d0;
     margin-top: 4px;
 }
-
 .mentorship-badge i { font-size: 11px; }
 
 /* ===== INFO CARDS ===== */
@@ -232,7 +183,11 @@ body {
     margin-bottom: 4px;
 }
 
-.info-item .value { font-size: 15px; font-weight: 600; color: #1e293b; }
+.info-item .value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+}
 
 /* Tags */
 .tags-container { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -247,16 +202,13 @@ body {
     border: 1px solid #bfdbfe;
     transition: all 0.2s;
 }
-
 .tag:hover { background: #2563eb; color: white; border-color: #2563eb; }
 
-/* Mentorship area tags — green color */
 .tag.mentorship-tag {
     background: #dcfce7;
     color: #16a34a;
     border-color: #bbf7d0;
 }
-
 .tag.mentorship-tag:hover { background: #16a34a; color: white; border-color: #16a34a; }
 
 .goals-text { font-size: 15px; color: #374151; line-height: 1.7; }
@@ -278,7 +230,6 @@ body {
     border: 1px solid #e5e7eb;
     transition: all 0.2s;
 }
-
 .social-link i { color: #2563eb; font-size: 17px; width: 20px; text-align: center; }
 .social-link:hover { background: #2563eb; color: white; border-color: #2563eb; }
 .social-link:hover i { color: white; }
@@ -298,17 +249,19 @@ body {
     border: 1px solid #e5e7eb;
     transition: all 0.2s;
 }
-
 .stat-card:hover {
     border-color: #2563eb;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(37,99,235,0.1);
 }
-
 .stat-value { font-size: 30px; font-weight: 800; color: #2563eb; margin-bottom: 4px; line-height: 1; }
 .stat-label { font-size: 12px; color: #6b7280; font-weight: 500; }
 
-.cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.cards-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
 /* ===== EDIT MODE ===== */
 .profile-edit { display: flex; flex-direction: column; gap: 20px; }
@@ -330,7 +283,6 @@ body {
     align-items: center;
     gap: 10px;
 }
-
 .form-section h3 i { color: #2563eb; background: #eff6ff; padding: 8px; border-radius: 8px; }
 
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -349,13 +301,11 @@ input, select, textarea {
     color: #1e293b;
     font-family: inherit;
 }
-
 input:focus, select:focus, textarea:focus {
     outline: none;
     border-color: #2563eb;
     box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
 }
-
 input:disabled { background: #f3f4f6; color: #9ca3af; cursor: not-allowed; }
 textarea { resize: vertical; min-height: 100px; }
 
@@ -463,16 +413,14 @@ textarea { resize: vertical; min-height: 100px; }
 .remove-photo-btn:hover { background: #dc2626; color: white; border-color: #dc2626; }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-    .sidebar { width: 220px; }
-    .main-content { margin-left: 220px; padding: 24px 20px; }
+@media (max-width: 768px) {
+    .profile-container { padding: 80px 16px 32px; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .cards-row { grid-template-columns: 1fr; }
+    .profile-hero-body { flex-direction: column; align-items: flex-start; }
 }
 
-@media (max-width: 680px) {
-    .sidebar { display: none; }
-    .main-content { margin-left: 0; padding: 20px 16px; }
+@media (max-width: 480px) {
     .form-grid { grid-template-columns: 1fr; }
-    .profile-hero-body { flex-direction: column; align-items: flex-start; }
+    .content-header { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
