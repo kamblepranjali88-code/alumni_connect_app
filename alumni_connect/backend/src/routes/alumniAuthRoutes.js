@@ -17,8 +17,6 @@ router.post('/change-password', alumniChangePassword);
 // Profile routes
 router.get('/profile/:userId', getAlumniProfile);
 router.put('/profile/:userId', updateAlumniProfile);
-
-// Search route (for students to search alumni)
 router.get('/search', getAllAlumni);
 
 // Test route

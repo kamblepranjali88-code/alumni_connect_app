@@ -360,6 +360,7 @@ const getAllAlumni = async (req, res) => {
     }
 };
 
+
 module.exports = {
     alumniRegistration,
     alumniLogin,
