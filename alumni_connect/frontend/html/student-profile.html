@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile | Alumni Connect</title>
+    <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/student-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+
+    <!-- Navbar injected here by navbar.js -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Page content -->
     <div class="profile-container">
+<<<<<<< HEAD
         <div class="sidebar">
             <div class="logo">
                 <i class="fas fa-graduation-cap"></i>
@@ -26,189 +33,240 @@
             <div class="sidebar-footer">
                 <a href="login.html" class="nav-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
             </div>
+=======
+
+        <div class="content-header">
+            <h1>My Profile</h1>
+            <button class="edit-btn" id="editProfileBtn">
+                <i class="fas fa-edit"></i> Edit Profile
+            </button>
+>>>>>>> c136bc37671dbfb6c77dcbb16258eab652b50da7
         </div>
 
-        <div class="main-content">
-            <div class="content-header">
-                <h1>My Profile</h1>
-                <button class="edit-btn" id="editProfileBtn"><i class="fas fa-edit"></i> Edit Profile</button>
+        <!-- ===== VIEW MODE ===== -->
+        <div class="profile-view" id="profileView">
+
+            <!-- Hero -->
+            <div class="profile-hero">
+                <div class="profile-cover">
+                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt="Cover">
+                </div>
+                <div class="profile-hero-body">
+                    <div class="profile-avatar">
+                        <img src="https://ui-avatars.com/api/?name=User&size=150&background=2563eb&color=fff"
+                             alt="Avatar" id="avatarImg">
+                    </div>
+                    <div class="profile-hero-info">
+                        <h2 id="displayFullName">Loading...</h2>
+                        <p>
+                            <i class="fas fa-id-card"></i>
+                            <span id="displayRollNumber">-</span>
+                            &nbsp;·&nbsp;
+                            <i class="fas fa-code-branch"></i>
+                            <span id="displayBranch">-</span>
+                            &nbsp;·&nbsp;
+                            <i class="fas fa-layer-group"></i>
+                            <span id="displayYear">-</span>
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            <!-- VIEW MODE -->
-            <div class="profile-view" id="profileView">
-                <div class="profile-hero">
-                    <div class="profile-cover">
-                        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt="Cover">
+            <!-- Stats -->
+            <div class="info-card">
+                <div class="card-title"><i class="fas fa-chart-line"></i> Activity Summary</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="statRequests">0</div>
+                        <div class="stat-label">Mentorship Requests</div>
                     </div>
-                    <div class="profile-hero-body">
-                        <div class="profile-avatar">
-                            <img src="https://ui-avatars.com/api/?name=User&size=150&background=2563eb&color=fff" alt="Avatar" id="avatarImg">
+                    <div class="stat-card">
+                        <div class="stat-value" id="statMentors">0</div>
+                        <div class="stat-label">Active Mentors</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statEvents">0</div>
+                        <div class="stat-label">Events Attended</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statPosts">0</div>
+                        <div class="stat-label">Forum Posts</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basic Info + Skills -->
+            <div class="cards-row">
+                <div class="info-card">
+                    <div class="card-title"><i class="fas fa-user-circle"></i> Basic Information</div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="label">Full Name</div>
+                            <div class="value" id="displayFullName2">Loading...</div>
                         </div>
-                        <div class="profile-hero-info">
-                            <h2 id="displayFullName">Loading...</h2>
-                            <p>
-                                <i class="fas fa-id-card"></i><span id="displayRollNumber">-</span>
-                                &nbsp;·&nbsp;
-                                <i class="fas fa-code-branch"></i><span id="displayBranch">-</span>
-                                &nbsp;·&nbsp;
-                                <i class="fas fa-layer-group"></i><span id="displayYear">-</span>
-                            </p>
+                        <div class="info-item">
+                            <div class="label">Email</div>
+                            <div class="value" id="displayEmail">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Branch</div>
+                            <div class="value" id="displayBranch2">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Year</div>
+                            <div class="value" id="displayYear2">-</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="info-card">
-                    <div class="card-title"><i class="fas fa-chart-line"></i> Activity Summary</div>
-                    <div class="stats-grid">
-                        <div class="stat-card"><div class="stat-value" id="statRequests">0</div><div class="stat-label">Mentorship Requests</div></div>
-                        <div class="stat-card"><div class="stat-value" id="statMentors">0</div><div class="stat-label">Active Mentors</div></div>
-                        <div class="stat-card"><div class="stat-value" id="statEvents">0</div><div class="stat-label">Events Attended</div></div>
-                        <div class="stat-card"><div class="stat-value" id="statPosts">0</div><div class="stat-label">Forum Posts</div></div>
-                    </div>
-                </div>
-
-                <div class="cards-row">
-                    <div class="info-card">
-                        <div class="card-title"><i class="fas fa-user-circle"></i> Basic Information</div>
-                        <div class="info-grid">
-                            <div class="info-item"><div class="label">Full Name</div><div class="value" id="displayFullName2">Loading...</div></div>
-                            <div class="info-item"><div class="label">Email</div><div class="value" id="displayEmail">-</div></div>
-                            <div class="info-item"><div class="label">Branch</div><div class="value" id="displayBranch2">-</div></div>
-                            <div class="info-item"><div class="label">Year</div><div class="value" id="displayYear2">-</div></div>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-title"><i class="fas fa-code"></i> Skills & Interests</div>
-                        <div class="tags-container" id="displayInterests"><span class="tag">No skills added</span></div>
-                    </div>
-                </div>
-
-                <div class="cards-row">
-                    <div class="info-card">
-                        <div class="card-title"><i class="fas fa-bullseye"></i> Career Goals</div>
-                        <p class="goals-text" id="displayGoals">No goals added yet.</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-title"><i class="fas fa-link"></i> Social Links</div>
-                        <div class="social-links">
-                            <a href="#" class="social-link" id="linkedinLink" target="_blank"><i class="fab fa-linkedin"></i><span id="linkedinText">Not added</span></a>
-                            <a href="#" class="social-link" id="githubLink" target="_blank"><i class="fab fa-github"></i><span id="githubText">Not added</span></a>
-                        </div>
+                    <div class="card-title"><i class="fas fa-code"></i> Skills & Interests</div>
+                    <div class="tags-container" id="displayInterests">
+                        <span class="tag">No skills added</span>
                     </div>
                 </div>
             </div>
 
-            <!-- EDIT MODE -->
-            <div class="profile-edit" id="profileEdit" style="display: none;">
-                <form id="profileForm">
+            <!-- Goals + Social -->
+            <div class="cards-row">
+                <div class="info-card">
+                    <div class="card-title"><i class="fas fa-bullseye"></i> Career Goals</div>
+                    <p class="goals-text" id="displayGoals">No goals added yet.</p>
+                </div>
 
-                    <!-- Photo Upload -->
-                    <div class="form-section">
-                        <h3><i class="fas fa-camera"></i> Profile Photo</h3>
-                        <div class="photo-upload-area">
-                            <div class="photo-preview-wrapper">
-                                <img src="https://ui-avatars.com/api/?name=User&size=150&background=2563eb&color=fff"
-                                     alt="Profile" id="editAvatarImg" class="photo-preview">
-                                <label for="photoInput" class="camera-btn" title="Upload photo">
-                                    <i class="fas fa-camera"></i>
-                                </label>
-                                <input type="file" id="photoInput" accept="image/*" style="display:none;">
-                            </div>
-                            <div class="photo-upload-info">
-                                <p class="photo-upload-title">Upload Profile Photo</p>
-                                <p class="photo-upload-hint">Supported formats: JPG, PNG, GIF · Max size: 5MB</p>
-                                <label for="photoInput" class="upload-btn">
-                                    <i class="fas fa-upload"></i> Choose from Device
-                                </label>
-
-                                 <button type="button" class="remove-photo-btn" id="removePhotoBtn">
-                                 <i class="fas fa-trash"></i> Remove Photo
-                                 </button>
-                            </div>
-                        </div>
+                <div class="info-card">
+                    <div class="card-title"><i class="fas fa-link"></i> Social Links</div>
+                    <div class="social-links">
+                        <a href="#" class="social-link" id="linkedinLink" target="_blank">
+                            <i class="fab fa-linkedin"></i><span id="linkedinText">Not added</span>
+                        </a>
+                        <a href="#" class="social-link" id="githubLink" target="_blank">
+                            <i class="fab fa-github"></i><span id="githubText">Not added</span>
+                        </a>
                     </div>
-
-                    <!-- Basic Info -->
-                    <div class="form-section">
-                        <h3><i class="fas fa-user-circle"></i> Basic Information</h3>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Full Name *</label>
-                                <input type="text" id="editFullName" required placeholder="Your full name">
-                            </div>
-                            <div class="form-group">
-                                <label>Roll Number</label>
-                                <input type="text" id="editRollNumber" disabled>
-                                <small>Roll number cannot be changed</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Email *</label>
-                                <input type="email" id="editEmail" required placeholder="your@email.com">
-                            </div>
-                            <div class="form-group">
-                                <label>Branch *</label>
-                                <select id="editBranch" required>
-                                    <option value="Computer Engineering">Computer Engineering</option>
-                                    <option value="Information Technology">Information Technology</option>
-                                    <option value="ENTC">ENTC</option>
-                                    <option value="Mechanical">Mechanical</option>
-                                    <option value="Civil">Civil</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Year *</label>
-                                <select id="editYear" required>
-                                    <option value="1">1st Year</option>
-                                    <option value="2">2nd Year</option>
-                                    <option value="3">3rd Year</option>
-                                    <option value="4">4th Year</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Skills -->
-                    <div class="form-section">
-                        <h3><i class="fas fa-code"></i> Skills & Interests</h3>
-                        <div class="form-group">
-                            <label>Skills (comma separated)</label>
-                            <input type="text" id="editInterests" placeholder="e.g. Web Development, AI, Python">
-                        </div>
-                    </div>
-
-                    <!-- Goals -->
-                    <div class="form-section">
-                        <h3><i class="fas fa-bullseye"></i> Career Goals</h3>
-                        <div class="form-group">
-                            <label>What guidance do you need?</label>
-                            <textarea id="editGoals" rows="3" placeholder="Describe your career goals..."></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Social Links -->
-                    <div class="form-section">
-                        <h3><i class="fas fa-link"></i> Social Links</h3>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>LinkedIn URL</label>
-                                <input type="url" id="editLinkedin" placeholder="https://linkedin.com/in/username">
-                            </div>
-                            <div class="form-group">
-                                <label>GitHub URL</label>
-                                <input type="url" id="editGithub" placeholder="https://github.com/username">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="button" class="cancel-btn" id="cancelEditBtn">Cancel</button>
-                        <button type="submit" class="save-btn"><i class="fas fa-save"></i> Save Changes</button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
+
+        </div><!-- end profile-view -->
+
+        <!-- ===== EDIT MODE ===== -->
+        <div class="profile-edit" id="profileEdit" style="display: none;">
+            <form id="profileForm">
+
+                <!-- Photo Upload -->
+                <div class="form-section">
+                    <h3><i class="fas fa-camera"></i> Profile Photo</h3>
+                    <div class="photo-upload-area">
+                        <div class="photo-preview-wrapper">
+                            <img src="https://ui-avatars.com/api/?name=User&size=150&background=2563eb&color=fff"
+                                 alt="Profile" id="editAvatarImg" class="photo-preview">
+                            <label for="photoInput" class="camera-btn" title="Upload photo">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                            <input type="file" id="photoInput" accept="image/*" style="display:none;">
+                        </div>
+                        <div class="photo-upload-info">
+                            <p class="photo-upload-title">Upload Profile Photo</p>
+                            <p class="photo-upload-hint">Supported formats: JPG, PNG, GIF · Max size: 5MB</p>
+                            <label for="photoInput" class="upload-btn">
+                                <i class="fas fa-upload"></i> Choose from Device
+                            </label>
+                            <button type="button" class="remove-photo-btn" id="removePhotoBtn">
+                                <i class="fas fa-trash"></i> Remove Photo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basic Info -->
+                <div class="form-section">
+                    <h3><i class="fas fa-user-circle"></i> Basic Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="editFullName" required placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label>Roll Number</label>
+                            <input type="text" id="editRollNumber" disabled>
+                            <small>Roll number cannot be changed</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="editEmail" required placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Branch *</label>
+                            <select id="editBranch" required>
+                                <option value="Computer Engineering">Computer Engineering</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="ENTC">ENTC</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Civil">Civil</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Year *</label>
+                            <select id="editYear" required>
+                                <option value="1">1st Year</option>
+                                <option value="2">2nd Year</option>
+                                <option value="3">3rd Year</option>
+                                <option value="4">4th Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="form-section">
+                    <h3><i class="fas fa-code"></i> Skills & Interests</h3>
+                    <div class="form-group">
+                        <label>Skills (comma separated)</label>
+                        <input type="text" id="editInterests" placeholder="e.g. Web Development, AI, Python">
+                    </div>
+                </div>
+
+                <!-- Goals -->
+                <div class="form-section">
+                    <h3><i class="fas fa-bullseye"></i> Career Goals</h3>
+                    <div class="form-group">
+                        <label>What guidance do you need?</label>
+                        <textarea id="editGoals" rows="3" placeholder="Describe your career goals..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="form-section">
+                    <h3><i class="fas fa-link"></i> Social Links</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>LinkedIn URL</label>
+                            <input type="url" id="editLinkedin" placeholder="https://linkedin.com/in/username">
+                        </div>
+                        <div class="form-group">
+                            <label>GitHub URL</label>
+                            <input type="url" id="editGithub" placeholder="https://github.com/username">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelEditBtn">Cancel</button>
+                    <button type="submit" class="save-btn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+
+            </form>
+        </div><!-- end profile-edit -->
+
+    </div><!-- end profile-container -->
+
     <script src="../js/student-profile.js"></script>
+<<<<<<< HEAD
     <script src="logout.js"></script>
+=======
+    <script src="../js/navbar.js"></script>
+>>>>>>> c136bc37671dbfb6c77dcbb16258eab652b50da7
 </body>
 </html>
