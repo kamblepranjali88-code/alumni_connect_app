@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum | Alumni Connect</title>
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/forum.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="brand">
+        <i class="fas fa-graduation-cap"></i>
+        <div>
+            <div class="brand-title">Tech University</div>
+            <div class="brand-subtitle">Discussion Forum</div>
+        </div>
+    </div>
+    <nav class="nav-links">
+    <a href="student-dashboard.html">Dashboard</a>
+    <a href="student-profile.html">My Profile</a>
+    <a href="search-alumni.html">Search Alumni</a>
+    <a href="my-connections-student.html">My Connections</a>
+    <a href="job-opportunities.html">Jobs</a>
+    <a href="events.html">Events</a>
+    <a href="forum.html">Forum</a>
+    <a href="#" class="logout" onclick="logout()">Logout</a>
+    </nav>
+</header>
+
+<main class="dashboard">
+    <div class="forum-header">
+        <div>
+            <h1><i class="fas fa-comments"></i> Discussion Forum</h1>
+            <p>Ask questions, share knowledge, and connect with peers</p>
+        </div>
+        <button class="btn-new-post" onclick="window.location.href='forum-create-post.html'">
+            <i class="fas fa-plus"></i> New Post
+        </button>
+    </div>
+
+    <div id="postsContainer" class="posts-container">
+        <div class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading discussions...</p>
+        </div>
+    </div>
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="/js/includeFooter.js"></script>
+<script src="/js/forum.js"></script>
+
+    <script src="logout.js"></script>
+</body>
+</html>

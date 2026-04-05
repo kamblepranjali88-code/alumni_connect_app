@@ -131,13 +131,13 @@ const studentRegistration = async (req, res) => {
 };
 
 // ===== LOGIN =====
+// ===== LOGIN =====
 const login = async (req, res) => {
     try {
         const { userId, password } = req.body;
 
         console.log('=== LOGIN ATTEMPT ===');
         console.log('Received userId:', userId);
-        console.log('Received password:', password);
 
         const rollNumber = userId?.replace('STU_', '').trim();
         console.log('Extracted rollNumber:', rollNumber);
@@ -159,7 +159,6 @@ const login = async (req, res) => {
             return res.status(401).json({ message: 'Invalid User ID or password' });
         }
 
-        console.log('Stored password_hash:', user.password_hash);
         const isValid = await bcrypt.compare(password, user.password_hash);
         console.log('Password valid:', isValid);
 
@@ -167,11 +166,25 @@ const login = async (req, res) => {
             return res.status(401).json({ message: 'Invalid User ID or password' });
         }
 
-        console.log('✅ Login successful for:', rollNumber);
+        // ✅ FIRST: Get student_id from students table
+        const { data: student, error: studentError } = await supabase
+            .from('students')
+            .select('student_id')
+            .eq('user_id', user.user_id)
+            .single();
 
+        if (studentError) {
+            console.error('❌ Error fetching student_id:', studentError.message);
+        }
+
+        console.log('✅ Login successful for:', rollNumber);
+        console.log('student_id:', student?.student_id);
+
+        // ✅ THEN: Send response with student_id
         res.json({
-            user_id:     user.user_id,
-            user_type:   user.user_type,
+            user_id: user.user_id,
+            student_id: student?.student_id || null,
+            user_type: user.user_type,
             login_count: user.login_count
         });
 

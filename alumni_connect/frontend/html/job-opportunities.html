@@ -2,75 +2,114 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Job Opportunities | Alumni Connect</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Opportunities | Alumni Connect</title>
 
-    <!-- Common styles -->
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/job-opportunities.css">
-    <link rel="stylesheet" href="../css/footer.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/job-opportunities.css">
+    <link rel="stylesheet" href="/css/footer.css">
 
     <!-- Icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
 <!-- ===== NAVBAR ===== -->
 <header class="navbar">
     <div class="brand">
-        <i class="fas fa-briefcase"></i>
+        <i class="fas fa-graduation-cap"></i>
         <div>
             <div class="brand-title">Tech University</div>
-            <div class="brand-subtitle">Job Opportunities</div>
+            <div class="brand-subtitle">Student Dashboard</div>
         </div>
     </div>
 
-   <nav class="nav-links">
-    <a href="student-dashboard.html">Dashboard</a>
-    <a href="student-profile.html">My Profile</a>
-    <a href="search-alumni.html">Search Alumni</a>
-    <a href="my-connections-student.html">My Connections</a>
-    <a href="job-opportunities.html">Jobs</a>
-    <a href="events.html">Events</a>
-    <a href="student-forum.html">Forum</a>
-    <a href="login.html" class="logout">Logout</a>
+    <nav class="nav-links">
+        <a href="student-dashboard.html">Dashboard</a>
+        <a href="student-profile.html">My Profile</a>
+        <a href="search-alumni.html">Search Alumni</a>
+        <a href="my-connections-student.html">My Connections</a>
+        <a href="job-opportunities.html" class="active">Jobs</a>
+        <a href="events.html">Events</a>
+        <a href="forum.html">Forum</a>
+        <a href="#" class="logout" onclick="logout()">Logout</a>
+    </nav>
 </header>
 
 <!-- ===== MAIN CONTENT ===== -->
-<main class="jobs-container">
-
-    <!-- Header -->
-    <section class="jobs-header">
-        <div>
-            <h1>Job & Internship Opportunities</h1>
-            <p>Explore opportunities shared by alumni</p>
+<main class="dashboard">
+    
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-icon">
+            <i class="fas fa-briefcase"></i>
         </div>
-    </section>
+        <h1>Job Opportunities</h1>
+        <p>Explore jobs and internships shared by our alumni network</p>
+    </div>
 
-    <!-- Filters -->
-    <section class="job-filters">
-    <select id="filterType">
-        <option value="All">All Types</option>
-        <option value="Internship">Internship</option>
-        <option value="Full-Time">Full-Time</option>
-    </select>
+    <!-- Search and Filter Bar -->
+    <div class="search-bar">
+        <div class="search-input-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search by job title or company...">
+        </div>
+        <div class="filter-wrapper">
+            <select id="filterCompany">
+                <option value="all">All Companies</option>
+            </select>
+        </div>
+    </div>
 
-    <input
-        type="text"
-        id="searchJob"
-        placeholder="Search by role or skill (e.g. React, Java)">
-</section>
+    <!-- Stats Summary -->
+    <div class="jobs-stats">
+        <div class="stat-item">
+            <i class="fas fa-briefcase"></i>
+            <span id="totalJobs">0</span>
+            <p>Total Jobs</p>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-building"></i>
+            <span id="totalCompanies">0</span>
+            <p>Companies</p>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <span id="newJobs">0</span>
+            <p>New This Week</p>
+        </div>
+    </div>
 
-    <!-- Job Cards -->
-    <section class="jobs-list" id="jobsList"></section>
+    <!-- Jobs Grid -->
+    <div class="jobs-container">
+        <div class="jobs-header">
+            <h2><i class="fas fa-list"></i> Available Opportunities</h2>
+            <span class="jobs-count" id="jobsCount">0 jobs found</span>
+        </div>
+
+        <div id="jobsGrid" class="jobs-grid">
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Loading jobs...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- No Results Message -->
+    <div id="noResults" class="no-results" style="display: none;">
+        <i class="fas fa-search"></i>
+        <h3>No jobs found</h3>
+        <p>Try adjusting your search or check back later for new opportunities</p>
+    </div>
 
 </main>
 
 <!-- ===== FOOTER ===== -->
 <div id="footer-placeholder"></div>
-<script src="../js/includeFooter.js"></script>
-<script src="../js/job-opportunities.js"></script>
+<script src="/js/includeFooter.js"></script>
+<script src="/js/job-opportunities.js"></script>
 
+    <script src="logout.js"></script>
 </body>
 </html>

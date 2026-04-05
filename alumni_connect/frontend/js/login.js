@@ -34,9 +34,16 @@ document.getElementById('loginBtn').addEventListener('click', async function(e) 
         const result = await response.json();
 
         if (response.ok) {
-            // Save user info in session
+            // Save user info in session (KEEP EXISTING KEYS)
             sessionStorage.setItem('userId', result.user_id);
-            sessionStorage.setItem('userType', result.user_type);
+            sessionStorage.setItem('userType', result.user_type);  // ← Keep as is
+            
+            // ===== ADD NEW KEYS FOR FORUM (won't affect existing pages) =====
+            if (result.user_type === 'student') {
+                sessionStorage.setItem('student_id', result.student_id);
+            } else if (result.user_type === 'alumni') {
+                sessionStorage.setItem('alumni_id', result.alumni_id);
+            }
 
             if (result.login_count === 0) {
                 // First time login → change password

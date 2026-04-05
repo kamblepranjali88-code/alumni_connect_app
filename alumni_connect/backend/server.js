@@ -5,6 +5,8 @@ const http = require('http');           // ← NEW: needed for Socket.IO
 const { Server } = require('socket.io'); // ← NEW: Socket.IO server
 require('dotenv').config();
 
+
+
 // IMPORT ROUTES
 const authRoutes       = require('./src/routes/authRoutes');
 const alumniAuthRoutes = require('./src/routes/alumniAuthRoutes');
@@ -28,6 +30,10 @@ initChatSocket(io);  // ← NEW: wire up all chat socket events
 
 const PORT = process.env.PORT || 5000;
 
+const jobRoutes = require('./src/routes/jobRoutes');  
+const forumRoutes = require('./src/routes/forumRoutes');
+
+
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '5mb' }));
@@ -48,6 +54,8 @@ app.use('/api', authRoutes);                  // student routes → /api/auth/..
 app.use('/api/alumni', alumniAuthRoutes);      // alumni routes  → /api/alumni/...
 app.use('/api/requests', requestRoutes);       // request routes → /api/requests/...
 app.use('/api/chat', chatRoutes);             // ← NEW: chat routes → /api/chat/...
+app.use('/api/jobs', jobRoutes);
+app.use('/api/forum', forumRoutes);
 
 // Test route
 app.get('/test', (req, res) => {
@@ -64,3 +72,6 @@ server.listen(PORT, () => {
     console.log(`Socket.IO       ready for real-time chat`); // ← NEW
     console.log(`Frontend available at http://localhost:${PORT}/html/index.html`);
 });
+
+
+
