@@ -1,0 +1,462 @@
+/* ===== GLOBAL FORUM PAGE ===== */
+
+.dashboard {
+    max-width: 1000px;
+    margin: auto;
+    padding: 110px 24px 40px;
+}
+
+/* ===== FORUM HEADER ===== */
+
+.forum-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.forum-header h1 {
+    font-size: 28px;
+    color: #1e293b;
+}
+
+.forum-header h1 i {
+    color: #2563eb;
+    margin-right: 10px;
+}
+
+.btn-new-post {
+    background: linear-gradient(135deg,#2563eb,#1d4ed8);
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-new-post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(37,99,235,0.35);
+}
+
+/* ===== POSTS LIST ===== */
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===== POST CARD ===== */
+
+.post-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+
+/* Your Post Highlight */
+
+.post-card.my-post {
+    background: linear-gradient(135deg,#f0f9ff,#e6f7ff);
+    border-left: 5px solid #2563eb;
+}
+
+.my-post-badge {
+    background: #2563eb;
+    color: white;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-left: 8px;
+}
+
+/* ===== POST TEXT ===== */
+
+.post-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.post-content {
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+/* ===== POST META ===== */
+
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: #64748b;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 10px;
+}
+
+.post-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ===== AUTHOR BADGES ===== */
+
+.author-badge {
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.badge-student {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.badge-alumni {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* ===== POST DETAILS PAGE ===== */
+
+.post-detail-card {
+    background: white;
+    border-radius: 22px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.post-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.post-detail-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.post-detail-content {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 14px;
+    line-height: 1.7;
+    color: #334155;
+}
+
+/* ===== COMMENTS ===== */
+
+.comments-section {
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+    margin-bottom: 28px;
+    border: 1px solid #e2e8f0;
+}
+
+.comments-section h3 {
+    font-size: 20px;
+    margin-bottom: 18px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 8px;
+}
+
+/* ===== COMMENT CARD ===== */
+
+.comment-card {
+    padding: 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.comment-card:last-child {
+    border-bottom: none;
+}
+
+.comment-card.my-comment {
+    background: #f0f9ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 10px;
+}
+
+.comment-content {
+    font-size: 14px;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+.comment-meta {
+    font-size: 12px;
+    color: #64748b;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.your-comment-badge {
+    background: #2563eb;
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+/* ===== COMMENT FORM ===== */
+
+.comment-form {
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* ===== BUTTON ===== */
+
+.btn-submit {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #1d4ed8;
+}
+
+/* ===== BACK BUTTON ===== */
+
+.back-button {
+    margin-bottom: 20px;
+}
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f5f9;
+    color: #475569;
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.btn-back:hover {
+    background: #e2e8f0;
+}
+
+/* ===== LOADING ===== */
+
+.loading-state {
+    text-align: center;
+    padding: 60px;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== TOAST ===== */
+
+.toast-notification {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #22c55e;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 10px;
+}
+
+.toast-notification.error {
+    background: #ef4444;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width:768px){
+
+    .dashboard{
+        padding:100px 16px 30px;
+    }
+
+    .post-detail-title{
+        font-size:22px;
+    }
+
+    .post-title{
+        font-size:16px;
+    }
+
+}
+
+/* ===== DELETE BUTTON ===== */
+
+.delete-post-btn {
+    background: #fee2e2;
+    border: none;
+    color: #dc2626;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.25s;
+}
+
+.delete-post-btn:hover {
+    background: #fecaca;
+    transform: translateY(-1px);
+}
+
+/* delete comment */
+
+.delete-comment-btn {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.delete-comment-btn:hover {
+    background: #fee2e2;
+}
+
+
+/* ===== CREATE POST FORM ===== */
+
+.form-container{
+    background:white;
+    border-radius:20px;
+    padding:32px;
+    max-width:700px;
+    margin:auto;
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    border:1px solid #e2e8f0;
+}
+
+.form-container h2{
+    font-size:24px;
+    margin-bottom:24px;
+    color:#1e293b;
+}
+
+.form-container h2 i{
+    color:#2563eb;
+    margin-right:8px;
+}
+
+/* form fields */
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
+}
+
+.form-group label{
+    font-weight:600;
+    margin-bottom:6px;
+    color:#334155;
+}
+
+.form-group input,
+.form-group textarea{
+    padding:12px 14px;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    font-size:14px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,0.1);
+}
+
+/* form buttons */
+
+.form-actions{
+    display:flex;
+    gap:12px;
+    margin-top:10px;
+}
+
+.btn-cancel{
+    background:#f1f5f9;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.btn-cancel:hover{
+    background:#e2e8f0;
+}

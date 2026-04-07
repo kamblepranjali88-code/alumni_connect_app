@@ -178,10 +178,6 @@ function formatDate(dateStr) {
     });
 }
 
-document.querySelector('.logout')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    sessionStorage.clear();
-    window.location.href = 'login.html';
-});
+
 
 loadConnections();

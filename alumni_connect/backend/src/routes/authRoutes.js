@@ -1,27 +1,19 @@
-const express = require('express');  // ← add this line
+const express = require('express');
 const router = express.Router();
+const authController = require('../controllers/authController');
 
-const authController = require('../controllers/authController');  // ← line 1
-console.log('Auth controller exports:', Object.keys(authController));  // ← line 2
-
-const {
-    studentRegistration,
-    login,
-    changePassword,
-    getStudentProfile,
-    updateStudentProfile
-} = require('../controllers/authController');
-
-// Auth routes
-router.post('/auth/student-request', studentRegistration);
-router.post('/auth/login', login);
-router.post('/auth/change-password', changePassword);
+// Auth routes (student)
+router.post('/auth/student-request', authController.studentRegistration);
+router.post('/auth/login', authController.login);
+router.post('/auth/change-password', authController.changePassword);
 
 // Profile routes
-router.get('/auth/student/profile/:userId', getStudentProfile);
-router.put('/auth/student/profile/:userId', updateStudentProfile);
+router.get('/auth/student/profile/:userId', authController.getStudentProfile);
+router.put('/auth/student/profile/:userId', authController.updateStudentProfile);
 
-
+// Forgot password routes - ADD THESE (without /auth prefix)
+router.post('/forgot-password', authController.forgotPassword);
+router.post('/reset-password', authController.resetPassword);
 
 // Test route
 router.get('/test', (req, res) => {

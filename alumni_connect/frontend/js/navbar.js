@@ -25,7 +25,7 @@
         <a href="chat.html"                   ${active('chat.html')}>Chat</a>
         <a href="job-opportunities.html"      ${active('job-opportunities.html')}>Jobs</a>
         <a href="events.html"                 ${active('events.html')}>Events</a>
-        <a href="student-forum.html"          ${active('student-forum.html')}>Forum</a>
+        <a href="forum.html"          ${active('forum.html')}>Forum</a>
         <a href="#" class="logout" id="navLogout">Logout</a>
     `;
 
@@ -37,6 +37,7 @@
         <a href="chat.html"                   ${active('chat.html')}>Chat</a>
         <a href="alumni-post-job.html"        ${active('alumni-post-job.html')}>Post Job</a>
         <a href="events.html"                 ${active('events.html')}>Events</a>
+        <a href="alumni-forum.html"           ${active('alumni-forum.html')}>Forum</a>
         <a href="#" class="logout" id="navLogout">Logout</a>
     `;
 

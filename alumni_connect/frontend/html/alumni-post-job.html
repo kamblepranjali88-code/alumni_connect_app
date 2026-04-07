@@ -1,93 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Post Job Opportunity | Alumni Connect</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/alumni-post-job.css">
-    <link rel="stylesheet" href="../css/footer.css">
+<title>Post Job | Alumni Connect</title>
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/alumni-post-job.css">
+<link rel="stylesheet" href="../css/footer.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
+
 <body>
 
-<!-- ===== NAVBAR ===== -->
 <div id="navbar-placeholder"></div>
 
-<!-- ===== MAIN CONTENT ===== -->
-<main class="post-job-container">
+<main class="dashboard">
 
-    <section class="page-header">
-        <h1>Post Job / Internship</h1>
-        <p>Share opportunities and manage your postings</p>
-    </section>
+<div class="page-header">
 
-    <section class="job-layout">
+<h1>
+<i class="fas fa-briefcase"></i>
+Post Job Opportunity
+</h1>
 
-        <!-- ===== LEFT: POST JOB FORM ===== -->
-        <div class="job-form-card">
-            <h2>Add New Opportunity</h2>
+<p>Share opportunities with students from your network.</p>
 
-            <form id="jobForm">
-                <div class="form-group">
-                    <label>Job Title</label>
-                    <input type="text" id="jobTitle" required>
-                </div>
+</div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Job Type</label>
-                        <select id="jobType" required>
-                            <option value="">Select</option>
-                            <option>Internship</option>
-                            <option>Full-Time</option>
-                        </select>
-                    </div>
 
-                    <div class="form-group">
-                        <label>Location</label>
-                        <input type="text" id="location" required>
-                    </div>
-                </div>
+<div class="post-job-container">
 
-                <div class="form-group">
-                    <label>Skills (comma separated)</label>
-                    <input type="text" id="skills" required>
-                </div>
+<!-- JOB FORM -->
 
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea id="description" rows="4" required></textarea>
-                </div>
+<div class="job-form">
 
-                <div class="form-group">
-                    <label>Application Link / Email</label>
-                    <input type="text" id="applyLink" required>
-                </div>
+<h3>Job Details</h3>
 
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Post Job
-                </button>
-            </form>
-        </div>
+<form id="postJobForm">
 
-        <!-- ===== RIGHT: POSTED JOBS ===== -->
-        <div class="posted-jobs-card">
-            <h2>Your Posted Opportunities</h2>
+<div class="form-group">
+<label>Job Title</label>
+<input type="text" id="title" placeholder="Software Engineer" required>
+</div>
 
-            <div id="postedJobsList"></div>
-        </div>
+<div class="form-group">
+<label>Company Name</label>
+<input type="text" id="company" placeholder="Google" required>
+</div>
 
-    </section>
+<div class="form-group">
+<label>Application Link</label>
+<input type="url" id="applicationLink"
+placeholder="https://careers.company.com/job/123"
+required>
+</div>
+
+<button class="btn-post">
+<i class="fas fa-paper-plane"></i>
+Post Job
+</button>
+
+</form>
+
+</div>
+
+
+<!-- JOB HISTORY -->
+
+<div class="posted-jobs">
+
+<h3>Your Posted Jobs</h3>
+
+<div id="jobsHistoryContainer" class="jobs-history-container">
+
+<div class="loading-state">
+<div class="loading-spinner"></div>
+<p>Loading jobs...</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </main>
 
 <div id="footer-placeholder"></div>
+
 <script src="../js/includeFooter.js"></script>
 <script src="../js/alumni-post-job.js"></script>
 <script src="../js/navbar.js"></script>
+
 </body>
 </html>

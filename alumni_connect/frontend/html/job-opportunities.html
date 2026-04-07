@@ -1,56 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Job Opportunities | Alumni Connect</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Common styles -->
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/job-opportunities.css">
-    <link rel="stylesheet" href="../css/footer.css">
+<title>Job Opportunities | Alumni Connect</title>
 
-    <!-- Icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/job-opportunities.css">
+<link rel="stylesheet" href="/css/footer.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
+
 <body>
 
-<!-- ===== NAVBAR ===== -->
-  <div id="navbar-placeholder"></div>
+<div id="navbar-placeholder"></div>
 
-<!-- ===== MAIN CONTENT ===== -->
-<main class="jobs-container">
+<main class="dashboard">
 
-    <!-- Header -->
-    <section class="jobs-header">
-        <div>
-            <h1>Job & Internship Opportunities</h1>
-            <p>Explore opportunities shared by alumni</p>
-        </div>
-    </section>
+<h1 class="page-title">
+<i class="fas fa-briefcase"></i>
+Job Opportunities
+</h1>
 
-    <!-- Filters -->
-    <section class="job-filters">
-    <select id="filterType">
-        <option value="All">All Types</option>
-        <option value="Internship">Internship</option>
-        <option value="Full-Time">Full-Time</option>
-    </select>
+<p class="page-subtitle">
+Browse job openings shared by alumni.
+</p>
 
-    <input
-        type="text"
-        id="searchJob"
-        placeholder="Search by role or skill (e.g. React, Java)">
-</section>
+<!-- SEARCH + FILTER -->
 
-    <!-- Job Cards -->
-    <section class="jobs-list" id="jobsList"></section>
+<div class="search-bar">
+
+<div class="search-input-wrapper">
+
+<i class="fas fa-search"></i>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search job title or company">
+
+</div>
+
+<div class="filter-wrapper">
+
+<select id="filterCompany">
+<option value="all">All Companies</option>
+</select>
+
+</div>
+
+</div>
+
+
+<!-- JOB LIST -->
+
+<div class="jobs-container">
+
+<div class="jobs-header">
+
+<h2>Available Jobs</h2>
+
+<span class="jobs-count" id="jobsCount">
+0 jobs
+</span>
+
+</div>
+
+
+<div id="jobsGrid" class="jobs-grid">
+
+<div class="loading-state">
+<div class="loading-spinner"></div>
+<p>Loading jobs...</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div id="noResults" class="no-results" style="display:none">
+
+<i class="fas fa-search"></i>
+<h3>No jobs found</h3>
+<p>Try another search.</p>
+
+</div>
 
 </main>
 
-<!-- ===== FOOTER ===== -->
+
 <div id="footer-placeholder"></div>
+
 <script src="../js/includeFooter.js"></script>
 <script src="../js/job-opportunities.js"></script>
 <script src="../js/navbar.js"></script>

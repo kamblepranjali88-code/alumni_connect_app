@@ -9,7 +9,9 @@ body {
     background: #f5f7fa;
     color: #1e293b;
     min-height: 100vh;
+    padding-top: 80px;
 }
+
 
 /* ===== TOP NAVBAR ===== */
 .top-nav {
