@@ -138,6 +138,7 @@ const alumniRegistration = async (req, res) => {
 };
 
 // ===== ALUMNI LOGIN =====
+// ===== ALUMNI LOGIN =====
 const alumniLogin = async (req, res) => {
     try {
         const { userId, password } = req.body;
@@ -157,8 +158,6 @@ const alumniLogin = async (req, res) => {
             .maybeSingle();
 
         console.log('User found:', user ? 'YES' : 'NO');
-        console.log('Stored hash:', user?.password_hash);
-        console.log('Entered password:', password);
 
         if (error) {
             console.error('❌ DB error during login:', error.message);
@@ -176,11 +175,23 @@ const alumniLogin = async (req, res) => {
             return res.status(401).json({ message: 'Invalid User ID or password' });
         }
 
+        // ✅ Get alumni_id from alumni table
+        const { data: alumni, error: alumniError } = await supabase
+            .from('alumni')
+            .select('alumni_id')
+            .eq('user_id', user.user_id)
+            .single();
+
+        if (alumniError) {
+            console.error('❌ Error fetching alumni_id:', alumniError.message);
+        }
+
         console.log('✅ Alumni login successful for PRN:', prnNumber);
 
         res.json({
-            user_id:     user.user_id,
-            user_type:   user.user_type,
+            user_id: user.user_id,
+            alumni_id: alumni?.alumni_id || null,  // ← Fixed: added comma and alumni_id
+            user_type: user.user_type,
             login_count: user.login_count
         });
 
@@ -348,6 +359,7 @@ const getAllAlumni = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
 
 module.exports = {
     alumniRegistration,

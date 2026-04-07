@@ -152,6 +152,72 @@ const sendFirstMessageNotification = async ({
 
     console.log(`[Email] Session ${sessionNumber} notification → ${alumniEmail} | reply-to: ${studentEmail}`);
 };
+// ===== SEND NEW JOB NOTIFICATION TO ALL STUDENTS (BCC) =====
+const sendNewJobNotificationToAll = async (students, jobTitle, companyName, alumniName, applicationLink) => {
+    // Extract all student emails for BCC
+    const bccEmails = students.map(s => s.email);
+    
+    const loginRedirect = `http://localhost:5000/html/login.html?redirect=student-dashboard.html`;
+
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        bcc: bccEmails,  // BCC all students
+        subject: `💼 New Job Opportunity: ${jobTitle} at ${companyName} | Alumni Connect`,
+        html: `
+            <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto;">
+                <div style="background: #2563eb; padding: 24px; border-radius: 12px 12px 0 0; text-align: center;">
+                    <h2 style="color: white; margin: 0;">🎯 New Job Opportunity!</h2>
+                </div>
+                <div style="background: #f9fafb; padding: 24px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb;">
+                    <p style="color: #374151;">Hello <strong>Student</strong>,</p>
+                    <p style="color: #374151;">An alumnus has shared a new job opportunity exclusively for our college community!</p>
+                    
+                    <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid #e5e7eb; margin: 16px 0;">
+                        <p style="margin: 0 0 8px 0; font-size: 18px; font-weight: bold; color: #1e293b;">${jobTitle}</p>
+                        <p style="margin: 0 0 6px 0; color: #2563eb; font-weight: 500;">🏢 ${companyName}</p>
+                        <p style="margin: 0; color: #64748b; font-size: 13px;">👤 Posted by: ${alumniName} (Alumni)</p>
+                    </div>
+
+                    <div style="background: #eff6ff; padding: 14px; border-radius: 8px; border-left: 4px solid #2563eb; margin: 16px 0;">
+                        <p style="margin: 0 0 8px 0; font-weight: bold; color: #2563eb;">📌 Quick Tips</p>
+                        <ul style="margin: 0; padding-left: 18px; color: #374151; font-size: 13px;">
+                            <li>Read the job description carefully before applying</li>
+                            <li>Customize your resume for this specific role</li>
+                            <li>You can reach out to the alumni for referral if needed</li>
+                            <li>Apply as early as possible — opportunities fill fast!</li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <a href="${applicationLink}"
+                           style="background: #16a34a; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+                            Apply Now →
+                        </a>
+                    </div>
+
+                    <div style="background: #fef3c7; padding: 12px; border-radius: 8px; margin: 16px 0;">
+                        <p style="margin: 0; font-size: 12px; color: #92400e; text-align: center;">
+                            ⚡ This link will take you to the company's official application page.
+                        </p>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="${loginRedirect}"
+                           style="color: #2563eb; text-decoration: none; font-size: 13px;">
+                            View all jobs on your dashboard →
+                        </a>
+                    </div>
+
+                    <p style="text-align: center; margin-top: 20px; font-size: 11px; color: #9ca3af;">
+                        You're receiving this because you're a registered student at Tech University.
+                    </p>
+                </div>
+            </div>
+        `
+    };
+    
+    await transporter.sendMail(mailOptions);
+};
 
 const sendEventNotification = async ({
     toEmail, toName, eventTitle, eventDate, eventMode, eventDesc, deadline
@@ -210,6 +276,11 @@ module.exports = {
     sendRequestNotification,
     sendAcceptNotification,
     sendRejectNotification,
+<<<<<<< HEAD
     sendFirstMessageNotification,
     sendEventNotification  
+=======
+    sendNewJobNotificationToAll,
+    sendFirstMessageNotification
+>>>>>>> 607ce08155e473a58230b0478cca4c0023eccf3c
 };

@@ -69,10 +69,6 @@ function displayProfile(student) {
     }
 }
 
-document.getElementById('logoutBtn').addEventListener('click', (e) => {
-    e.preventDefault();
-    sessionStorage.clear();
-    window.location.href = 'login.html';
-});
+
 
 loadStudentProfile();
