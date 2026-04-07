@@ -153,10 +153,63 @@ const sendFirstMessageNotification = async ({
     console.log(`[Email] Session ${sessionNumber} notification → ${alumniEmail} | reply-to: ${studentEmail}`);
 };
 
+const sendEventNotification = async ({
+    toEmail, toName, eventTitle, eventDate, eventMode, eventDesc, deadline
+}) => {
+    const dateStr     = new Date(eventDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    const deadlineStr = new Date(deadline).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+    const modeColor   = eventMode === 'Online' ? '#2563eb' : '#16a34a';
+    const eventsLink  = `http://localhost:5000/html/events.html`;
+ 
+    await transporter.sendMail({
+        from:    `"Alumni Connect" <${process.env.EMAIL_USER}>`,
+        to:      toEmail,
+        subject: `🎉 New Event: ${eventTitle} | Alumni Connect`,
+        html: `
+        <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto">
+            <div style="background:#2563eb;padding:24px;border-radius:12px 12px 0 0;text-align:center">
+                <h2 style="color:white;margin:0">🎉 New Event Announced!</h2>
+            </div>
+            <div style="background:#f9fafb;padding:24px;border-radius:0 0 12px 12px;border:1px solid #e5e7eb">
+                <p style="color:#374151">Hi <strong>${toName}</strong>,</p>
+                <p style="color:#374151;margin-bottom:20px">A new event has been added to Alumni Connect. Register before the deadline!</p>
+ 
+                <div style="background:white;padding:20px;border-radius:10px;border:1px solid #e5e7eb;margin-bottom:20px">
+                    <h3 style="color:#1e293b;margin:0 0 12px">${eventTitle}</h3>
+                    <p style="color:#6b7280;font-size:14px;margin:0 0 8px">
+                        📅 <strong>Date:</strong> ${dateStr}
+                    </p>
+                    <p style="color:#6b7280;font-size:14px;margin:0 0 8px">
+                        🏷️ <strong>Mode:</strong>
+                        <span style="background:${modeColor};color:white;padding:2px 10px;border-radius:12px;font-size:12px">${eventMode}</span>
+                    </p>
+                    <p style="color:#6b7280;font-size:14px;margin:0 0 12px">
+                        ⏰ <strong>Register by:</strong> ${deadlineStr}
+                    </p>
+                    <p style="color:#374151;font-size:14px;border-left:3px solid #2563eb;padding-left:12px;margin:0">
+                        ${eventDesc}
+                    </p>
+                </div>
+ 
+                <div style="text-align:center">
+                    <a href="${eventsLink}"
+                       style="background:#2563eb;color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block">
+                        View & Register
+                    </a>
+                </div>
+                <p style="text-align:center;margin-top:16px;font-size:11px;color:#9ca3af">
+                    Alumni Connect · Tech University
+                </p>
+            </div>
+        </div>`
+    });
+};
+
 module.exports = {
     sendCredentials,
     sendRequestNotification,
     sendAcceptNotification,
     sendRejectNotification,
-    sendFirstMessageNotification
+    sendFirstMessageNotification,
+    sendEventNotification  
 };

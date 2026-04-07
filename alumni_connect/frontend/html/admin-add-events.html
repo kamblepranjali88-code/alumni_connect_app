@@ -2,94 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin | Manage Events</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Common styles -->
+    <title>Manage Events | Admin | Alumni Connect</title>
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/admin-add-events.css">
-    <link rel="stylesheet" href="../css/footer.css">
-
-    <!-- Icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
-<div id="navbar-placeholder"></div>
+    <div id="navbar-placeholder"></div>
 
-<!-- ===== MAIN CONTENT ===== -->
-<main class="admin-events-container">
+    <main class="admin-container">
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <h1>Manage Events</h1>
-        <p>Create and manage alumni–student events</p>
-    </section>
+        <div class="page-header">
+            <div>
+                <h1><i class="fas fa-calendar-plus"></i> Manage Events</h1>
+                <p>Create new events and view registrations</p>
+            </div>
+        </div>
 
-    <!-- Layout -->
-    <section class="events-layout">
+        <!-- ── Add Event Form ─────────────────────────────────── -->
+        <section class="form-card" id="addEventSection">
+            <h2 class="section-title"><i class="fas fa-plus-circle"></i> Add New Event</h2>
 
-        <!-- ===== ADD EVENT FORM ===== -->
-        <div class="add-event-card">
-            <h2>Add New Event</h2>
+            <form id="addEventForm">
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Event Title *</label>
+                        <input type="text" id="eventTitle" required placeholder="e.g. Alumni–Student Career Meetup">
+                    </div>
 
-            <form id="eventForm">
-                <div class="form-group">
-                    <label>Event Title</label>
-                    <input type="text" id="eventTitle" required>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Date</label>
-                        <input type="date" id="eventDate" required>
+                    <div class="form-group full-width">
+                        <label>Description *</label>
+                        <textarea id="eventDesc" rows="3" required
+                                  placeholder="Describe the event, what attendees will learn..."></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label>Mode</label>
-                        <select id="eventMode" required>
-                            <option value="">Select</option>
-                            <option>Online</option>
-                            <option>Offline</option>
+                        <label>Mode *</label>
+                        <select id="eventMode" required onchange="toggleLocation()">
+                            <option value="">Select mode</option>
+                            <option value="Online">Online</option>
+                            <option value="Offline">Offline</option>
                         </select>
                     </div>
+
+                    <div class="form-group" id="locationGroup">
+                        <label id="locationLabel">Location / Link</label>
+                        <input type="text" id="eventLocation"
+                               placeholder="Venue address or meeting link">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Event Date & Time *</label>
+                        <input type="datetime-local" id="eventDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Registration Deadline *</label>
+                        <input type="datetime-local" id="eventDeadline" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Max Participants <span style="color:#9ca3af">(leave empty = unlimited)</span></label>
+                        <input type="number" id="eventMax" placeholder="e.g. 100" min="1">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Venue / Meeting Link</label>
-                    <input type="text" id="eventVenue" required>
+                <div class="form-note">
+                    <i class="fas fa-bell"></i>
+                    An email notification will be sent to <strong>all students and alumni</strong> when this event is created.
                 </div>
 
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea id="eventDescription" rows="4" required></textarea>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Create Event & Notify All
+                    </button>
                 </div>
-
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-plus-circle"></i> Add Event
-                </button>
             </form>
+        </section>
+
+        <!-- ── Events List ───────────────────────────────────── -->
+        <section class="events-section">
+            <h2 class="section-title"><i class="fas fa-list"></i> All Events</h2>
+            <div id="adminEventsList">
+                <div class="loading-text"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ── Registrations Modal ──────────────────────────────── -->
+    <div class="modal-overlay" id="regModal" style="display:none">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modalTitle">Registrations</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-export" onclick="exportToExcel()">
+                    <i class="fas fa-file-excel"></i> Export to Excel
+                </button>
+                <span id="regCount" class="reg-count">0 registrations</span>
+            </div>
+            <div class="table-wrap">
+                <table id="regTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Type</th>
+                            <th>Registered At</th>
+                        </tr>
+                    </thead>
+                    <tbody id="regTableBody"></tbody>
+                </table>
+            </div>
         </div>
+    </div>
 
-        <!-- ===== EVENT LIST ===== -->
-        <div class="events-list-card">
-            <h2>Events Created</h2>
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
 
-            <div id="adminEventsList"></div>
-        </div>
-
-    </section>
-
-</main>
-
-<!-- ===== FOOTER ===== -->
-<div id="footer-placeholder"></div>
-<script src="../js/includeFooter.js"></script>
-<script src="../js/admin-add-events.js"></script>
-<script src="../js/navbar.js"></script>
+    <script src="../js/admin-add-events.js"></script>
+    <script src="../js/navbar.js"></script>
 </body>
 </html>

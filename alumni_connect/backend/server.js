@@ -9,7 +9,9 @@ require('dotenv').config();
 const authRoutes       = require('./src/routes/authRoutes');
 const alumniAuthRoutes = require('./src/routes/alumniAuthRoutes');
 const requestRoutes    = require('./src/routes/requestRoutes');
-const chatRoutes       = require('./src/routes/chatRoutes');  // ← NEW
+const chatRoutes       = require('./src/routes/chatRoutes');  
+const adminAuthRoutes = require('./src/routes/adminAuthRoutes');
+ const eventRoutes     = require('./src/routes/eventRoutes');
 
 // ← NEW: Socket.IO chat handler
 const { initChatSocket } = require('./src/socket/chatSocket');
@@ -48,6 +50,8 @@ app.use('/api', authRoutes);                  // student routes → /api/auth/..
 app.use('/api/alumni', alumniAuthRoutes);      // alumni routes  → /api/alumni/...
 app.use('/api/requests', requestRoutes);       // request routes → /api/requests/...
 app.use('/api/chat', chatRoutes);             // ← NEW: chat routes → /api/chat/...
+app.use('/api/admin', adminAuthRoutes);   // admin login → /api/admin/login
+app.use('/api/events', eventRoutes);
 
 // Test route
 app.get('/test', (req, res) => {
