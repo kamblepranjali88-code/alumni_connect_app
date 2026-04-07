@@ -64,11 +64,8 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
         const result = await response.json();
 
         if (response.ok) {
-<<<<<<< HEAD
 
-=======
             // Save user info in session (KEEP EXISTING KEYS)
->>>>>>> 607ce08155e473a58230b0478cca4c0023eccf3c
             sessionStorage.setItem('userId', result.user_id);
             sessionStorage.setItem('userType', result.user_type);  // ← Keep as is
             

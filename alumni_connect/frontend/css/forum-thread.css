@@ -1,143 +1,144 @@
-/* ===== PAGE OFFSET (FIX NAVBAR OVERLAP) ===== */
+/* ===== THREAD PAGE ===== */
+
 .thread-container {
-    max-width: 1000px;
+    max-width: 900px;
     margin: auto;
-    padding: 120px 24px 40px;
-    background-color: #f5f7fa;
+    padding: 110px 24px 40px;
 }
 
 /* ===== QUESTION CARD ===== */
+
 .question-card {
     background: white;
-    border-radius: 16px;
+    border-radius: 22px;
     padding: 28px;
-    border: 1px solid #e5e7eb;
-    margin-bottom: 32px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 30px;
 }
 
 .question-card h1 {
-    font-size: 28px;
-    font-weight: 800;
+    font-size: 26px;
+    font-weight: 700;
     margin-bottom: 14px;
 }
 
 .question-meta {
     display: flex;
-    gap: 18px;
     flex-wrap: wrap;
-    font-size: 14px;
-    color: #6b7280;
-    margin-bottom: 18px;
+    gap: 14px;
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 16px;
 }
 
 .category-badge {
-    background: #e0e7ff;
-    color: #3730a3;
-    padding: 6px 14px;
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 5px 12px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
 }
 
 .question-text {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.7;
-    color: #1f2937;
+    color: #334155;
 }
 
 /* ===== REPLIES ===== */
+
 .replies-section {
-    margin-bottom: 36px;
+    margin-bottom: 30px;
 }
 
 .replies-section h2 {
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 20px;
     margin-bottom: 16px;
 }
 
 .reply-card {
     background: white;
-    border-radius: 14px;
-    padding: 20px 22px;
-    border: 1px solid #e5e7eb;
-    margin-bottom: 14px;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 12px;
 }
 
 .reply-header {
     display: flex;
     gap: 10px;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 8px;
 }
 
 .reply-header span {
-    background: #f3f4f6;
-    padding: 4px 10px;
+    background: #f1f5f9;
+    padding: 3px 10px;
     border-radius: 12px;
-    font-size: 12px;
-    color: #374151;
 }
 
 .reply-card p {
-    font-size: 15px;
-    color: #1f2937;
+    font-size: 14px;
+    color: #334155;
     line-height: 1.6;
 }
 
 /* ===== ADD REPLY ===== */
+
 .add-reply-section {
     background: white;
-    border-radius: 16px;
+    border-radius: 20px;
     padding: 24px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #e2e8f0;
 }
 
 .add-reply-section h2 {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 14px;
+    font-size: 20px;
+    margin-bottom: 12px;
 }
 
 .add-reply-section textarea {
     width: 100%;
-    min-height: 120px;
-    padding: 14px;
+    min-height: 110px;
+    padding: 12px;
     border-radius: 12px;
-    border: 1px solid #d1d5db;
-    font-size: 15px;
-    resize: vertical;
-    margin-bottom: 16px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+    margin-bottom: 14px;
 }
 
 .add-reply-section textarea:focus {
     outline: none;
-    border-color: #1a73e8;
+    border-color: #2563eb;
 }
 
 /* ===== BUTTON ===== */
+
 .btn-primary {
-    background: #1a73e8;
+    background: #2563eb;
     color: white;
     border: none;
     padding: 12px 22px;
-    border-radius: 10px;
-    font-size: 15px;
+    border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
 }
 
 .btn-primary:hover {
-    background: #1557b0;
+    background: #1d4ed8;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .thread-container {
-        padding: 110px 16px 32px;
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+
+    .thread-container{
+        padding:100px 16px 30px;
     }
 
-    .question-card h1 {
-        font-size: 22px;
+    .question-card h1{
+        font-size:22px;
     }
+
 }

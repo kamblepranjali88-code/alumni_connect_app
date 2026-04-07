@@ -1,6 +1,22 @@
 let postId = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+
+const backLink = document.getElementById('backLink');
+const userType = sessionStorage.getItem('userType');
+
+if(backLink){
+
+backLink.href =
+userType === 'alumni'
+? 'alumni-forum.html'
+: 'forum.html';
+
+}
+
+});
+
+document.addEventListener('DOMContentLoaded', () => {
     setDynamicNavbar();
     
     const urlParams = new URLSearchParams(window.location.search);

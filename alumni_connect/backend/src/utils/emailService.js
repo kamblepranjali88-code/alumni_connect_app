@@ -276,11 +276,8 @@ module.exports = {
     sendRequestNotification,
     sendAcceptNotification,
     sendRejectNotification,
-<<<<<<< HEAD
     sendFirstMessageNotification,
-    sendEventNotification  
-=======
+    sendEventNotification,
     sendNewJobNotificationToAll,
     sendFirstMessageNotification
->>>>>>> 607ce08155e473a58230b0478cca4c0023eccf3c
 };
