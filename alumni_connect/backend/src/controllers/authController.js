@@ -192,17 +192,22 @@ const changePassword = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(new_password, 10);
 
-        const { error } = await supabase
+        const { data, error } = await supabase
             .from('users')
             .update({
                 password_hash: hashedPassword,
-                login_count:   1
+                login_count: 1
             })
-            .eq('user_id', user_id);
+            .eq('user_id', user_id)
+            .select();
 
         if (error) {
             console.error('❌ Error changing password:', error.message);
             return res.status(500).json({ message: 'Error changing password' });
+        }
+
+        if (!data || data.length === 0) {
+            return res.status(404).json({ message: 'User not found' });
         }
 
         console.log('✅ Password changed for user_id:', user_id);
