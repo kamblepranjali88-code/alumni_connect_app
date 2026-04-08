@@ -114,7 +114,7 @@ const postJob = async (req, res) => {
     }
 };
 
-// GET /api/jobs/my-jobs - Get all jobs posted by this alumni
+// GET /api/jobs/my-jobs - Get all active jobs posted by this alumni
 const getMyJobs = async (req, res) => {
     try {
         const { user_id } = req.query;
@@ -133,6 +133,7 @@ const getMyJobs = async (req, res) => {
             .from('jobs')
             .select('*')
             .eq('posted_by', alumniId)
+            .eq('status', 'active')          // ← only fetch active jobs, excludes deleted (closed) ones
             .order('posted_date', { ascending: false });
 
         if (error) {
@@ -148,7 +149,7 @@ const getMyJobs = async (req, res) => {
     }
 };
 
-// DELETE /api/jobs/:jobId - Delete a job
+// DELETE /api/jobs/:jobId - Delete a job (soft delete - sets status to 'closed')
 const deleteJob = async (req, res) => {
     try {
         const { jobId } = req.params;
