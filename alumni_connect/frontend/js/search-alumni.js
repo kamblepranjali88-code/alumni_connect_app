@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://alumni-connect-backend-yy97.onrender.com/api';
 
 const list               = document.getElementById('alumniList');
 const searchInput        = document.getElementById('searchInput');

@@ -25,7 +25,7 @@ const grid = document.getElementById("jobsGrid");
 
 try{
 
-const response = await fetch("http://localhost:5000/api/jobs");
+const response = await fetch("https://alumni-connect-backend-yy97.onrender.com/api/jobs");
 const data = await response.json();
 
 if(!data.success){

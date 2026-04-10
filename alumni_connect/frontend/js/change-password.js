@@ -48,7 +48,7 @@ document.getElementById('changePwdBtn').addEventListener('click', async function
     
     try {
         // Send request to backend
-        const response = await fetch('http://localhost:5000/api/auth/change-password', {
+        const response = await fetch('https://alumni-connect-backend-yy97.onrender.com/api/auth/change-password', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

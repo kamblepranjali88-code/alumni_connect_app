@@ -30,7 +30,7 @@ submitBtn.innerHTML =
 try {
 
 const response = await fetch(
-'http://localhost:5000/api/forum/posts',
+'https://alumni-connect-backend-yy97.onrender.com/api/forum/posts',
 {
 method: 'POST',
 

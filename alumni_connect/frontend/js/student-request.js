@@ -38,7 +38,7 @@ document.getElementById('submitBtn').addEventListener('click', async function(e)
     
     try {
         // Send to backend
-        const response = await fetch('http://localhost:5000/api/auth/student-request', {
+        const response = await fetch('https://alumni-connect-backend-yy97.onrender.com/api/auth/student-request', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ document.getElementById('submitBtn').addEventListener('click', async function(e)
         }
     } catch(error) {
         console.error('Error:', error);
-        alert('❌ Network error. Make sure server is running at http://localhost:5000');
+        alert('❌ Network error. Make sure server is running at https://alumni-connect-backend-yy97.onrender.com');
     } finally {
         // Reset button
         btn.textContent = originalText;

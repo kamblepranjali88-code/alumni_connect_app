@@ -6,7 +6,7 @@ async function loadPosts() {
     const container = document.getElementById('postsContainer');
 
     try {
-        const response = await fetch('http://localhost:5000/api/forum/posts');
+        const response = await fetch('https://alumni-connect-backend-yy97.onrender.com/api/forum/posts');
         const data = await response.json();
 
         if (!data.success || !data.posts || data.posts.length === 0) {
@@ -89,7 +89,7 @@ async function deletePost(postId) {
     if (!userId) return alert('Please login');
 
     try {
-        const response = await fetch(`http://localhost:5000/api/forum/posts/${postId}`, {
+        const response = await fetch(`https://alumni-connect-backend-yy97.onrender.com/api/forum/posts/${postId}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             // ✅ FIX: Send userId as plain string — backend getUserInfo expects UUID string, not a number

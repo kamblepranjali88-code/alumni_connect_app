@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api/alumni';
+const BASE_URL = 'https://alumni-connect-backend-yy97.onrender.com/api/alumni';
 
 // ===== GET USER ID FROM SESSION =====
 const userId = sessionStorage.getItem('userId');

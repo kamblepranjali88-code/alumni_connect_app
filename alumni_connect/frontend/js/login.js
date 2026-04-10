@@ -18,7 +18,7 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
     btn.textContent = 'Logging in...';
     btn.disabled = true;
 
-    const BASE_URL = 'http://localhost:5000/api';
+    const BASE_URL = 'https://alumni-connect-backend-yy97.onrender.com/api';
 
     try {
 
@@ -102,7 +102,7 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
         console.error('Login error:', error);
 
         alert(
-            '❌ Network error. Make sure server is running at http://localhost:5000'
+            '❌ Network error. Make sure server is running at https://alumni-connect-backend-yy97.onrender.com'
         );
 
     } finally {

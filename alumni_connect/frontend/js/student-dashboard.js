@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     
     try {
-        const url = `http://localhost:5000/api/auth/student/profile/${userId}`;
+        const url = `https://alumni-connect-backend-yy97.onrender.com/api/auth/student/profile/${userId}`;
         console.log('4️⃣ Fetching from:', url);
         
         const response = await fetch(url);

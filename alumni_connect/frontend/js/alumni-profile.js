@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api/alumni';
+const BASE_URL = 'https://alumni-connect-backend-yy97.onrender.com/api/alumni';
 
 const editProfileBtn = document.getElementById('editProfileBtn');
 const cancelEditBtn  = document.getElementById('cancelEditBtn');

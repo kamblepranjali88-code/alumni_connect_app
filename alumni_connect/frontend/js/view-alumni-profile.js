@@ -1,5 +1,5 @@
 // ===== INITIALIZE VARIABLES =====
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://alumni-connect-backend-yy97.onrender.com/api';
 
 // Get IDs from URL and session
 const urlParams = new URLSearchParams(window.location.search);

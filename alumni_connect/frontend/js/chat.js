@@ -14,7 +14,7 @@ const STATE = {
   onlineUsers: new Set(),
 };
 
-const SERVER = 'http://localhost:5000';
+const SERVER = 'https://alumni-connect-backend-yy97.onrender.com';
 
 function el(id) { return document.getElementById(id); }
 

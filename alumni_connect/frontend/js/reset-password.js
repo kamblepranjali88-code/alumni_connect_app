@@ -76,7 +76,7 @@ document.getElementById('resetPasswordForm').addEventListener('submit', async (e
     resetBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting...';
     
     try {
-        const response = await fetch('http://localhost:5000/api/reset-password', {
+        const response = await fetch('https://alumni-connect-backend-yy97.onrender.com/api/reset-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, token, new_password: newPassword })

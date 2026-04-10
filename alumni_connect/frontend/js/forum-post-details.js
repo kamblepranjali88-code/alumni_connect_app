@@ -67,7 +67,7 @@ function setDynamicNavbar() {
 
 async function loadPostDetails() {
     try {
-        const response = await fetch(`http://localhost:5000/api/forum/posts/${postId}`);
+        const response = await fetch(`https://alumni-connect-backend-yy97.onrender.com/api/forum/posts/${postId}`);
         const data = await response.json();
         
         if (!data.success) {
@@ -216,7 +216,7 @@ async function submitComment() {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting...';
     
     try {
-        const response = await fetch('http://localhost:5000/api/forum/comments', {
+        const response = await fetch('https://alumni-connect-backend-yy97.onrender.com/api/forum/comments', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

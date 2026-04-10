@@ -1,5 +1,5 @@
 // frontend/js/admin-add-events.js
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://alumni-connect-backend-yy97.onrender.com/api';
 const adminId  = sessionStorage.getItem('userId');
 const userType = sessionStorage.getItem('userType') || sessionStorage.getItem('user_type');
 

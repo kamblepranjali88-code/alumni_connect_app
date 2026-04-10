@@ -99,7 +99,7 @@ document.getElementById('submitBtn').addEventListener('click', async function(e)
 
         console.log('Sending registration data:', payload);
 
-        const response = await fetch('http://localhost:5000/api/alumni/register', {
+        const response = await fetch('https://alumni-connect-backend-yy97.onrender.com/api/alumni/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -116,7 +116,7 @@ document.getElementById('submitBtn').addEventListener('click', async function(e)
 
     } catch (error) {
         console.error('Registration error:', error);
-        alert('❌ Network error. Make sure server is running at http://localhost:5000');
+        alert('❌ Network error. Make sure server is running at https://alumni-connect-backend-yy97.onrender.com');
     } finally {
         btn.textContent = originalText;
         btn.disabled = false;

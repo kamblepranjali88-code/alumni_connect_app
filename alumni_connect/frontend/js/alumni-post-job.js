@@ -4,7 +4,7 @@ async function loadMyJobs() {
 
     try {
         const response = await fetch(
-            `http://localhost:5000/api/jobs/my-jobs?user_id=${userId}`
+            `https://alumni-connect-backend-yy97.onrender.com/api/jobs/my-jobs?user_id=${userId}`
         );
 
         const data = await response.json();
@@ -62,7 +62,7 @@ async function deleteJob(jobId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:5000/api/jobs/${jobId}`, {
+        const response = await fetch(`https://alumni-connect-backend-yy97.onrender.com/api/jobs/${jobId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -114,7 +114,7 @@ document.getElementById("postJobForm").addEventListener("submit", async (e) => {
     };
 
     try {
-        const response = await fetch("http://localhost:5000/api/jobs/post", {
+        const response = await fetch("https://alumni-connect-backend-yy97.onrender.com/api/jobs/post", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
