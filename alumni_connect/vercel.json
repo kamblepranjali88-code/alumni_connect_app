@@ -1,7 +1,3 @@
 {
-  "rewrites": [
-    { "source": "/css/:path*", "destination": "/css/:path*" },
-    { "source": "/js/:path*", "destination": "/js/:path*" },
-    { "source": "/:path*", "destination": "/html/:path*" }
-  ]
+  "cleanUrls": true
 }
