@@ -76,28 +76,22 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
                 sessionStorage.setItem('alumni_id', result.alumni_id);
             }
 
-            if (result.login_count === 0) {
+           if (result.login_count === 0) {
+   window.location.href = '/html/reset-password.html?userId=' + result.user_id;
+} else {
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectPage = urlParams.get('redirect');
 
-                window.location.href =
-                    'change-password.html?userId=' + result.user_id;
-
-            } else {
-
-                const urlParams = new URLSearchParams(window.location.search);
-                const redirectPage = urlParams.get('redirect');
-
-                if (redirectPage) {
-                    window.location.href = redirectPage;
-                } else {
-
-                    if (result.user_type === 'alumni') {
-                        window.location.href = 'alumni-dashboard.html';
-                    } else {
-                        window.location.href = 'student-dashboard.html';
-                    }
-
-                }
-            }
+    if (redirectPage) {
+        window.location.href = redirectPage;
+    } else {
+        if (result.user_type === 'alumni') {
+            window.location.href = '/html/alumni-dashboard.html';
+        } else {
+            window.location.href = '/html/student-dashboard.html';
+        }
+    }
+}
 
         } else {
             alert('❌ ' + result.message);

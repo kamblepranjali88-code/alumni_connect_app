@@ -1,153 +1,143 @@
-async function loadMyJobs(){
+async function loadMyJobs() {
+    const userId = sessionStorage.getItem("userId");
+    const container = document.getElementById("jobsHistoryContainer");
 
-const userId=sessionStorage.getItem("userId");
+    try {
+        const response = await fetch(
+            `http://localhost:5000/api/jobs/my-jobs?user_id=${userId}`
+        );
 
-const container=document.getElementById("jobsHistoryContainer");
+        const data = await response.json();
+        console.log("Jobs data:", data);
 
-try{
+        const jobs = data.jobs || data || [];
 
-const response=await fetch(
-`http://localhost:5000/api/jobs/my-jobs?user_id=${userId}`
-);
+        if (!jobs.length) {
+            container.innerHTML = "<p>No jobs posted yet.</p>";
+            return;
+        }
 
-const data=await response.json();
+        container.innerHTML = jobs.map(job => {
+            const date = new Date(job.posted_date || job.created_at || Date.now()).toLocaleDateString();
+            const jobId = job.job_id || job.id;
 
-if(!data.jobs || data.jobs.length===0){
+            return `
+                <div class="job-card" id="job-card-${jobId}">
+                    <div>
+                        <div class="job-title">${job.title}</div>
+                        <div class="job-company">${job.company}</div>
+                        <div class="job-date">${date}</div>
+                    </div>
 
-container.innerHTML="<p>No jobs posted yet.</p>";
-return;
+                    <div class="job-actions">
+                        <button class="btn-view-link"
+                            onclick="window.open('${job.application_link}', '_blank')">
+                            View
+                        </button>
 
+                        <button class="btn-copy-link"
+                            onclick="copyLink('${job.application_link}')">
+                            Copy
+                        </button>
+
+                        <button class="btn-delete-job"
+                            onclick="deleteJob(${jobId})">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    } catch (error) {
+        console.error("Load jobs error:", error);
+        container.innerHTML = "<p>Failed to load jobs</p>";
+    }
 }
 
-container.innerHTML=data.jobs.map(job=>{
+async function deleteJob(jobId) {
+    const userId = sessionStorage.getItem("userId");
 
-const date=new Date(job.posted_date)
-.toLocaleDateString();
+    if (!confirm("Are you sure you want to delete this job?")) {
+        return;
+    }
 
-return`
+    try {
+        const response = await fetch(`http://localhost:5000/api/jobs/${jobId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                user_id: parseInt(userId)
+            })
+        });
 
-<div class="job-card">
+        const result = await response.json();
+        console.log("Delete response:", result);
 
-<div>
+        if (!response.ok) {
+            alert(result.message || "Failed to delete job");
+            return;
+        }
 
-<div class="job-title">${job.title}</div>
+        // Remove deleted card immediately from alumni history
+        const card = document.getElementById(`job-card-${jobId}`);
+        if (card) {
+            card.remove();
+        }
 
-<div class="job-company">
-${job.company}
-</div>
+        // Reload jobs list to keep UI and DB in sync
+        loadMyJobs();
 
-<div class="job-date">
-${date}
-</div>
-
-</div>
-
-<div class="job-actions">
-
-<button class="btn-view-link"
-onclick="window.open('${job.application_link}','_blank')">
-View
-</button>
-
-<button class="btn-copy-link"
-onclick="copyLink('${job.application_link}')">
-Copy
-</button>
-
-<button class="btn-delete-job"
-onclick="deleteJob(${job.id})">
-Delete
-</button>
-
-</div>
-
-</div>
-
-`;
-
-}).join("");
-
-}
-catch(error){
-
-container.innerHTML="<p>Failed to load jobs</p>";
-
+        alert("Job deleted successfully");
+    } catch (error) {
+        console.error("Delete error:", error);
+        alert("Error deleting job");
+    }
 }
 
+function copyLink(link) {
+    navigator.clipboard.writeText(link);
+    alert("Link copied");
 }
 
+document.getElementById("postJobForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
+    const userId = sessionStorage.getItem("userId");
 
-async function deleteJob(jobId){
+    const jobData = {
+        user_id: parseInt(userId),
+        title: document.getElementById("title").value,
+        company: document.getElementById("company").value,
+        application_link: document.getElementById("applicationLink").value
+    };
 
-const userId=sessionStorage.getItem("userId");
+    try {
+        const response = await fetch("http://localhost:5000/api/jobs/post", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(jobData)
+        });
 
-await fetch(`http://localhost:5000/api/jobs/${jobId}`,{
+        const result = await response.json();
 
-method:"DELETE",
+        if (!response.ok) {
+            alert(result.message || "Failed to post job");
+            return;
+        }
 
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({user_id:parseInt(userId)})
-
+        document.getElementById("postJobForm").reset();
+        loadMyJobs();
+        alert("Job posted successfully");
+    } catch (error) {
+        console.error("Post job error:", error);
+        alert("Error posting job");
+    }
 });
 
-loadMyJobs();
-
-}
-
-
-function copyLink(link){
-
-navigator.clipboard.writeText(link);
-
-alert("Link copied");
-
-}
-
-
-document.getElementById("postJobForm")
-.addEventListener("submit",async(e)=>{
-
-e.preventDefault();
-
-const userId=sessionStorage.getItem("userId");
-
-const jobData={
-
-user_id:parseInt(userId),
-
-title:document.getElementById("title").value,
-
-company:document.getElementById("company").value,
-
-application_link:document.getElementById("applicationLink").value
-
-};
-
-await fetch("http://localhost:5000/api/jobs/post",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify(jobData)
-
-});
-
-document.getElementById("postJobForm").reset();
-
-loadMyJobs();
-
-});
-
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-loadMyJobs();
-
+document.addEventListener("DOMContentLoaded", () => {
+    loadMyJobs();
 });
