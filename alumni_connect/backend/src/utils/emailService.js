@@ -20,7 +20,7 @@ const sendCredentials = async (email, userId, password, fullName) => {
                     <p style="margin:0"><strong>Temp Password:</strong> <span style="color:#2563eb;font-family:monospace">${password}</span></p>
                 </div>
                 <div style="text-align:center;margin-top:20px">
-                    <a href="http://localhost:5000/html/login.html"
+                    <a href="https://alumni-connect-app-3udd.vercel.app/login.html"
                        style="background:#2563eb;color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold">Login Now</a>
                 </div></div></div>`
     });
@@ -43,7 +43,7 @@ const sendRequestNotification = async (alumniEmail, alumniName, studentName, stu
                     <p style="margin:0 0 6px;font-size:12px;color:#6b7280;text-transform:uppercase">Message</p>
                     <p style="margin:0;color:#1e293b;font-style:italic">"${message}"</p></div>
                 <div style="text-align:center;margin-top:20px">
-                    <a href="http://localhost:5000/html/login.html?redirect=mentorship-requests.html"
+                    <a href="https://alumni-connect-app-3udd.vercel.app/login.html?redirect=mentorship-requests.html"
                        style="background:#2563eb;color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold">View Request</a>
                 </div></div></div>`
     });
@@ -64,7 +64,7 @@ const sendAcceptNotification = async (studentEmail, studentName, alumniName, alu
                     <p style="margin:0 0 6px"><strong>Company:</strong> ${alumniCompany || 'Not specified'}</p>
                     <p style="margin:0"><strong>Active until:</strong> ${expiryDate}</p></div>
                 <div style="text-align:center;margin-top:20px">
-                    <a href="http://localhost:5000/html/login.html?redirect=student-dashboard.html"
+                    <a href="https://alumni-connect-app-3udd.vercel.app/login.html?redirect=student-dashboard.html"
                        style="background:#16a34a;color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold">Go to Dashboard</a>
                 </div></div></div>`
     });
@@ -80,7 +80,7 @@ const sendRejectNotification = async (studentEmail, studentName, alumniName) => 
             <div style="background:#f9fafb;padding:24px;border-radius:0 0 12px 12px;border:1px solid #e5e7eb">
                 <p>Hi <strong>${studentName}</strong>, your request to <strong>${alumniName}</strong> was not accepted.</p>
                 <div style="text-align:center;margin-top:20px">
-                    <a href="http://localhost:5000/html/login.html?redirect=search-alumni.html"
+                    <a href="https://alumni-connect-app-3udd.vercel.app/login.html?redirect=search-alumni.html"
                        style="background:#2563eb;color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold">Find Another Mentor</a>
                 </div></div></div>`
     });
@@ -157,7 +157,7 @@ const sendNewJobNotificationToAll = async (students, jobTitle, companyName, alum
     // Extract all student emails for BCC
     const bccEmails = students.map(s => s.email);
     
-    const loginRedirect = `http://localhost:5000/html/login.html?redirect=student-dashboard.html`;
+    const loginRedirect = `https://alumni-connect-app-3udd.vercel.app/login.html?redirect=student-dashboard.html`;
 
     const mailOptions = {
         from: process.env.EMAIL_USER,
@@ -225,7 +225,7 @@ const sendEventNotification = async ({
     const dateStr     = new Date(eventDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     const deadlineStr = new Date(deadline).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
     const modeColor   = eventMode === 'Online' ? '#2563eb' : '#16a34a';
-    const eventsLink  = `http://localhost:5000/html/events.html`;
+    const eventsLink  = `https://alumni-connect-app-3udd.vercel.app/events.html`;
  
     await transporter.sendMail({
         from:    `"Alumni Connect" <${process.env.EMAIL_USER}>`,
