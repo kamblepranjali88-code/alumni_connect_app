@@ -1,8 +1,13 @@
 // Student Registration Form Handler
 
+let isSubmitting = false; // ← prevents double submission
+
 document.getElementById('submitBtn').addEventListener('click', async function(e) {
-    e.preventDefault(); // Prevent form from submitting normally
-    
+    e.preventDefault();
+
+    // ✅ Prevent double submission
+    if (isSubmitting) return;
+
     // Get form values
     const fullName = document.getElementById('fullName').value;
     const rollNumber = document.getElementById('rollNumber').value;
@@ -10,48 +15,38 @@ document.getElementById('submitBtn').addEventListener('click', async function(e)
     const branch = document.getElementById('branch').value;
     const year = document.getElementById('year').value;
     const interestsInput = document.getElementById('interests').value;
-    
+
     // Validate form
-    if(!fullName || !rollNumber || !email || !branch || !year) {
+    if (!fullName || !rollNumber || !email || !branch || !year) {
         alert('Please fill all required fields');
         return;
     }
-    
-    // Process interests (comma separated to array)
+
+    // Process interests
     const interests = interestsInput ? interestsInput.split(',').map(i => i.trim()) : [];
-    
-    // Prepare data for API
-    const studentData = {
-        fullName: fullName,
-        rollNumber: rollNumber,
-        email: email,
-        branch: branch,
-        year: year,
-        interests: interests
-    };
-    
+
+    // Prepare data
+    const studentData = { fullName, rollNumber, email, branch, year, interests };
+
     // Show loading state
     const btn = document.getElementById('submitBtn');
     const originalText = btn.textContent;
     btn.textContent = 'Submitting...';
     btn.disabled = true;
-    
+    isSubmitting = true; // ✅ Lock submission
+
     try {
-        // Send to backend
         const response = await fetch('https://alumni-connect-backend-yy97.onrender.com/api/auth/student-request', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(studentData)
         });
-        
+
         const result = await response.json();
-        
-        if(response.ok) {
-            // Success
+
+        if (response.ok) {
             alert('✅ Success! ' + result.message);
-            
+
             // Clear form
             document.getElementById('fullName').value = '';
             document.getElementById('rollNumber').value = '';
@@ -59,28 +54,32 @@ document.getElementById('submitBtn').addEventListener('click', async function(e)
             document.getElementById('branch').value = '';
             document.getElementById('year').value = '';
             document.getElementById('interests').value = '';
-            
-            // Redirect to login page after 2 seconds
+
+            // Redirect to login
             setTimeout(() => {
                 window.location.href = 'login.html';
             }, 2000);
+
         } else {
-            // Error from server
             alert('❌ Error: ' + result.message);
+            // ✅ Only unlock if error so they can try again
+            isSubmitting = false;
+            btn.textContent = originalText;
+            btn.disabled = false;
         }
-    } catch(error) {
+
+    } catch (error) {
         console.error('Error:', error);
-        alert('❌ Network error. Make sure server is running at https://alumni-connect-backend-yy97.onrender.com');
-    } finally {
-        // Reset button
+        alert('❌ Network error. Make sure server is running.');
+        isSubmitting = false;
         btn.textContent = originalText;
         btn.disabled = false;
     }
 });
 
-// Add Enter key support
-document.addEventListener('keypress', function(e) {
-    if(e.key === 'Enter') {
+// ✅ Enter key only on last input field, not entire document
+document.getElementById('interests').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
         document.getElementById('submitBtn').click();
     }
 });
