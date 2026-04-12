@@ -382,7 +382,7 @@ const forgotPassword = async (req, res) => {
         console.log('Token saved for:', email);
         
         // Send email
-        const resetLink = `http://localhost:5000/html/reset-password.html?token=${token}&email=${email}`;
+        const resetLink = `https://alumni-connect-app-3udd.vercel.app/reset-password.html?token=${token}&email=${email}`;
         
         const transporter = require('nodemailer').createTransport({
             service: 'gmail',
