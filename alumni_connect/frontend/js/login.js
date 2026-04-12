@@ -1,4 +1,3 @@
-
 // Login functionality
 
 document.getElementById('loginBtn').addEventListener('click', async function (e) {
@@ -34,23 +33,18 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
             const result = await response.json();
 
             if (response.ok) {
-
                 sessionStorage.setItem('userId', result.admin_id);
                 sessionStorage.setItem('userType', 'admin');
                 sessionStorage.setItem('fullName', result.full_name);
-
                 window.location.href = 'admin-dashboard.html';
                 return;
-
             } else {
                 alert('❌ ' + result.message);
                 return;
             }
         }
 
-
         // ===== ALUMNI / STUDENT LOGIN =====
-
         const loginUrl = userId.startsWith('ALM_')
             ? `${BASE_URL}/alumni/login`
             : `${BASE_URL}/auth/login`;
@@ -65,61 +59,49 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
 
         if (response.ok) {
 
-            // Save user info in session (KEEP EXISTING KEYS)
             sessionStorage.setItem('userId', result.user_id);
-            sessionStorage.setItem('userType', result.user_type);  // ← Keep as is
-            
-            // ===== ADD NEW KEYS FOR FORUM (won't affect existing pages) =====
+            sessionStorage.setItem('userType', result.user_type);
+
             if (result.user_type === 'student') {
                 sessionStorage.setItem('student_id', result.student_id);
             } else if (result.user_type === 'alumni') {
                 sessionStorage.setItem('alumni_id', result.alumni_id);
             }
 
-           if (result.login_count === 0) {
-   window.location.href = '/html/reset-password.html?userId=' + result.user_id;
-} else {
-    const urlParams = new URLSearchParams(window.location.search);
-    const redirectPage = urlParams.get('redirect');
+            // ✅ FIRST LOGIN → go to change password page
+            if (result.login_count === 0) {
+                window.location.href = '/html/change-password.html?userId=' + result.user_id;
+            } else {
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirectPage = urlParams.get('redirect');
 
-    if (redirectPage) {
-        window.location.href = redirectPage;
-    } else {
-        if (result.user_type === 'alumni') {
-            window.location.href = '/html/alumni-dashboard.html';
-        } else {
-            window.location.href = '/html/student-dashboard.html';
-        }
-    }
-}
+                if (redirectPage) {
+                    window.location.href = redirectPage;
+                } else {
+                    if (result.user_type === 'alumni') {
+                        window.location.href = '/html/alumni-dashboard.html';
+                    } else {
+                        window.location.href = '/html/student-dashboard.html';
+                    }
+                }
+            }
 
         } else {
             alert('❌ ' + result.message);
         }
 
     } catch (error) {
-
         console.error('Login error:', error);
-
-        alert(
-            '❌ Network error. Make sure server is running at https://alumni-connect-backend-yy97.onrender.com'
-        );
-
+        alert('❌ Network error. Make sure server is running at https://alumni-connect-backend-yy97.onrender.com');
     } finally {
-
         btn.textContent = originalText;
         btn.disabled = false;
-
     }
 });
-
 
 // Allow Enter key to submit
 document.getElementById('password').addEventListener('keypress', function (e) {
-
     if (e.key === 'Enter') {
         document.getElementById('loginBtn').click();
     }
-
 });
-
