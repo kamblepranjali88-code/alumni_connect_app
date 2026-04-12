@@ -10,10 +10,9 @@ const transporter = nodemailer.createTransport({
         pass: process.env.BREVO_PASS 
     }
 });
-
 const sendCredentials = async (email, userId, password, fullName) => {
     await transporter.sendMail({
-        from: process.env.EMAIL_USER, to: email,
+        from: process.env.BREVO_USER, to: email,
         subject: 'Your Alumni Connect Login Credentials',
         html: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto">
             <div style="background:#2563eb;padding:24px;border-radius:12px 12px 0 0;text-align:center">
@@ -33,7 +32,7 @@ const sendCredentials = async (email, userId, password, fullName) => {
 
 const sendRequestNotification = async (alumniEmail, alumniName, studentName, studentBranch, studentYear, message) => {
     await transporter.sendMail({
-        from: process.env.EMAIL_USER, to: alumniEmail,
+        from: process.env.BREVO_USER, to: alumniEmail,
         subject: `New Mentorship Request from ${studentName} | Alumni Connect`,
         html: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto">
             <div style="background:#2563eb;padding:24px;border-radius:12px 12px 0 0;text-align:center">
@@ -57,7 +56,7 @@ const sendRequestNotification = async (alumniEmail, alumniName, studentName, stu
 const sendAcceptNotification = async (studentEmail, studentName, alumniName, alumniCompany, alumniDesignation, expiresAt) => {
     const expiryDate = new Date(expiresAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
     await transporter.sendMail({
-        from: process.env.EMAIL_USER, to: studentEmail,
+        from: process.env.BREVO_USER, to: studentEmail,
         subject: `✅ Mentorship Request Accepted by ${alumniName} | Alumni Connect`,
         html: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto">
             <div style="background:#16a34a;padding:24px;border-radius:12px 12px 0 0;text-align:center">
@@ -77,7 +76,7 @@ const sendAcceptNotification = async (studentEmail, studentName, alumniName, alu
 
 const sendRejectNotification = async (studentEmail, studentName, alumniName) => {
     await transporter.sendMail({
-        from: process.env.EMAIL_USER, to: studentEmail,
+        from: process.env.BREVO_USER, to: studentEmail,
         subject: `Mentorship Request Update | Alumni Connect`,
         html: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto">
             <div style="background:#dc2626;padding:24px;border-radius:12px 12px 0 0;text-align:center">
@@ -98,7 +97,7 @@ const sendFirstMessageNotification = async ({
     const nth = sessionNumber === 1 ? '1st' : sessionNumber === 2 ? '2nd' : sessionNumber === 3 ? '3rd' : `${sessionNumber}th`;
 
     await transporter.sendMail({
-        from:    `"Alumni Connect" <${process.env.EMAIL_USER}>`,
+        from:    `"Alumni Connect" <${process.env.BREVO_USER}>`,
         to:      alumniEmail,
         replyTo: studentEmail,   // ← alumni hits Reply → goes straight to student's email
         subject: `💬 ${studentName} wants to chat (Session ${sessionNumber}) | Alumni Connect`,
@@ -165,7 +164,7 @@ const sendNewJobNotificationToAll = async (students, jobTitle, companyName, alum
     const loginRedirect = `https://alumni-connect-app-3udd.vercel.app/login.html?redirect=student-dashboard.html`;
 
     const mailOptions = {
-        from: process.env.EMAIL_USER,
+        from: process.env.BREVO_USER,
         bcc: bccEmails,  // BCC all students
         subject: `💼 New Job Opportunity: ${jobTitle} at ${companyName} | Alumni Connect`,
         html: `
@@ -233,8 +232,8 @@ const sendEventNotification = async ({
     const eventsLink  = `https://alumni-connect-app-3udd.vercel.app/events.html`;
  
     await transporter.sendMail({
-        from:    `"Alumni Connect" <${process.env.EMAIL_USER}>`,
-        to:      toEmail,
+        from:`"Alumni Connect" <${process.env.BREVO_USER}>`,
+        to:  toEmail,
         subject: `🎉 New Event: ${eventTitle} | Alumni Connect`,
         html: `
         <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto">
