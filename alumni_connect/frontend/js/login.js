@@ -70,7 +70,7 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
 
             // ✅ FIRST LOGIN → go to change password page
             if (result.login_count === 0) {
-                window.location.href = '/html/change-password.html?userId=' + result.user_id;
+                window.location.href = '/html/reset-password.html?userId=' + result.user_id;
             } else {
                 const urlParams = new URLSearchParams(window.location.search);
                 const redirectPage = urlParams.get('redirect');
