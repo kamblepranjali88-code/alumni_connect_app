@@ -1,60 +1,90 @@
-// admin-dashboard.js
+// ===============================
+// ADMIN DASHBOARD JS
+// ===============================
 
-// ===== API BASE URL (works for local + deployed) =====
+// Detect environment (local vs deployed)
 const API_BASE =
     window.location.hostname === "localhost"
         ? "http://localhost:5000/api"
-        : "https://your-backend-domain.com/api"; // change to your deployed backend
+        : "https://your-backend-domain.com/api"; // CHANGE THIS
 
-let userChartInstance = null;
-let mentorshipChartInstance = null;
-let jobChartInstance = null;
-let eventChartInstance = null;
+let userChart = null;
+let mentorshipChart = null;
+let jobChart = null;
+let eventChart = null;
 
 
-// ===== FETCH DASHBOARD DATA =====
-async function fetchDashboardData() {
+// ===============================
+// AUTH CHECK
+// ===============================
+function checkAuth() {
 
     const token = localStorage.getItem("adminToken");
 
     if (!token) {
+
         alert("Session expired. Please login again.");
-        window.location.href = "login.html";
-        return;
+
+        window.location.href = "admin-login.html";
+
+        return false;
     }
+
+    return token;
+}
+
+
+// ===============================
+// FETCH DASHBOARD DATA
+// ===============================
+async function fetchDashboardData() {
+
+    const token = checkAuth();
+
+    if (!token) return;
 
     try {
 
-        const res = await fetch(`${API_BASE}/admin/dashboard`, {
+        const response = await fetch(`${API_BASE}/admin/dashboard`, {
+
             method: "GET",
+
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             }
+
         });
 
-        if (!res.ok) {
+        if (response.status === 401) {
 
-            if (res.status === 401) {
-                alert("Session expired. Please login again.");
-                localStorage.removeItem("adminToken");
-                window.location.href = "login.html";
-                return;
-            }
+            localStorage.removeItem("adminToken");
 
-            throw new Error(`Failed to load dashboard (${res.status})`);
+            alert("Session expired. Please login again.");
+
+            window.location.href = "admin-login.html";
+
+            return;
         }
 
-        return await res.json();
+        if (!response.ok) {
+            throw new Error(`Server error (${response.status})`);
+        }
 
-    } catch (err) {
-        console.error("API Error:", err);
-        throw err;
+        return await response.json();
+
+    } catch (error) {
+
+        console.error("Dashboard API Error:", error);
+
+        throw error;
     }
 }
 
 
-// ===== RENDER STATS =====
+// ===============================
+// RENDER STATS
+// ===============================
 function renderStats(data) {
 
     document.getElementById("admin-name").innerText =
@@ -74,7 +104,9 @@ function renderStats(data) {
 }
 
 
-// ===== RENDER ALERTS =====
+// ===============================
+// RENDER ALERTS
+// ===============================
 function renderAlerts(alerts) {
 
     const ul = document.getElementById("adminUpdates");
@@ -86,8 +118,12 @@ function renderAlerts(alerts) {
     if (!alerts || alerts.length === 0) {
 
         const li = document.createElement("li");
-        li.innerHTML = `<i class="fas fa-circle-info"></i> No updates available`;
+
+        li.innerHTML =
+            `<i class="fas fa-info-circle"></i> No updates available`;
+
         ul.appendChild(li);
+
         return;
     }
 
@@ -103,34 +139,43 @@ function renderAlerts(alerts) {
 }
 
 
-// ===== DESTROY OLD CHARTS =====
+// ===============================
+// DESTROY OLD CHARTS
+// ===============================
 function destroyCharts() {
 
-    [userChartInstance, mentorshipChartInstance, jobChartInstance, eventChartInstance]
-        .forEach(chart => {
-            if (chart) chart.destroy();
-        });
+    if (userChart) userChart.destroy();
+    if (mentorshipChart) mentorshipChart.destroy();
+    if (jobChart) jobChart.destroy();
+    if (eventChart) eventChart.destroy();
 }
 
 
-// ===== RENDER CHARTS =====
+// ===============================
+// RENDER CHARTS
+// ===============================
 function renderCharts(data) {
 
     destroyCharts();
 
-    // ===== USER DISTRIBUTION =====
-    userChartInstance = new Chart(document.getElementById("userChart"), {
+    // USER DISTRIBUTION
+    userChart = new Chart(document.getElementById("userChart"), {
 
         type: "doughnut",
 
         data: {
             labels: ["Students", "Alumni"],
+
             datasets: [{
                 data: [
                     data.students ?? 0,
                     data.alumni ?? 0
                 ],
-                backgroundColor: ["#3b82f6", "#10b981"]
+
+                backgroundColor: [
+                    "#3b82f6",
+                    "#10b981"
+                ]
             }]
         },
 
@@ -143,22 +188,26 @@ function renderCharts(data) {
                 }
             }
         }
+
     });
 
 
-    // ===== MENTORSHIP ACTIVITY =====
-    mentorshipChartInstance = new Chart(document.getElementById("mentorshipChart"), {
+    // MENTORSHIP ACTIVITY
+    mentorshipChart = new Chart(document.getElementById("mentorshipChart"), {
 
         type: "bar",
 
         data: {
             labels: ["Active", "Completed"],
+
             datasets: [{
                 label: "Mentorship Sessions",
+
                 data: [
                     data.mentorships?.active ?? 0,
                     data.mentorships?.completed ?? 0
                 ],
+
                 backgroundColor: "#6366f1"
             }]
         },
@@ -172,22 +221,28 @@ function renderCharts(data) {
                 }
             }
         }
+
     });
 
 
-    // ===== JOB OPPORTUNITIES =====
-    jobChartInstance = new Chart(document.getElementById("jobChart"), {
+    // JOB CHART
+    jobChart = new Chart(document.getElementById("jobChart"), {
 
         type: "pie",
 
         data: {
             labels: ["Internships", "Full-Time"],
+
             datasets: [{
                 data: [
                     data.jobs?.internships ?? 0,
                     data.jobs?.fullTime ?? 0
                 ],
-                backgroundColor: ["#f59e0b", "#ef4444"]
+
+                backgroundColor: [
+                    "#f59e0b",
+                    "#ef4444"
+                ]
             }]
         },
 
@@ -200,22 +255,34 @@ function renderCharts(data) {
                 }
             }
         }
+
     });
 
 
-    // ===== EVENT TREND =====
-    eventChartInstance = new Chart(document.getElementById("eventChart"), {
+    // EVENT TREND
+    eventChart = new Chart(document.getElementById("eventChart"), {
 
         type: "line",
 
         data: {
-            labels: data.eventTrend?.labels || ["Jan", "Feb", "Mar", "Apr"],
+
+            labels: data.eventTrend?.labels || [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr"
+            ],
+
             datasets: [{
                 label: "Events Conducted",
+
                 data: data.eventTrend?.values || [0, 0, 0, 0],
+
                 borderColor: "#22c55e",
-                fill: false,
-                tension: 0.3
+
+                tension: 0.3,
+
+                fill: false
             }]
         },
 
@@ -228,22 +295,27 @@ function renderCharts(data) {
                 }
             }
         }
+
     });
 }
 
 
-// ===== LOADING STATE =====
-function showLoading(isLoading) {
+// ===============================
+// LOADING STATE
+// ===============================
+function showLoading(state) {
 
     const loader = document.getElementById("dashboardLoader");
 
     if (!loader) return;
 
-    loader.style.display = isLoading ? "block" : "none";
+    loader.style.display = state ? "block" : "none";
 }
 
 
-// ===== LOAD DASHBOARD =====
+// ===============================
+// LOAD DASHBOARD
+// ===============================
 async function loadDashboard() {
 
     showLoading(true);
@@ -255,21 +327,24 @@ async function loadDashboard() {
         if (!data) return;
 
         renderStats(data);
+
         renderAlerts(data.alerts);
+
         renderCharts(data);
 
-    } catch (err) {
+    } catch (error) {
 
-        console.error("Dashboard load error:", err);
+        console.error("Dashboard Load Failed:", error);
 
-        const alertsEl = document.getElementById("adminUpdates");
+        const alerts = document.getElementById("adminUpdates");
 
-        if (alertsEl) {
-            alertsEl.innerHTML =
-                `<li style="color:red;">
-                    <i class="fas fa-circle-exclamation"></i>
-                    Failed to load dashboard
-                </li>`;
+        if (alerts) {
+
+            alerts.innerHTML =
+                `<li style="color:red">
+                <i class="fas fa-circle-exclamation"></i>
+                Failed to load dashboard data
+            </li>`;
         }
 
     } finally {
@@ -279,12 +354,14 @@ async function loadDashboard() {
 }
 
 
-// ===== INIT =====
+// ===============================
+// INIT
+// ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
     loadDashboard();
 
-    // Auto refresh dashboard every 60 seconds
+    // Refresh every minute
     setInterval(loadDashboard, 60000);
 
 });
