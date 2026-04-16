@@ -14,7 +14,12 @@ const requestRoutes    = require('./src/routes/requestRoutes');
 const chatRoutes       = require('./src/routes/chatRoutes');  
 const adminAuthRoutes = require('./src/routes/adminAuthRoutes');
  const eventRoutes     = require('./src/routes/eventRoutes');
+const statsRoutes   = require('./src/routes/statsRoutes');
+const updatesRoutes = require('./src/routes/updatesRoutes');
 
+// Add these with other app.use() lines
+app.use('/api/stats',   statsRoutes);
+app.use('/api/updates', updatesRoutes);
 // ← NEW: Socket.IO chat handler
 const { initChatSocket } = require('./src/socket/chatSocket');
 
