@@ -32,14 +32,13 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
 
             const result = await response.json();
 
-           if (response.ok) {
-    sessionStorage.setItem('userId', result.admin_id);
-    sessionStorage.setItem('userType', 'admin');
-    sessionStorage.setItem('fullName', result.full_name);
-    localStorage.setItem('adminToken', result.admin_id); // ✅ ADD THIS LINE
-    window.location.href = 'admin-dashboard.html';
-    return;
-}
+         if (response.ok) {
+                sessionStorage.setItem('userId', result.admin_id);
+                sessionStorage.setItem('userType', 'admin');
+                sessionStorage.setItem('fullName', result.full_name);
+                localStorage.setItem('adminToken', result.admin_id);
+                window.location.href = 'admin-dashboard.html';
+                return;
             } else {
                 alert('❌ ' + result.message);
                 return;
