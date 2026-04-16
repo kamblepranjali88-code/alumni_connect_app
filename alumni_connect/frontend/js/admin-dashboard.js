@@ -18,21 +18,16 @@ let eventChart = null;
 // AUTH CHECK
 // ===============================
 function checkAuth() {
-
-    const token = localStorage.getItem("adminToken");
-
-    if (!token) {
-
+    // Change this:
+    const token = sessionStorage.getItem("userId"); // ✅ match login.js
+    
+    if (!token || sessionStorage.getItem("userType") !== "admin") {
         alert("Session expired. Please login again.");
-
-        window.location.href = "admin-login.html";
-
+        window.location.href = "admin-login.html"; // check this filename too!
         return false;
     }
-
     return token;
 }
-
 
 // ===============================
 // FETCH DASHBOARD DATA
