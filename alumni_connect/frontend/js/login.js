@@ -32,12 +32,12 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
 
             const result = await response.json();
 
-         if (response.ok) {
+            if (response.ok) {
                 sessionStorage.setItem('userId', result.admin_id);
                 sessionStorage.setItem('userType', 'admin');
                 sessionStorage.setItem('fullName', result.full_name);
                 localStorage.setItem('adminToken', result.admin_id);
-                window.location.href = 'admin-dashboard.html';
+                window.location.href = '../html/admin-dashboard.html';
                 return;
             } else {
                 alert('❌ ' + result.message);
@@ -71,7 +71,7 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
 
             // ✅ FIRST LOGIN → go to change password page
             if (result.login_count === 0) {
-                window.location.href = '/html/reset-password.html?userId=' + result.user_id;
+                window.location.href = '../html/reset-password.html?userId=' + result.user_id;
             } else {
                 const urlParams = new URLSearchParams(window.location.search);
                 const redirectPage = urlParams.get('redirect');
@@ -80,9 +80,9 @@ document.getElementById('loginBtn').addEventListener('click', async function (e)
                     window.location.href = redirectPage;
                 } else {
                     if (result.user_type === 'alumni') {
-                        window.location.href = '/html/alumni-dashboard.html';
+                        window.location.href = '../html/alumni-dashboard.html';
                     } else {
-                        window.location.href = '/html/student-dashboard.html';
+                        window.location.href = '../html/student-dashboard.html';
                     }
                 }
             }
