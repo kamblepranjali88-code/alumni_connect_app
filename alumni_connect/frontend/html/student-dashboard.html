@@ -15,100 +15,93 @@
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
+    <!-- ===== NAVBAR ===== -->
+    <div id="navbar-placeholder"></div>
 
-  <div id="navbar-placeholder"></div>
+    <!-- ===== MAIN DASHBOARD ===== -->
+    <main class="dashboard">
 
-<!-- ===== MAIN DASHBOARD ===== -->
-<main class="dashboard">
+        <!-- Welcome -->
+        <section class="welcome">
+            <h1 id="student-name">Welcome, <span id="displayName">Student</span></h1>
+            <p>Connect with alumni, explore opportunities, and grow your career</p>
+        </section>
 
-  <!-- Welcome -->
-<section class="welcome">
-    <h1 id="student-name">Welcome, <span id="displayName">Student</span></h1>
-    <p>Connect with alumni, explore opportunities, and grow your career</p>
-</section>
+        <!-- ===== STATS (BACKEND DATA) ===== -->
+        <section class="stats">
+            <div class="stat-card">
+                <h2 id="alumniCount">0</h2>
+                <p>Alumni Available</p>
+            </div>
 
-<!-- Add this script at bottom of page -->
-<script src="../js/student-dashboard.js"></script>
-    <!-- ===== STATS (BACKEND DATA) ===== -->
-    <section class="stats">
-        <div class="stat-card">
-            <h2 id="alumniCount">0</h2>
-            <p>Alumni Available</p>
-        </div>
+            <div class="stat-card">
+                <h2 id="mentorshipLimit">0 / Month</h2>
+                <p>Mentorship Limit</p>
+            </div>
 
-        <div class="stat-card">
-            <h2 id="mentorshipLimit">0 / Month</h2>
-            <p>Mentorship Limit</p>
-        </div>
+            <div class="stat-card">
+                <h2 id="jobCount">0</h2>
+                <p>Job Opportunities</p>
+            </div>
 
-        <div class="stat-card">
-            <h2 id="jobCount">0</h2>
-            <p>Job Opportunities</p>
-        </div>
+            <div class="stat-card">
+                <h2 id="eventCount">0</h2>
+                <p>Upcoming Events</p>
+            </div>
+        </section>
 
-        <div class="stat-card">
-            <h2 id="eventCount">0</h2>
-            <p>Upcoming Events</p>
-        </div>
-    </section>
+        <!-- ===== QUICK ACTIONS ===== -->
+        <section class="actions">
+            <h2>Quick Actions</h2>
 
-    <!-- ===== QUICK ACTIONS ===== -->
-    <section class="actions">
-        <h2>Quick Actions</h2>
+            <div class="action-grid">
+                <a href="search-alumni.html" class="action-card">
+                    <i class="fas fa-user-graduate action-icon"></i>
+                    <h3>Search Alumni</h3>
+                    <p>Search alumni by branch, year, or company</p>
+                </a>
 
-        <div class="action-grid">
-            <a href="search-alumni.html" class="action-card">
-                <i class="fas fa-user-graduate action-icon"></i>
-                <h3>Search Alumni</h3>
-                <p>Search alumni by branch, year, or company</p>
-            </a>
+                <a href="student-forum.html" class="action-card">
+                    <i class="fas fa-comments action-icon"></i>
+                    <h3>Ask a Question</h3>
+                    <p>Post doubts and get answers from peers</p>
+                </a>
 
-            <a href="student-forum.html" class="action-card">
-                <i class="fas fa-comments action-icon"></i>
-                <h3>Ask a Question</h3>
-                <p>Post doubts and get answers from peers</p>
-            </a>
+                <a href="job-opportunities.html" class="action-card">
+                    <i class="fas fa-briefcase action-icon"></i>
+                    <h3>View Jobs</h3>
+                    <p>Explore jobs & internships shared by alumni</p>
+                </a>
 
-            <a href="job-opportunities.html" class="action-card">
-                <i class="fas fa-briefcase action-icon"></i>
-                <h3>View Jobs</h3>
-                <p>Explore jobs & internships shared by alumni</p>
-            </a>
+                <a href="events.html" class="action-card">
+                    <i class="fas fa-calendar-check action-icon"></i>
+                    <h3>View Events</h3>
+                    <p>Register for alumni–student meets</p>
+                </a>
+            </div>
+        </section>
 
-            <a href="events.html" class="action-card">
-                <i class="fas fa-calendar-check action-icon"></i>
-                <h3>View Events</h3>
-                <p>Register for alumni–student meets</p>
-            </a>
-        </div>
-    </section>
+        <!-- ===== RECENT UPDATES (BACKEND DATA) ===== -->
+        <section class="notifications">
+            <h2>Recent Updates</h2>
 
-    <!-- ===== RECENT UPDATES (BACKEND DATA) ===== -->
-    <section class="notifications">
-        <h2>Recent Updates</h2>
+            <ul id="recentUpdates">
+                <li>
+                    <i class="fas fa-info-circle"></i>
+                    Loading updates...
+                </li>
+            </ul>
+        </section>
 
-        <!-- Backend will inject <li> items here -->
-        <ul id="recentUpdates">
-            <li>
-                <i class="fas fa-info-circle"></i>
-                Loading updates...
-            </li>
-        </ul>
-    </section>
+    </main>
 
-</main>
+    <!-- ===== FOOTER ===== -->
+    <div id="footer-placeholder"></div>
 
-<!-- ===== FOOTER ===== -->
-<div id="footer-placeholder"></div>
-<script src="../js/includeFooter.js"></script>
+    <!-- ===== SCRIPTS ===== -->
+    <script src="../js/includeFooter.js"></script>
+    <script src="../js/student-dashboard.js"></script>
+    <script src="../js/navbar.js"></script>
 
-<!-- ===== DASHBOARD DATA SCRIPT ===== -->
-<script src="../js/student-dashboard.js"></script>
-
-<script src="../js/navbar.js"></script>
-   
-
-    
 </body>
 </html>

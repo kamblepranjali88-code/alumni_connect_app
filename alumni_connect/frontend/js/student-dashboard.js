@@ -1,17 +1,17 @@
-// Student Dashboard - Load student profile
+// Student Dashboard - Load student profile, stats, and recent updates
 
-document.addEventListener('DOMContentLoaded', async function () {
-    console.log('1️⃣ Dashboard script started');
+document.addEventListener('DOMContentLoaded', async () => {
+    console.log('Dashboard script started');
 
-    // Get user_id from session storage (saved during login)
+    // Get login session data
     const userId = sessionStorage.getItem('userId');
     const userType = sessionStorage.getItem('userType');
-    console.log('2️⃣ User ID from session:', userId);
-    console.log('2️⃣ User Type from session:', userType);
 
-    // Auth check
+    console.log('User ID:', userId);
+    console.log('User Type:', userType);
+
+    // Check if student is logged in
     if (!userId || userType !== 'student') {
-        console.log('3️⃣ Not logged in as student - redirecting');
         alert('Please login first');
         window.location.href = '../html/login.html';
         return;
@@ -19,71 +19,146 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const API_BASE = 'https://alumni-connect-backend-yy97.onrender.com/api';
 
+    // Get all required elements
+    const displayNameEl = document.getElementById('displayName');
+    const alumniCountEl = document.getElementById('alumniCount');
+    const mentorshipLimitEl = document.getElementById('mentorshipLimit');
+    const jobCountEl = document.getElementById('jobCount');
+    const eventCountEl = document.getElementById('eventCount');
+    const recentUpdatesEl = document.getElementById('recentUpdates');
+
     try {
         // ===== LOAD STUDENT PROFILE =====
-        const url = `${API_BASE}/auth/student/profile/${userId}`;
-        console.log('4️⃣ Fetching from:', url);
+        const profileRes = await fetch(`${API_BASE}/auth/student/profile/${userId}`);
 
-        const response = await fetch(url);
-        console.log('5️⃣ Response status:', response.status);
+        if (profileRes.ok) {
+            const studentData = await profileRes.json();
+            console.log('Student profile:', studentData);
 
-        if (response.ok) {
-            const studentData = await response.json();
-            console.log('6️⃣ Student data received:', studentData);
-
-            const nameElement = document.getElementById('displayName');
-            if (nameElement) {
-                nameElement.textContent = studentData.full_name || 'Student';
-                console.log('8️⃣ Name updated to:', nameElement.textContent);
+            if (displayNameEl) {
+                displayNameEl.textContent = studentData.full_name || 'Student';
             }
-
-        } else if (response.status === 404) {
-            console.log('9️⃣ 404 - Student profile not found');
-            document.getElementById('displayName').textContent = 'Student';
+        } else if (profileRes.status === 404) {
+            console.warn('Student profile not found');
+            if (displayNameEl) {
+                displayNameEl.textContent = 'Student';
+            }
         } else {
-            console.error('🔟 Failed to fetch student profile');
+            console.error('Failed to fetch student profile');
+            if (displayNameEl) {
+                displayNameEl.textContent = 'Student';
+            }
         }
 
         // ===== LOAD STATS =====
         try {
             const statsRes = await fetch(`${API_BASE}/stats/dashboard`);
+
             if (statsRes.ok) {
                 const stats = await statsRes.json();
-                if (document.getElementById('alumniCount'))
-                    document.getElementById('alumniCount').textContent = stats.alumni_count || 0;
-                if (document.getElementById('jobCount'))
-                    document.getElementById('jobCount').textContent = stats.job_count || 0;
-                if (document.getElementById('eventCount'))
-                    document.getElementById('eventCount').textContent = stats.event_count || 0;
-                if (document.getElementById('mentorshipLimit'))
-                    document.getElementById('mentorshipLimit').textContent = stats.mentorship_limit || '0 / Month';
+                console.log('Stats:', stats);
+
+                if (alumniCountEl) {
+                    alumniCountEl.textContent = stats.alumni_count ?? 0;
+                }
+
+                if (jobCountEl) {
+                    jobCountEl.textContent = stats.job_count ?? 0;
+                }
+
+                if (eventCountEl) {
+                    eventCountEl.textContent = stats.event_count ?? 0;
+                }
+
+                if (mentorshipLimitEl) {
+                    mentorshipLimitEl.textContent = stats.mentorship_limit || '0 / Month';
+                }
+            } else {
+                console.warn('Failed to fetch stats');
             }
         } catch (statsError) {
             console.warn('Stats not available:', statsError);
+
+            if (alumniCountEl) alumniCountEl.textContent = '0';
+            if (jobCountEl) jobCountEl.textContent = '0';
+            if (eventCountEl) eventCountEl.textContent = '0';
+            if (mentorshipLimitEl) mentorshipLimitEl.textContent = '0 / Month';
         }
 
         // ===== LOAD RECENT UPDATES =====
         try {
             const updatesRes = await fetch(`${API_BASE}/updates/recent`);
+
             if (updatesRes.ok) {
                 const updates = await updatesRes.json();
-                const list = document.getElementById('recentUpdates');
-                if (list && updates.length > 0) {
-                    list.innerHTML = updates.map(u => `
-                        <li><i class="fas fa-info-circle"></i> ${u.message}</li>
-                    `).join('');
+                console.log('Recent updates:', updates);
+
+                if (recentUpdatesEl) {
+                    if (Array.isArray(updates) && updates.length > 0) {
+                        recentUpdatesEl.innerHTML = updates
+                            .map(
+                                (u) => `
+                                    <li>
+                                        <i class="fas fa-info-circle"></i>
+                                        ${u.message}
+                                    </li>
+                                `
+                            )
+                            .join('');
+                    } else {
+                        recentUpdatesEl.innerHTML = `
+                            <li>
+                                <i class="fas fa-info-circle"></i>
+                                No recent updates available
+                            </li>
+                        `;
+                    }
+                }
+            } else {
+                console.warn('Failed to fetch updates');
+
+                if (recentUpdatesEl) {
+                    recentUpdatesEl.innerHTML = `
+                        <li>
+                            <i class="fas fa-info-circle"></i>
+                            Unable to load updates
+                        </li>
+                    `;
                 }
             }
         } catch (updatesError) {
             console.warn('Updates not available:', updatesError);
-        }
 
+            if (recentUpdatesEl) {
+                recentUpdatesEl.innerHTML = `
+                    <li>
+                        <i class="fas fa-info-circle"></i>
+                        Unable to load updates
+                    </li>
+                `;
+            }
+        }
     } catch (error) {
-        console.error('❌ Error loading dashboard:', error);
+        console.error('Error loading dashboard:', error);
+
+        if (displayNameEl) displayNameEl.textContent = 'Student';
+        if (alumniCountEl) alumniCountEl.textContent = '0';
+        if (jobCountEl) jobCountEl.textContent = '0';
+        if (eventCountEl) eventCountEl.textContent = '0';
+        if (mentorshipLimitEl) mentorshipLimitEl.textContent = '0 / Month';
+
+        if (recentUpdatesEl) {
+            recentUpdatesEl.innerHTML = `
+                <li>
+                    <i class="fas fa-info-circle"></i>
+                    Failed to load dashboard data
+                </li>
+            `;
+        }
     }
 });
 
-// ===== LOGOUT =====
+// ===== LOGOUT FUNCTION =====
 function logout() {
     sessionStorage.clear();
     localStorage.clear();
