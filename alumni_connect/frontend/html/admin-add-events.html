@@ -10,25 +10,8 @@
 </head>
 <body>
 
+    <!-- Navbar injected here by navbar.js -->
     <div id="navbar-placeholder"></div>
-<!-- ===== NAVBAR ===== -->
-<header class="navbar admin-navbar">
-    <div class="brand">
-        <i class="fas fa-user-shield"></i>
-        <div>
-            <div class="brand-title">Tech University</div>
-            <div class="brand-subtitle">Admin Panel</div>
-        </div>
-    </div>
-
-     <nav class="nav-links">
-        <a href="admin-dashboard.html" class="active">Dashboard</a>
-        <a href="verify-alumni.html">Verify Alumni</a>
-        <a href="admin-add-events.html">Events</a>
-        <a href="#" class="logout" onclick="logout()">Logout</a>
-    </nav>
-</header>
-<div id="navbar-placeholder"></div>
 
     <main class="admin-container">
 
@@ -39,7 +22,7 @@
             </div>
         </div>
 
-        <!-- ── Add Event Form ─────────────────────────────────── -->
+        <!-- Add Event Form -->
         <section class="form-card" id="addEventSection">
             <h2 class="section-title"><i class="fas fa-plus-circle"></i> Add New Event</h2>
 
@@ -100,7 +83,7 @@
             </form>
         </section>
 
-        <!-- ── Events List ───────────────────────────────────── -->
+        <!-- Events List -->
         <section class="events-section">
             <h2 class="section-title"><i class="fas fa-list"></i> All Events</h2>
             <div id="adminEventsList">
@@ -110,7 +93,7 @@
 
     </main>
 
-    <!-- ── Registrations Modal ──────────────────────────────── -->
+    <!-- Registrations Modal -->
     <div class="modal-overlay" id="regModal" style="display:none">
         <div class="modal-card">
             <div class="modal-header">
@@ -145,7 +128,9 @@
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
+    <!-- Scripts: page logic first, navbar LAST -->
     <script src="../js/admin-add-events.js"></script>
     <script src="../js/navbar.js"></script>
+
 </body>
 </html>

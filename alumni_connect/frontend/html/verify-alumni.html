@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Alumni | Admin | Alumni Connect</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/verify-alumni.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar injected by navbar.js -->
+    <div id="navbar-placeholder"></div>
+
+    <main class="admin-container">
+
+        <div class="page-header">
+            <div>
+                <h1><i class="fas fa-user-check"></i> Verify Alumni</h1>
+                <p>Review and approve pending alumni registrations</p>
+            </div>
+        </div>
+
+        <!-- Pending Requests -->
+        <section class="form-card">
+            <h2 class="section-title"><i class="fas fa-clock"></i> Pending Requests</h2>
+            <div id="pendingList">
+                <div class="loading-text"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+            </div>
+        </section>
+
+        <!-- Verified Alumni -->
+        <section class="form-card" style="margin-top: 2rem;">
+            <h2 class="section-title"><i class="fas fa-check-circle"></i> Verified Alumni</h2>
+            <div id="verifiedList">
+                <div class="loading-text"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="../js/verify-alumni.js"></script>
+    <script src="../js/navbar.js"></script>
+
+</body>
+</html>

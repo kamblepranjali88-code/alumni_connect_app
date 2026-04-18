@@ -18,99 +18,75 @@
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
-<header class="navbar">
-    <div class="brand">
-        <i class="fas fa-user-shield"></i>
-        <div>
-            <div class="brand-title">Tech University</div>
-            <div class="brand-subtitle">Admin Dashboard</div>
-        </div>
-    </div>
+    <!-- Navbar injected by navbar.js -->
+    <div id="navbar-placeholder"></div>
 
-    <nav class="nav-links">
-        <a href="admin-dashboard.html" class="active">Dashboard</a>
-        <a href="verify-alumni.html">Verify Alumni</a>
-        <a href="admin-add-events.html">Events</a>
-        <a href="#" class="logout" onclick="logout()">Logout</a>
-    </nav>
-</header>
-<div id="navbar-placeholder"></div>
+    <!-- ===== MAIN DASHBOARD ===== -->
+    <main class="dashboard">
 
-<!-- ===== MAIN DASHBOARD ===== -->
-<main class="dashboard">
+        <!-- Welcome -->
+        <section class="welcome">
+            <h1 id="admin-name">Welcome, Admin</h1>
+            <p>System overview, analytics, and platform monitoring</p>
+        </section>
 
-    <!-- Welcome -->
-    <section class="welcome">
-        <h1 id="admin-name">Welcome, Admin</h1>
-        <p>System overview, analytics, and platform monitoring</p>
-    </section>
-
-    <!-- ===== SYSTEM STATS ===== -->
-    <section class="stats">
-        <div class="stat-card">
-            <h2 id="studentCount">0</h2>
-            <p>Total Students</p>
-        </div>
-        <div class="stat-card">
-            <h2 id="alumniCount">0</h2>
-            <p>Total Alumni</p>
-        </div>
-        <div class="stat-card">
-            <h2 id="pendingVerifications">0</h2>
-            <p>Pending Verifications</p>
-        </div>
-        <div class="stat-card">
-            <h2 id="eventCount">0</h2>
-            <p>Upcoming Events</p>
-        </div>
-    </section>
-
-    <!-- ===== SYSTEM OVERVIEW ===== -->
-    <section class="actions">
-        <h2>System Overview</h2>
-
-        <div class="action-grid">
-            <div class="action-card">
-                <canvas id="userChart"></canvas>
+        <!-- ===== SYSTEM STATS ===== -->
+        <section class="stats">
+            <div class="stat-card">
+                <h2 id="studentCount">0</h2>
+                <p>Total Students</p>
             </div>
-
-            <div class="action-card">
-                <canvas id="mentorshipChart"></canvas>
+            <div class="stat-card">
+                <h2 id="alumniCount">0</h2>
+                <p>Total Alumni</p>
             </div>
-
-            <div class="action-card">
-                <canvas id="jobChart"></canvas>
+            <div class="stat-card">
+                <h2 id="pendingVerifications">0</h2>
+                <p>Pending Verifications</p>
             </div>
-
-            <div class="action-card">
-                <canvas id="eventChart"></canvas>
+            <div class="stat-card">
+                <h2 id="eventCount">0</h2>
+                <p>Upcoming Events</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ===== SYSTEM ALERTS ===== -->
-    <section class="notifications">
-        <h2>System Alerts</h2>
+        <!-- ===== SYSTEM OVERVIEW ===== -->
+        <section class="actions">
+            <h2>System Overview</h2>
 
-        <ul id="adminUpdates">
-            <li><i class="fas fa-info-circle"></i> Loading system alerts...</li>
-        </ul>
-    </section>
+            <div class="action-grid">
+                <div class="action-card">
+                    <canvas id="userChart"></canvas>
+                </div>
+                <div class="action-card">
+                    <canvas id="mentorshipChart"></canvas>
+                </div>
+                <div class="action-card">
+                    <canvas id="jobChart"></canvas>
+                </div>
+                <div class="action-card">
+                    <canvas id="eventChart"></canvas>
+                </div>
+            </div>
+        </section>
 
-</main>
+        <!-- ===== SYSTEM ALERTS ===== -->
+        <section class="notifications">
+            <h2>System Alerts</h2>
+            <ul id="adminUpdates">
+                <li><i class="fas fa-info-circle"></i> Loading system alerts...</li>
+            </ul>
+        </section>
 
-<!-- ===== FOOTER ===== -->
-<div id="footer-placeholder"></div>
-<script src="../js/includeFooter.js"></script>
+    </main>
 
-<!-- ===== DASHBOARD DATA SCRIPT ===== -->
-<script src="../js/admin-dashboard.js"></script>
+    <!-- ===== FOOTER ===== -->
+    <div id="footer-placeholder"></div>
 
-<<<<<<< HEAD
-    <script src="logout.js"></script>
-=======
-<script src="../js/navbar.js"></script>
->>>>>>> c136bc37671dbfb6c77dcbb16258eab652b50da7
+    <!-- Scripts — navbar.js MUST be last -->
+    <script src="../js/includeFooter.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
+    <script src="../js/navbar.js"></script>
+
 </body>
 </html>
