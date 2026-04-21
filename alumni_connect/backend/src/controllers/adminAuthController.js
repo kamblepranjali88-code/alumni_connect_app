@@ -74,9 +74,9 @@ const adminLogin = async (req, res) => {
 // ===== ADMIN DASHBOARD =====
 const getAdminDashboard = async (req, res) => {
     try {
-        // Total Students (from users table)
+        // Total Students
         const { count: students } = await supabase
-            .from('users')
+            .from('students')
             .select('*', { count: 'exact', head: true });
 
         // Total Alumni
