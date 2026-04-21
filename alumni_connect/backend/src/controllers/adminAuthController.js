@@ -12,25 +12,21 @@ const adminLogin = async (req, res) => {
         console.log("Raw userId received:", userId);
         console.log("Password received:", password ? "YES (hidden)" : "NO");
 
-        // Validate inputs
         if (!userId || !password) {
             return res.status(400).json({
                 message: "User ID and password required"
             });
         }
 
-        // Ensure ADMIN_ prefix (case-insensitive check)
         if (!userId.toUpperCase().startsWith("ADMIN_")) {
             return res.status(401).json({
                 message: "Invalid Admin ID format"
             });
         }
 
-        // Extract email — case-insensitive prefix strip
         const email = userId.replace(/^ADMIN_/i, "").trim().toLowerCase();
         console.log("Extracted email:", email);
 
-        // Query DB
         const { data: admin, error } = await supabase
             .from("admin_users")
             .select("*")
@@ -46,7 +42,6 @@ const adminLogin = async (req, res) => {
             });
         }
 
-        // Compare password
         console.log("Hash from DB:", admin.password_hash);
         const isValid = await bcrypt.compare(password, admin.password_hash);
         console.log("bcrypt compare result:", isValid);
@@ -76,14 +71,12 @@ const adminLogin = async (req, res) => {
 };
 
 
-
-
 // ===== ADMIN DASHBOARD =====
 const getAdminDashboard = async (req, res) => {
     try {
-        // Total Students
+        // Total Students (from users table)
         const { count: students } = await supabase
-            .from('students')
+            .from('users')
             .select('*', { count: 'exact', head: true });
 
         // Total Alumni
@@ -151,5 +144,4 @@ const getAdminDashboard = async (req, res) => {
     }
 };
 
-// UPDATE exports
 module.exports = { adminLogin, getAdminDashboard };
