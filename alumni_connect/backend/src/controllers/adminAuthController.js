@@ -12,25 +12,17 @@ const adminLogin = async (req, res) => {
         console.log("Raw userId received:", userId);
         console.log("Password received:", password ? "YES (hidden)" : "NO");
 
-        // Validate inputs
         if (!userId || !password) {
-            return res.status(400).json({
-                message: "User ID and password required"
-            });
+            return res.status(400).json({ message: "User ID and password required" });
         }
 
-        // Ensure ADMIN_ prefix (case-insensitive check)
         if (!userId.toUpperCase().startsWith("ADMIN_")) {
-            return res.status(401).json({
-                message: "Invalid Admin ID format"
-            });
+            return res.status(401).json({ message: "Invalid Admin ID format" });
         }
 
-        // Extract email — case-insensitive prefix strip
         const email = userId.replace(/^ADMIN_/i, "").trim().toLowerCase();
         console.log("Extracted email:", email);
 
-        // Query DB
         const { data: admin, error } = await supabase
             .from("admin_users")
             .select("*")
@@ -41,20 +33,15 @@ const adminLogin = async (req, res) => {
         console.log("Admin found:", admin ? `YES — ${admin.email}` : "NO");
 
         if (error || !admin) {
-            return res.status(401).json({
-                message: "Invalid Admin ID or password"
-            });
+            return res.status(401).json({ message: "Invalid Admin ID or password" });
         }
 
-        // Compare password
         console.log("Hash from DB:", admin.password_hash);
         const isValid = await bcrypt.compare(password, admin.password_hash);
         console.log("bcrypt compare result:", isValid);
 
         if (!isValid) {
-            return res.status(401).json({
-                message: "Invalid Admin ID or password"
-            });
+            return res.status(401).json({ message: "Invalid Admin ID or password" });
         }
 
         console.log(`✅ Admin login successful: ${admin.email}`);
@@ -69,13 +56,9 @@ const adminLogin = async (req, res) => {
 
     } catch (err) {
         console.error("Admin login error:", err);
-        res.status(500).json({
-            message: "Server error"
-        });
+        res.status(500).json({ message: "Server error" });
     }
 };
-
-
 
 
 // ===== ADMIN DASHBOARD =====
@@ -103,27 +86,21 @@ const getAdminDashboard = async (req, res) => {
             .select('*', { count: 'exact', head: true })
             .gte('event_date', new Date().toISOString());
 
-        // Mentorship counts
+        // Mentorship counts — using actual status values
         const { count: activeMentorships } = await supabase
             .from('mentorship_requests')
             .select('*', { count: 'exact', head: true })
-            .eq('status', 'active');
+            .eq('status', 'accepted');
 
         const { count: completedMentorships } = await supabase
             .from('mentorship_requests')
             .select('*', { count: 'exact', head: true })
-            .eq('status', 'completed');
+            .eq('status', 'rejected');
 
-        // Jobs
-        const { count: internships } = await supabase
+        // Jobs — count all jobs (no job_type column exists)
+        const { count: totalJobs } = await supabase
             .from('jobs')
-            .select('*', { count: 'exact', head: true })
-            .eq('job_type', 'internship');
-
-        const { count: fullTime } = await supabase
-            .from('jobs')
-            .select('*', { count: 'exact', head: true })
-            .eq('job_type', 'full-time');
+            .select('*', { count: 'exact', head: true });
 
         return res.json({
             students:             students || 0,
@@ -135,8 +112,8 @@ const getAdminDashboard = async (req, res) => {
                 completed: completedMentorships || 0
             },
             jobs: {
-                internships: internships || 0,
-                fullTime:    fullTime || 0
+                internships: totalJobs || 0,
+                fullTime:    0
             },
             eventTrend: {
                 labels: ["Jan", "Feb", "Mar", "Apr"],
@@ -151,5 +128,4 @@ const getAdminDashboard = async (req, res) => {
     }
 };
 
-// UPDATE exports
 module.exports = { adminLogin, getAdminDashboard };
