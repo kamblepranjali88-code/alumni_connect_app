@@ -33,7 +33,7 @@ async function fetchDashboardData() {
     if (!token) return;
 
     try {
-        const response = await fetch(`${API_BASE}/admin/dashboard`, {
+        const response = await fetch(`${API_BASE}/stats/dashboard`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
