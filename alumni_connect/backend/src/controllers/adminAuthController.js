@@ -29,22 +29,15 @@ const adminLogin = async (req, res) => {
             .eq("email", email)
             .single();
 
-        console.log("DB query error:", error);
-        console.log("Admin found:", admin ? `YES — ${admin.email}` : "NO");
-
         if (error || !admin) {
             return res.status(401).json({ message: "Invalid Admin ID or password" });
         }
 
-        console.log("Hash from DB:", admin.password_hash);
         const isValid = await bcrypt.compare(password, admin.password_hash);
-        console.log("bcrypt compare result:", isValid);
 
         if (!isValid) {
             return res.status(401).json({ message: "Invalid Admin ID or password" });
         }
-
-        console.log(`✅ Admin login successful: ${admin.email}`);
 
         return res.json({
             admin_id: admin.admin_id,
@@ -64,29 +57,24 @@ const adminLogin = async (req, res) => {
 // ===== ADMIN DASHBOARD =====
 const getAdminDashboard = async (req, res) => {
     try {
-        // Total Students
         const { count: students } = await supabase
             .from('students')
             .select('*', { count: 'exact', head: true });
 
-        // Total Alumni
         const { count: alumni } = await supabase
             .from('alumni')
             .select('*', { count: 'exact', head: true });
 
-        // Pending Verifications
         const { count: pendingVerifications } = await supabase
             .from('alumni')
             .select('*', { count: 'exact', head: true })
             .eq('is_verified', false);
 
-        // Upcoming Events
         const { count: events } = await supabase
             .from('events')
             .select('*', { count: 'exact', head: true })
             .gte('event_date', new Date().toISOString());
 
-        // Mentorship counts — using actual status values
         const { count: activeMentorships } = await supabase
             .from('mentorship_requests')
             .select('*', { count: 'exact', head: true })
@@ -97,10 +85,29 @@ const getAdminDashboard = async (req, res) => {
             .select('*', { count: 'exact', head: true })
             .eq('status', 'rejected');
 
-        // Jobs — count all jobs (no job_type column exists)
         const { count: totalJobs } = await supabase
             .from('jobs')
             .select('*', { count: 'exact', head: true });
+
+        // Event trend — count events per month for last 6 months
+        const { data: eventRows } = await supabase
+            .from('events')
+            .select('event_date');
+
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const monthlyCounts = {};
+
+        (eventRows || []).forEach(row => {
+            if (!row.event_date) return;
+            const d = new Date(row.event_date);
+            const key = monthNames[d.getMonth()];
+            monthlyCounts[key] = (monthlyCounts[key] || 0) + 1;
+        });
+
+        const trendLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const trendValues = trendLabels.map(m => monthlyCounts[m] || 0);
 
         return res.json({
             students:             students || 0,
@@ -116,8 +123,8 @@ const getAdminDashboard = async (req, res) => {
                 fullTime:    0
             },
             eventTrend: {
-                labels: ["Jan", "Feb", "Mar", "Apr"],
-                values: [0, 0, 0, 0]
+                labels: trendLabels,
+                values: trendValues
             },
             alerts: []
         });
